@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>EXCLAIM Executive Admin Dashboard | Ben Knudsen Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    /* Carousel container */
+    .carousel {
+      max-width: 700px;
+      margin: 2rem auto;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+    }
+
+    .slides {
+      display: flex;
+      transition: transform 0.4s ease;
+      width: 200%;
+    }
+
+    .slides img {
+      width: 100%;
+      border-radius: 12px;
+      user-select: none;
+      pointer-events: none;
+    }
+
+    /* Buttons */
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      background: rgba(255, 255, 255, 0.7);
+      border: none;
+      border-radius: 50%;
+      width: 38px;
+      height: 38px;
+      cursor: pointer;
+      transform: translateY(-50%);
+      transition: background 0.3s ease;
+      font-weight: bold;
+      font-size: 1.5rem;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .carousel-button:hover {
+      background: #1d4ed8;
+      color: white;
+    }
+
+    .prev {
+      left: 12px;
+    }
+    .next {
+      right: 12px;
+    }
+
+    /* Project content container */
+    .project-content {
+      max-width: 700px;
+      margin: 2rem auto;
+      padding: 0 1rem;
+      color: #1f2937;
+    }
+
+    .project-content h1 {
+      font-size: 2rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .project-content p {
+      font-size: 1.1rem;
+      line-height: 1.6;
+      margin-bottom: 1rem;
+    }
+
+    /* Back link */
+    .back-link {
+      max-width: 700px;
+      margin: 1rem auto 4rem;
+      padding: 0 1rem;
+    }
+
+    .back-link a {
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .carousel {
+        max-width: 95vw;
+      }
+      .project-content, .back-link {
+        max-width: 95vw;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="project-content">
+    <h1>EXCLAIM Executive Admin Dashboard</h1>
+    <p>
+      Supported the rollout of a nationwide VA program by designing custom data entry, storage, and analytics solutions to help improve cancer treatment outcomes 
+      through the use of genetic testing and more targeted treatment selection.
+    </p>
+  </div>
+
+  <div class="carousel" aria-label="Image carousel for EXCLAIM project">
+    <div class="slides" id="slides">
+      <img src="assets/images/slide1.png" alt="EXCLAIM Project Screenshot 1" draggable="false" />
+      <img src="assets/images/slide2.png" alt="EXCLAIM Project Screenshot 2" draggable="false" />
+    </div>
+    <button class="carousel-button prev" id="prevBtn" aria-label="Previous image">&#10094;</button>
+    <button class="carousel-button next" id="nextBtn" aria-label="Next image">&#10095;</button>
+  </div>
+
+  <div class="back-link">
+    <a href="index.html">&larr; Back to Homepage</a>
+  </div>
+
+  <script>
+    // Carousel logic
+    const slides = document.getElementById('slides');
+    const prevBtn = document.getElementById('prevBtn');
+    const nextBtn = document.getElementById('nextBtn');
+
+    let currentIndex = 0;
+    const totalSlides = slides.children.length;
+
+    function showSlide(index) {
+      if (index < 0) {
+        currentIndex = totalSlides - 1;
+      } else if (index >= totalSlides) {
+        currentIndex = 0;
+      } else {
+        currentIndex = index;
+      }
+      const offset = currentIndex * -100;
+      slides.style.transform = `translateX(${offset}%)`;
+    }
+
+    prevBtn.addEventListener('click', () => {
+      showSlide(currentIndex - 1);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      showSlide(currentIndex + 1);
+    });
+
+    // Initialize carousel
+    showSlide(currentIndex);
+  </script>
+</body>
+</html>
