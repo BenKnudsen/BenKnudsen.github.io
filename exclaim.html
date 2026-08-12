@@ -6,48 +6,48 @@
   <title>EXCLAIM Executive Admin Dashboard | Ben Knudsen Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Carousel container */
     .carousel {
-      max-width: 700px;
+      max-width: 900px;
       margin: 2rem auto;
       position: relative;
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 6px 15px rgba(0,0,0,0.1);
+      background: white;
     }
 
     .slides {
       display: flex;
       transition: transform 0.4s ease;
-      width: 200%;
     }
 
     .slides img {
       width: 100%;
-      border-radius: 12px;
+      flex-shrink: 0;
+      display: block;
       user-select: none;
-      pointer-events: none;
     }
 
-    /* Buttons */
     .carousel-button {
       position: absolute;
       top: 50%;
-      background: rgba(255, 255, 255, 0.7);
+      background: rgba(255, 255, 255, 0.85);
       border: none;
       border-radius: 50%;
-      width: 38px;
-      height: 38px;
+      width: 42px;
+      height: 42px;
       cursor: pointer;
       transform: translateY(-50%);
-      transition: background 0.3s ease;
+      transition: background 0.2s ease, color 0.2s ease;
       font-weight: bold;
-      font-size: 1.5rem;
+      font-size: 1.4rem;
       color: #1d4ed8;
       display: flex;
       align-items: center;
       justify-content: center;
+      z-index: 2;
     }
+
     .carousel-button:hover {
       background: #1d4ed8;
       color: white;
@@ -56,33 +56,32 @@
     .prev {
       left: 12px;
     }
+
     .next {
       right: 12px;
     }
 
-    /* Project content container */
     .project-content {
-      max-width: 700px;
+      max-width: 900px;
       margin: 2rem auto;
       padding: 0 1rem;
       color: #1f2937;
     }
 
     .project-content h1 {
-      font-size: 2rem;
+      font-size: 2.2rem;
       margin-bottom: 1rem;
       color: #0f172a;
     }
 
     .project-content p {
-      font-size: 1.1rem;
-      line-height: 1.6;
+      font-size: 1.08rem;
+      line-height: 1.7;
       margin-bottom: 1rem;
     }
 
-    /* Back link */
     .back-link {
-      max-width: 700px;
+      max-width: 900px;
       margin: 1rem auto 4rem;
       padding: 0 1rem;
     }
@@ -97,12 +96,26 @@
       text-decoration: underline;
     }
 
+    .slide-counter {
+      text-align: center;
+      margin-top: 1rem;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
     @media (max-width: 768px) {
-      .carousel {
+      .carousel,
+      .project-content,
+      .back-link {
         max-width: 95vw;
       }
-      .project-content, .back-link {
-        max-width: 95vw;
+
+      .project-content h1 {
+        font-size: 1.8rem;
+      }
+
+      .project-content p {
+        font-size: 1rem;
       }
     }
   </style>
@@ -111,32 +124,50 @@
   <div class="project-content">
     <h1>EXCLAIM Executive Admin Dashboard</h1>
     <p>
-      Supported the rollout of a nationwide VA program by designing custom data entry, storage, and analytics solutions to help improve cancer treatment outcomes 
-      through the use of genetic testing and more targeted treatment selection.
+      Supported the rollout of a nationwide VA program by designing custom data entry,
+      storage, and analytics solutions to help improve cancer treatment outcomes through
+      the use of genetic testing and more targeted treatment selection.
+    </p>
+    <p>
+      This dashboard suite was designed to support executive visibility, operational tracking,
+      and implementation monitoring across multiple views, including enterprise metrics,
+      hiring tracker, VISN overview, facility profiles, personnel profiles, clinical workflows,
+      and underlying data structure.
     </p>
   </div>
 
   <div class="carousel" aria-label="Image carousel for EXCLAIM project">
     <div class="slides" id="slides">
-      <img src="assets/images/slide1.png" alt="EXCLAIM Project Screenshot 1" draggable="false" />
-      <img src="assets/images/slide2.png" alt="EXCLAIM Project Screenshot 2" draggable="false" />
+      <img src="assets/images/exclaim/1. EXCLAIM Executive Admin Dashboard Homepage.png" alt="EXCLAIM Homepage" draggable="false" />
+      <img src="assets/images/exclaim/2. EXCLAIM Executive Admin Dashboard VISN Overview.jpg" alt="EXCLAIM VISN Overview" draggable="false" />
+      <img src="assets/images/exclaim/3. EXCLAIM Executive Admin Dashboard Enterprise Metrics 1.png" alt="EXCLAIM Enterprise Metrics 1" draggable="false" />
+      <img src="assets/images/exclaim/4. EXCLAIM Executive Admin Dashboard Enterprise Metrics 2.png" alt="EXCLAIM Enterprise Metrics 2" draggable="false" />
+      <img src="assets/images/exclaim/5. EXCLAIM Executive Admin Dashboard Enterprise Metrics 3.png" alt="EXCLAIM Enterprise Metrics 3" draggable="false" />
+      <img src="assets/images/exclaim/6. EXCLAIM Executive Admin Dashboard Facility Profile.jpg" alt="EXCLAIM Facility Profile" draggable="false" />
+      <img src="assets/images/exclaim/7. EXCLAIM Executive Admin Dashboard Personnel Profile 1.png" alt="EXCLAIM Personnel Profile 1" draggable="false" />
+      <img src="assets/images/exclaim/8. EXCLAIM Executive Admin Dashboard Personnel Profile 2.png" alt="EXCLAIM Personnel Profile 2" draggable="false" />
+      <img src="assets/images/exclaim/9. EXCLAIM Executive Admin Dashboard Clinical Workflows.png" alt="EXCLAIM Clinical Workflows" draggable="false" />
+      <img src="assets/images/exclaim/10. EXCLAIM Executive Admin Dashboard Data Model.png" alt="EXCLAIM Data Model" draggable="false" />
     </div>
     <button class="carousel-button prev" id="prevBtn" aria-label="Previous image">&#10094;</button>
     <button class="carousel-button next" id="nextBtn" aria-label="Next image">&#10095;</button>
   </div>
+
+  <div class="slide-counter" id="slideCounter">1 / 10</div>
 
   <div class="back-link">
     <a href="index.html">&larr; Back to Homepage</a>
   </div>
 
   <script>
-    // Carousel logic
     const slides = document.getElementById('slides');
+    const images = slides.querySelectorAll('img');
     const prevBtn = document.getElementById('prevBtn');
     const nextBtn = document.getElementById('nextBtn');
+    const slideCounter = document.getElementById('slideCounter');
 
     let currentIndex = 0;
-    const totalSlides = slides.children.length;
+    const totalSlides = images.length;
 
     function showSlide(index) {
       if (index < 0) {
@@ -146,8 +177,9 @@
       } else {
         currentIndex = index;
       }
-      const offset = currentIndex * -100;
-      slides.style.transform = `translateX(${offset}%)`;
+
+      slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      slideCounter.textContent = `${currentIndex + 1} / ${totalSlides}`;
     }
 
     prevBtn.addEventListener('click', () => {
@@ -158,8 +190,7 @@
       showSlide(currentIndex + 1);
     });
 
-    // Initialize carousel
-    showSlide(currentIndex);
+    showSlide(0);
   </script>
 </body>
 </html>
