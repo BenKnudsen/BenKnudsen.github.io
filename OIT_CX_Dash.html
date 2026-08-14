@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VA - OIT - Customer Experience (CX) Dashboard | Ben Knudsen Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .project-hero {
+      background: linear-gradient(135deg, #0f172a, #1d4ed8);
+      color: white;
+      padding: 0 2rem 3rem;
+    }
+
+    .project-hero-content {
+      max-width: 1100px;
+      margin: 3rem auto 0;
+      padding: 2rem 0;
+    }
+
+    .project-hero-content h1 {
+      font-size: 2.8rem;
+      margin-bottom: 1rem;
+    }
+
+    .project-hero-content p {
+      max-width: 800px;
+      font-size: 1.15rem;
+      color: #dbeafe;
+      line-height: 1.7;
+    }
+
+    .project-page {
+      max-width: 1000px;
+      margin: 0 auto;
+      padding: 3rem 1.5rem 4rem;
+    }
+
+    .project-page h2 {
+      font-size: 1.75rem;
+      margin-top: 3rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .project-page p {
+      font-size: 1.05rem;
+      line-height: 1.7;
+      margin-bottom: 1rem;
+      color: #1f2937;
+    }
+
+    .tools-list {
+      margin-left: 1.25rem;
+      color: #1f2937;
+    }
+
+    .tools-list li {
+      margin-bottom: 0.5rem;
+      font-size: 1.05rem;
+    }
+
+    .screenshot-block {
+      margin-top: 2.75rem;
+      text-align: center;
+    }
+
+    .screenshot-block h3 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
+      color: #0f172a;
+    }
+
+    .screenshot-block img {
+      max-width: 100%;
+      height: auto;
+      border-radius: 12px;
+      box-shadow: 0 8px 24px rgba(15, 23, 42, 0.12);
+      border: 1px solid #dbeafe;
+      background: white;
+    }
+
+    .screenshot-block img.medium {
+      max-width: 80%;
+    }
+
+    .project-actions {
+      margin-top: 1.5rem;
+      display: flex;
+      gap: 1rem;
+      flex-wrap: wrap;
+    }
+
+    .back-link {
+      margin-top: 3rem;
+    }
+
+    .back-link a {
+      color: #1d4ed8;
+      text-decoration: none;
+      font-weight: 600;
+    }
+
+    .back-link a:hover {
+      text-decoration: underline;
+    }
+
+    @media (max-width: 768px) {
+      .project-hero {
+        padding: 0 1rem 2.5rem;
+      }
+
+      .project-hero-content h1 {
+        font-size: 2.1rem;
+      }
+
+      .project-hero-content p {
+        font-size: 1rem;
+      }
+
+      .project-page {
+        padding: 2rem 1rem 3rem;
+      }
+
+      .project-page h2 {
+        font-size: 1.5rem;
+      }
+
+      .screenshot-block img.medium {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header class="project-hero">
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">Ben Knudsen</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="project-hero-content">
+      <h1>VA - OIT - Customer Experience (CX) Dashboard</h1>
+      <p>
+        A Power BI dashboard and Power Automate-enabled reporting solution designed to monitor employee feedback on IT services across the Department of Veterans Affairs and support management decision-making at scale.
+      </p>
+      <div class="project-actions">
+        <a href="index.html#projects" class="btn primary">Back to Projects</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-page">
+    <h2>Description</h2>
+    <p>
+      For this project our team developed, distributed, and analyzed surveys capturing employees’ experiences and feedback on information technology services on monthly and an annual basis. Monthly survey participation requests were sent to one-twelfth of the entire Department of Veterans Affairs workforce each month, and employees were never solicited twice in a given year. Requests to participate in the annual survey were sent to the entire 500,000+ employee VA workforce at the end of the fiscal year, and each recipient received two follow-up reminders if they had not yet completed the survey. The distribution of the annual survey far exceeded the VA's daily outgoing email limits, so I created a highly scalable email automation process using Power Automate, which reduced the workload from eight employees working five hours daily to a single employee working 1.5 hours daily. Data from the surveys was visualized in a Power BI dashboard and distributed to management to guide decision making.
+    </p>
+    <p>
+      Due to IP rights of the client organization, only images of the Power BI dashboard are displayed here.
+    </p>
+
+    <h2>Applications Used</h2>
+    <ul class="tools-list">
+      <li>Power BI</li>
+      <li>Power Automate</li>
+    </ul>
+
+    <h2>Dashboard Pages</h2>
+
+    <div class="screenshot-block">
+      <h3>Home Page</h3>
+      <img src="assets/images/CX_Dash/1. CX Dash Home Page.png" alt="CX Dashboard Home Page" />
+    </div>
+
+    <div class="screenshot-block">
+      <h3>Enterprise Metrics</h3>
+      <img src="assets/images/CX_Dash/2. CX Dash Enterprise Metrics.png" alt="CX Dashboard Enterprise Metrics" />
+    </div>
+
+    <div class="screenshot-block">
+      <h3>Division Metrics</h3>
+      <img src="assets/images/CX_Dash/3. CX Dash Division Metrics.png" alt="CX Dashboard Division Metrics" />
+    </div>
+
+    <div class="screenshot-block">
+      <h3>Comparison</h3>
+      <img src="assets/images/CX_Dash/4. CX Dash Comparison.png" alt="CX Dashboard Comparison" />
+    </div>
+
+    <div class="screenshot-block">
+      <h3>Info</h3>
+      <img src="assets/images/CX_Dash/5. CX Dash Info.png" alt="CX Dashboard Info" />
+    </div>
+
+    <div class="back-link">
+      <a href="index.html">&larr; Back to Homepage</a>
+    </div>
+  </main>
+</body>
+</html>
