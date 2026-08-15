@@ -236,6 +236,16 @@ p {
   color: #1f2937;
 }
 
+/* Helper text styles */
+
+.section-note {
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: #475569;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
 .tools-list {
   margin-left: 1.1rem;
   color: #1f2937;
@@ -291,16 +301,6 @@ p {
 
 .back-link a:hover {
   text-decoration: underline;
-}
-
-/* Helper text styles */
-
-.section-note {
-  font-size: 0.95rem;
-  font-weight: normal;
-  color: #475569;
-  margin-bottom: 0.75rem;
-  line-height: 1.5;
 }
 
 /* Mobile */
