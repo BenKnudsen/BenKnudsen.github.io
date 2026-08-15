@@ -7,7 +7,6 @@
   <title>VA - VHA - NOP Executive Action Tracker | Ben Knudsen Portfolio</title>
   <link rel="stylesheet" href="style.css" />
   <style>
-    /* Carousel container and images */
     .carousel {
       max-width: 900px;
       margin: 2rem auto;
@@ -31,7 +30,6 @@
       user-select: none;
     }
 
-    /* Carousel buttons */
     .carousel-button {
       position: absolute;
       top: 50%;
@@ -65,110 +63,6 @@
       right: 12px;
     }
 
-    /* Project hero and page content */
-    .project-hero {
-      background: linear-gradient(135deg, #0f172a, #1d4ed8);
-      color: white;
-      padding: 0 2rem 2rem;
-    }
-
-    .project-hero-content {
-      max-width: 1100px;
-      margin: 1.75rem auto 0;
-      padding: 0.85rem 0 0.35rem;
-    }
-
-    .project-hero-content h1 {
-      font-size: 2.2rem;
-      margin-bottom: 0.6rem;
-    }
-
-    .project-hero-content p {
-      max-width: 800px;
-      font-size: 1rem;
-      color: #dbeafe;
-      line-height: 1.5;
-      margin-bottom: 0.65rem;
-    }
-
-    .project-page {
-      max-width: 1000px;
-      margin: 0 auto;
-      padding: 1.5rem 1.5rem 2.5rem;
-    }
-
-    .project-page h2 {
-      font-size: 1.4rem;
-      margin-top: 1.5rem;
-      margin-bottom: 0.6rem;
-      color: #0f172a;
-    }
-
-    .project-page p {
-      font-size: 0.98rem;
-      line-height: 1.55;
-      margin-bottom: 0.65rem;
-      color: #1f2937;
-    }
-
-    .tools-list {
-      margin-left: 1.1rem;
-      color: #1f2937;
-      margin-top: 0.15rem;
-    }
-
-    .tools-list li {
-      margin-bottom: 0.3rem;
-      font-size: 0.98rem;
-      line-height: 1.45;
-    }
-
-    .screenshot-block {
-      margin-top: 1.35rem;
-      text-align: center;
-    }
-
-    .screenshot-block h3 {
-      font-size: 1rem;
-      margin-bottom: 0.55rem;
-      color: #0f172a;
-    }
-
-    .screenshot-block img {
-      max-width: 100%;
-      height: auto;
-      border-radius: 12px;
-      box-shadow: 0 6px 18px rgba(15, 23, 42, 0.1);
-      border: 1px solid #dbeafe;
-      background: white;
-    }
-
-    .screenshot-block img.medium {
-      max-width: 80%;
-    }
-
-    .project-actions {
-      margin-top: 0.8rem;
-      display: flex;
-      gap: 0.65rem;
-      flex-wrap: wrap;
-    }
-
-    .back-link {
-      margin-top: 1.5rem;
-    }
-
-    .back-link a {
-      color: #1d4ed8;
-      text-decoration: none;
-      font-weight: 600;
-    }
-
-    .back-link a:hover {
-      text-decoration: underline;
-    }
-
-    /* Scrollable PDF container */
     .pdf-container {
       width: 100%;
       max-width: 900px;
@@ -188,60 +82,6 @@
     }
 
     @media (max-width: 768px) {
-      .project-hero {
-        padding: 0 1rem 2rem;
-      }
-
-      .project-hero-content h1 {
-        font-size: 2rem;
-      }
-
-      .project-hero-content p {
-        font-size: 0.95rem;
-        line-height: 1.4;
-      }
-
-      .project-page {
-        padding: 1rem 1rem 2rem;
-      }
-
-      .project-page h2 {
-        font-size: 1.25rem;
-        margin-top: 1.25rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .project-page p {
-        font-size: 0.96rem;
-        margin-bottom: 0.6rem;
-      }
-
-      .tools-list li {
-        font-size: 0.96rem;
-      }
-
-      .screenshot-block {
-        margin-top: 1.1rem;
-      }
-
-      .screenshot-block h3 {
-        font-size: 0.96rem;
-        margin-bottom: 0.5rem;
-      }
-
-      .screenshot-block img.medium {
-        max-width: 100%;
-      }
-
-      .project-actions {
-        margin-top: 0.7rem;
-        gap: 0.5rem;
-      }
-
-      .back-link {
-        margin-top: 1.25rem;
-      }
-
       .pdf-container {
         height: 600px;
         margin: 1.5rem auto;
@@ -292,8 +132,8 @@
     </ul>
 
     <h2>Project Delivery Presentation</h2>
-    <p style="font-size: 0.95rem; font-weight: normal; color: #475569; margin-bottom: 0.75rem;">
-    This presentation outlines the initial needs assessment, identifies shortcomings in the legacy manual tracking tool, and details the design and features of the newly developed solution. It highlights how the updated system improves usability, automates routine         communications, and provides leadership dashboards to enhance operational visibility and task management efficiency.
+    <p class="section-note">
+      This presentation outlines the initial needs assessment, identifies shortcomings in the legacy manual tracking tool, and details the design and features of the newly developed solution. It highlights how the updated system improves usability, automates routine communications, and provides leadership dashboards to enhance operational visibility and task management efficiency.
     </p>
     <div class="carousel" aria-label="NOP Executive Admin Tracker PowerPoint Slides">
       <div class="slides" id="slides">
@@ -325,9 +165,8 @@
 
     <h2>NOP Exec Admin Action Tracker User Guide</h2>
     <div class="pdf-container">
-      <iframe src="assets/images/execadmintracker/NOP Exec Admin Action Tracker User Guide.pdf"></iframe>
+      <iframe src="assets/images/execadmintracker/NOP Exec Admin Action Tracker User Guide.pdf" title="NOP Exec Admin Action Tracker User Guide"></iframe>
     </div>
-
   </main>
 
   <script>
