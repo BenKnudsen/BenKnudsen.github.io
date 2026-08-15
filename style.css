@@ -293,6 +293,16 @@ p {
   text-decoration: underline;
 }
 
+/* Helper text styles */
+
+.section-note {
+  font-size: 0.95rem;
+  font-weight: normal;
+  color: #475569;
+  margin-bottom: 0.75rem;
+  line-height: 1.5;
+}
+
 /* Mobile */
 
 @media (max-width: 768px) {
