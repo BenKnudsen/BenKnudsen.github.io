@@ -1,1 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>VA - VHA - NTO Service Expansion | Ben Knudsen Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .carousel {
+      max-width: 900px;
+      margin: 2rem auto;
+      position: relative;
+      border-radius: 12px;
+      overflow: hidden;
+      box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
+      background: white;
+    }
 
+    .slides {
+      display: flex;
+      transition: transform 0.4s ease;
+      scroll-behavior: smooth;
+    }
+
+    .slides img {
+      width: 100%;
+      flex-shrink: 0;
+      display: block;
+      user-select: none;
+    }
+
+    .carousel-button {
+      position: absolute;
+      top: 50%;
+      background: rgba(255, 255, 255, 0.85);
+      border: none;
+      border-radius: 50%;
+      width: 42px;
+      height: 42px;
+      cursor: pointer;
+      transform: translateY(-50%);
+      transition: background 0.2s ease, color 0.2s ease;
+      font-weight: bold;
+      font-size: 1.4rem;
+      color: #1d4ed8;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      z-index: 2;
+    }
+
+    .carousel-button:hover {
+      background: #1d4ed8;
+      color: white;
+    }
+
+    .prev {
+      left: 12px;
+    }
+
+    .next {
+      right: 12px;
+    }
+  </style>
+</head>
+<body>
+  <header class="project-hero">
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">Ben Knudsen</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="project-hero-content">
+      <h1>VA - VHA - NTO Service Expansion</h1>
+      <p>
+        A Power BI, Power Apps, SharePoint, and Power Automate solution developed to support the National Oncology Program’s TeleOncology service expansion by tracking geographic rollout, service maturity, and site onboarding progress.
+      </p>
+      <div class="project-actions">
+        <a href="index.html#projects" class="btn primary">Back to Projects</a>
+      </div>
+    </div>
+  </header>
+
+  <main class="project-page">
+    <h2>Description</h2>
+    <p>
+      This project supported the National Oncology Program’s expansion of TeleOncology services across the Veterans Health Administration. The program’s growth had two dimensions: expanding services geographically to new locations, sometimes in limited form, and maturing existing locations toward full implementation of the complete TeleOncology service offering. To support this effort, we first developed a Power BI dashboard that mapped participating sites, highlighted where services were available, and visually distinguished locations by the scope of services offered. As the program matured, the client needed a more robust operational tool to manage rollout progress, monitor onboarding, and support broader implementation tracking.
+    </p>
+    <p>
+      To meet that need, we adapted the foundation of the NOP Executive Action Tracker into a new solution tailored to this use case, leveraging SharePoint, Power Apps, Power Automate, and Power BI. The planned solution included a customized Power Apps canvas app and a dedicated SharePoint page to support site onboarding and service expansion management. A key challenge in this project was working closely with non-technical clinical leadership, who needed guidance not only on how the tool could be built, but also on what was feasible using existing Microsoft 365 tools without incurring additional costs. Development was progressing toward a mature implementation when the program was cut by DOGE in 2025. The materials below show the dashboard, an early project update presentation, and a later features presentation reflecting the direction of the more mature solution.
+    </p>
+
+    <h2>Applications Used</h2>
+    <ul class="tools-list">
+      <li>Power Automate</li>
+      <li>Power BI</li>
+      <li>Power Apps</li>
+      <li>SharePoint</li>
+      <li>Microsoft Teams</li>
+      <li>Outlook</li>
+    </ul>
+
+    <h2>NTO Services Map Dashboard</h2>
+    <p class="section-note">
+      This dashboard provided leadership with a geographic view of TeleOncology service expansion, showing where services were available and distinguishing sites by the scope of services implemented.
+    </p>
+    <div class="screenshot-block">
+      <img src="assets/images/ntositeonboarding/NTO Services Map.png" alt="NTO Services Map Dashboard" />
+    </div>
+
+    <h2>NTO Site Onboarding Tool Progress Update Presentation</h2>
+    <p class="section-note">
+      This presentation captures the project during an earlier phase of development, outlining the problem space, rollout needs, and the evolving direction of the onboarding tool.
+    </p>
+    <div class="carousel" aria-label="NTO Site Onboarding Tool Progress Update Presentation">
+      <div class="slides" id="progressSlides">
+        <img src="assets/images/ntositeonboarding/toolprogress/Slide1.PNG" alt="Progress Update Slide 1" />
+        <img src="assets/images/ntositeonboarding/toolprogress/Slide2.PNG" alt="Progress Update Slide 2" />
+        <img src="assets/images/ntositeonboarding/toolprogress/Slide3.PNG" alt="Progress Update Slide 3" />
+        <img src="assets/images/ntositeonboarding/toolprogress/Slide4.PNG" alt="Progress Update Slide 4" />
+        <img src="assets/images/ntositeonboarding/toolprogress/Slide5.PNG" alt="Progress Update Slide 5" />
+        <img src="assets/images/ntositeonboarding/toolprogress/Slide6.PNG" alt="Progress Update Slide 6" />
+      </div>
+      <button class="carousel-button prev" id="progressPrevBtn" aria-label="Previous progress slide">&#10094;</button>
+      <button class="carousel-button next" id="progressNextBtn" aria-label="Next progress slide">&#10095;</button>
+    </div>
+
+    <h2>NTO Site Onboarding Tool Features Presentation</h2>
+    <p class="section-note">
+      This presentation reflects the more mature design direction of the onboarding tool, highlighting proposed features, workflow improvements, and the planned user experience for supporting service expansion.
+    </p>
+    <div class="carousel" aria-label="NTO Site Onboarding Tool Features Presentation">
+      <div class="slides" id="featuresSlides">
+        <img src="assets/images/ntositeonboarding/toolfeatures/Slide1.PNG" alt="Features Slide 1" />
+        <img src="assets/images/ntositeonboarding/toolfeatures/Slide2.PNG" alt="Features Slide 2" />
+        <img src="assets/images/ntositeonboarding/toolfeatures/Slide3.PNG" alt="Features Slide 3" />
+        <img src="assets/images/ntositeonboarding/toolfeatures/Slide4.PNG" alt="Features Slide 4" />
+        <img src="assets/images/ntositeonboarding/toolfeatures/Slide5.PNG" alt="Features Slide 5" />
+        <img src="assets/images/ntositeonboarding/toolfeatures/Slide6.PNG" alt="Features Slide 6" />
+        <img src="assets/images/ntositeonboarding/toolfeatures/Slide7.PNG" alt="Features Slide 7" />
+      </div>
+      <button class="carousel-button prev" id="featuresPrevBtn" aria-label="Previous features slide">&#10094;</button>
+      <button class="carousel-button next" id="featuresNextBtn" aria-label="Next features slide">&#10095;</button>
+    </div>
+
+    <div class="back-link">
+      <a href="index.html">&larr; Back to Homepage</a>
+    </div>
+  </main>
+
+  <script>
+    function setupCarousel(slidesId, prevBtnId, nextBtnId) {
+      const slides = document.getElementById(slidesId);
+      const prevBtn = document.getElementById(prevBtnId);
+      const nextBtn = document.getElementById(nextBtnId);
+      const totalSlides = slides.children.length;
+      let currentIndex = 0;
+
+      function showSlide(index) {
+        if (index < 0) {
+          currentIndex = totalSlides - 1;
+        } else if (index >= totalSlides) {
+          currentIndex = 0;
+        } else {
+          currentIndex = index;
+        }
+        slides.style.transform = `translateX(-${currentIndex * 100}%)`;
+      }
+
+      prevBtn.addEventListener('click', () => {
+        showSlide(currentIndex - 1);
+      });
+
+      nextBtn.addEventListener('click', () => {
+        showSlide(currentIndex + 1);
+      });
+
+      showSlide(0);
+    }
+
+    setupCarousel('progressSlides', 'progressPrevBtn', 'progressNextBtn');
+    setupCarousel('featuresSlides', 'featuresPrevBtn', 'featuresNextBtn');
+  </script>
+</body>
+</html>
