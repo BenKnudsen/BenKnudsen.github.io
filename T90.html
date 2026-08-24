@@ -1,1 +1,134 @@
 
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>Layered Swap View Demo - T90 Project</title>
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background: #f8fafc;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+  }
+
+  .swap-container {
+    position: relative;
+    width: 600px;
+    height: 400px;
+    perspective: 1500px;
+  }
+
+  .swap-image {
+    position: absolute;
+    width: 540px;
+    height: 360px;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
+    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+    backface-visibility: hidden;
+    object-fit: cover;
+  }
+
+  /* Front image style */
+  .front {
+    transform: translateZ(60px) translateX(0) translateY(0) rotateY(0deg);
+    z-index: 2;
+  }
+
+  /* Back image style */
+  .back {
+    transform: translateZ(0) translateX(40px) translateY(20px) rotateY(-15deg);
+    opacity: 0.7;
+    filter: brightness(0.85);
+    z-index: 1;
+  }
+
+  /* Hidden behind */
+  .hidden-behind {
+    opacity: 0;
+    pointer-events: none;
+    transform: translateZ(-300px);
+  }
+
+  /* Controls */
+  .controls {
+    margin-top: 12px;
+    text-align: center;
+  }
+
+  button {
+    background-color: #1d4ed8;
+    border: none;
+    color: white;
+    font-weight: bold;
+    padding: 10px 16px;
+    border-radius: 6px;
+    cursor: pointer;
+    margin: 0 8px;
+    font-size: 1rem;
+  }
+
+  button:hover {
+    background-color: #2563eb;
+  }
+</style>
+</head>
+<body>
+  <div>
+    <div class="swap-container" aria-label="Layered Swap View for T90 Project Images" role="region">
+      <img src="assets/images/t90/T90 Old.png" alt="T90 Old Dashboard" class="swap-image front" id="imgFront" />
+      <img src="assets/images/t90/T90 New Dashboard.png" alt="T90 New Dashboard" class="swap-image back" id="imgBack" />
+    </div>
+    <div class="controls">
+      <button id="prevBtn" aria-label="Show previous image">Previous</button>
+      <button id="nextBtn" aria-label="Show next image">Next</button>
+    </div>
+  </div>
+
+<script>
+  const imgFront = document.getElementById('imgFront');
+  const imgBack = document.getElementById('imgBack');
+  const prevBtn = document.getElementById('prevBtn');
+  const nextBtn = document.getElementById('nextBtn');
+
+  // Track which image is currently front (true=front is original "T90 Old")
+  let frontIsOriginal = true;
+
+  function swapImages() {
+    if (frontIsOriginal) {
+      // Animate swap: front image rotates out and moves behind
+      imgFront.style.transform = 'translateZ(0) translateX(40px) translateY(20px) rotateY(-15deg)';
+      imgFront.style.opacity = "0.7";
+      imgFront.style.filter = "brightness(0.85)";
+      imgFront.style.zIndex = "1";
+
+      // Back image moves into front position
+      imgBack.style.transform = 'translateZ(60px) translateX(0) translateY(0) rotateY(0deg)';
+      imgBack.style.opacity = "1";
+      imgBack.style.filter = "brightness(1)";
+      imgBack.style.zIndex = "2";
+    } else {
+      // Reverse the swap back
+      imgFront.style.transform = 'translateZ(60px) translateX(0) translateY(0) rotateY(0deg)';
+      imgFront.style.opacity = "1"; 
+      imgFront.style.filter = "brightness(1)";
+      imgFront.style.zIndex = "2";
+
+      imgBack.style.transform = 'translateZ(0) translateX(40px) translateY(20px) rotateY(-15deg)';
+      imgBack.style.opacity = "0.7";
+      imgBack.style.filter = "brightness(0.85)";
+      imgBack.style.zIndex = "1";
+    }
+    frontIsOriginal = !frontIsOriginal;
+  }
+
+  nextBtn.onclick = swapImages;
+  prevBtn.onclick = swapImages;
+</script>
+</body>
+</html>
