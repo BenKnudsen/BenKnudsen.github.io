@@ -391,39 +391,33 @@ p {
 }
 
 .layered-swap-image {
-  position: absolute;
-  top: 50%;
-  left: 50%;
-  width: 88%;
-  max-width: 760px;
-  height: auto;
-  max-height: 500px;
+  width: 900px;
+  max-width: 95vw;
+  max-height: 600px;
+  object-fit: contain;
   border-radius: 12px;
   border: 1px solid #dbeafe;
   background: white;
   box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
-  object-fit: contain;
-  backface-visibility: hidden;
-  transform-origin: center center;
   transition:
     transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
     opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
     filter 0.7s cubic-bezier(0.4, 0, 0.2, 1),
     box-shadow 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+  image-rendering: crisp-edges;
+  -webkit-font-smoothing: antialiased;
 }
-
-.layered-swap-image.is-front {
-  transform: translate(-50%, -50%) translateX(0) translateY(0) rotateY(0deg) scale(1);
-  opacity: 1;
-  filter: brightness(1);
-  z-index: 2;
-}
-
 .layered-swap-image.is-back {
+  filter: brightness(0.9);
   transform: translate(-50%, -50%) translateX(42px) translateY(22px) rotateY(-14deg) scale(0.97);
   opacity: 0.78;
-  filter: brightness(0.82);
   z-index: 1;
+}
+.layered-swap-image.is-front {
+  filter: brightness(1);
+  transform: translate(-50%, -50%) translateX(0) translateY(0) rotateY(0deg) scale(1);
+  opacity: 1;
+  z-index: 2;
 }
 
 .layered-swap-controls {
