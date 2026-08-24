@@ -1,134 +1,254 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8" />
-<meta name="viewport" content="width=device-width, initial-scale=1" />
-<title>Layered Swap View Demo - T90 Project</title>
-<style>
-  body {
-    font-family: Arial, sans-serif;
-    background: #f8fafc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    height: 100vh;
-  }
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>T90 | Ben Knudsen Portfolio</title>
+  <link rel="stylesheet" href="style.css" />
+  <style>
+    .layered-swap-section {
+      margin-top: 1.5rem;
+    }
 
-  .swap-container {
-    position: relative;
-    width: 600px;
-    height: 400px;
-    perspective: 1500px;
-  }
+    .layered-swap-wrapper {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
 
-  .swap-image {
-    position: absolute;
-    width: 540px;
-    height: 360px;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.15);
-    transition: all 0.7s cubic-bezier(0.4, 0, 0.2, 1);
-    cursor: pointer;
-    backface-visibility: hidden;
-    object-fit: cover;
-  }
+    .layered-swap-container {
+      position: relative;
+      width: 100%;
+      max-width: 1000px;
+      height: 650px;
+      perspective: 1500px;
+      margin: 1.5rem auto 0;
+    }
 
-  /* Front image style */
-  .front {
-    transform: translateZ(60px) translateX(0) translateY(0) rotateY(0deg);
-    z-index: 2;
-  }
+    .layered-swap-image {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 900px;
+      max-width: 95vw;
+      max-height: 600px;
+      object-fit: contain;
+      border-radius: 12px;
+      border: 1px solid #dbeafe;
+      background: white;
+      box-shadow: 0 10px 28px rgba(15, 23, 42, 0.16);
+      transition:
+        transform 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+        opacity 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+        filter 0.7s cubic-bezier(0.4, 0, 0.2, 1),
+        box-shadow 0.7s cubic-bezier(0.4, 0, 0.2, 1);
+      image-rendering: crisp-edges;
+      -webkit-font-smoothing: antialiased;
+      backface-visibility: hidden;
+      transform-origin: center center;
+    }
 
-  /* Back image style */
-  .back {
-    transform: translateZ(0) translateX(40px) translateY(20px) rotateY(-15deg);
-    opacity: 0.7;
-    filter: brightness(0.85);
-    z-index: 1;
-  }
+    .layered-swap-image.is-back {
+      filter: brightness(0.9);
+      transform: translate(-50%, -50%) translateX(42px) translateY(22px) rotateY(-14deg) scale(0.97);
+      opacity: 0.78;
+      z-index: 1;
+    }
 
-  /* Hidden behind */
-  .hidden-behind {
-    opacity: 0;
-    pointer-events: none;
-    transform: translateZ(-300px);
-  }
+    .layered-swap-image.is-front {
+      filter: brightness(1);
+      transform: translate(-50%, -50%) translateX(0) translateY(0) rotateY(0deg) scale(1);
+      opacity: 1;
+      z-index: 2;
+    }
 
-  /* Controls */
-  .controls {
-    margin-top: 12px;
-    text-align: center;
-  }
+    .layered-swap-controls {
+      margin-top: 1rem;
+      display: flex;
+      gap: 0.75rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
 
-  button {
-    background-color: #1d4ed8;
-    border: none;
-    color: white;
-    font-weight: bold;
-    padding: 10px 16px;
-    border-radius: 6px;
-    cursor: pointer;
-    margin: 0 8px;
-    font-size: 1rem;
-  }
+    .layered-swap-button {
+      background-color: #1d4ed8;
+      color: white;
+      border: none;
+      border-radius: 8px;
+      padding: 0.72rem 1.15rem;
+      font-weight: 600;
+      font-size: 0.96rem;
+      cursor: pointer;
+      transition: background-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+      box-shadow: 0 4px 12px rgba(29, 78, 216, 0.18);
+    }
 
-  button:hover {
-    background-color: #2563eb;
-  }
-</style>
+    .layered-swap-button:hover {
+      background-color: #2563eb;
+      transform: translateY(-1px);
+    }
+
+    .layered-swap-button:focus-visible {
+      outline: 3px solid rgba(147, 197, 253, 0.8);
+      outline-offset: 2px;
+    }
+
+    .layered-swap-caption {
+      margin-top: 0.85rem;
+      text-align: center;
+      font-size: 0.95rem;
+      color: #475569;
+    }
+
+    @media (max-width: 768px) {
+      .layered-swap-container {
+        height: 360px;
+        margin-top: 1.1rem;
+      }
+
+      .layered-swap-image {
+        width: 94vw;
+        max-height: 300px;
+      }
+
+      .layered-swap-image.is-back {
+        transform: translate(-50%, -50%) translateX(22px) translateY(14px) rotateY(-10deg) scale(0.97);
+      }
+
+      .layered-swap-controls {
+        gap: 0.55rem;
+      }
+
+      .layered-swap-button {
+        padding: 0.68rem 1rem;
+        font-size: 0.94rem;
+      }
+    }
+  </style>
 </head>
 <body>
-  <div>
-    <div class="swap-container" aria-label="Layered Swap View for T90 Project Images" role="region">
-      <img src="assets/images/t90/T90 Old.png" alt="T90 Old Dashboard" class="swap-image front" id="imgFront" />
-      <img src="assets/images/t90/T90 New Dashboard.png" alt="T90 New Dashboard" class="swap-image back" id="imgBack" />
+  <header class="project-hero">
+    <nav class="navbar">
+      <div class="logo"><a href="index.html">Ben Knudsen</a></div>
+      <ul class="nav-links">
+        <li><a href="index.html#about">About</a></li>
+        <li><a href="index.html#projects">Projects</a></li>
+        <li><a href="index.html#contact">Contact</a></li>
+      </ul>
+    </nav>
+
+    <div class="project-hero-content">
+      <h1>T90</h1>
+      <p>
+        Placeholder short blurb for the T90 project. Replace this with a concise summary of the problem, solution, and impact.
+      </p>
+      <div class="project-actions">
+        <a href="index.html#projects" class="btn primary">Back to Projects</a>
+      </div>
     </div>
-    <div class="controls">
-      <button id="prevBtn" aria-label="Show previous image">Previous</button>
-      <button id="nextBtn" aria-label="Show next image">Next</button>
+  </header>
+
+  <main class="project-page">
+    <h2>Description</h2>
+    <p>
+      Placeholder long description for the T90 project. Replace this with a full overview of the project context, the business problem, the tools or methods used, and the outcome. You can also use this section to explain your role, the stakeholders involved, and any technical or organizational challenges you addressed.
+    </p>
+    <p>
+      Add a second paragraph here if needed to describe implementation details, the evolution of the solution, or how the final deliverable improved the existing process.
+    </p>
+
+    <h2>Applications Used</h2>
+    <ul class="tools-list">
+      <li>Placeholder Application 1</li>
+      <li>Placeholder Application 2</li>
+      <li>Placeholder Application 3</li>
+    </ul>
+
+    <section class="layered-swap-section">
+      <h2>Before and After Dashboard Comparison</h2>
+      <p class="section-note">
+        This Layered Swap view compares the inherited dashboard with the redesigned version. Use the buttons below to rotate the two images and compare the layouts from a more dynamic perspective.
+      </p>
+
+      <div class="layered-swap-wrapper">
+        <div class="layered-swap-container" aria-label="Before and after dashboard comparison" role="region">
+          <img
+            src="assets/images/t90/T90 Old.png"
+            alt="T90 old dashboard"
+            class="layered-swap-image is-front"
+            id="layeredSwapFront"
+          />
+          <img
+            src="assets/images/t90/T90 New Dashboard.png"
+            alt="T90 new dashboard"
+            class="layered-swap-image is-back"
+            id="layeredSwapBack"
+          />
+        </div>
+
+        <div class="layered-swap-controls">
+          <button class="layered-swap-button" id="layeredSwapPrevBtn" type="button">Previous</button>
+          <button class="layered-swap-button" id="layeredSwapNextBtn" type="button">Next</button>
+        </div>
+
+        <p class="layered-swap-caption" id="layeredSwapCaption">
+          Currently viewing: Original dashboard in front, redesigned dashboard behind.
+        </p>
+      </div>
+    </section>
+
+    <h2>Placeholder Section Title</h2>
+    <p class="section-note">
+      Placeholder helper text for an additional project artifact, media section, or explanation block.
+    </p>
+    <div class="screenshot-block">
+      <h3>Placeholder Screenshot or Deliverable</h3>
+      <img src="assets/images/t90/T90 New Dashboard.png" alt="Placeholder T90 screenshot" />
     </div>
-  </div>
 
-<script>
-  const imgFront = document.getElementById('imgFront');
-  const imgBack = document.getElementById('imgBack');
-  const prevBtn = document.getElementById('prevBtn');
-  const nextBtn = document.getElementById('nextBtn');
+    <div class="back-link">
+      <a href="index.html">&larr; Back to Homepage</a>
+    </div>
+  </main>
 
-  // Track which image is currently front (true=front is original "T90 Old")
-  let frontIsOriginal = true;
+  <script>
+    const layeredSwapFront = document.getElementById('layeredSwapFront');
+    const layeredSwapBack = document.getElementById('layeredSwapBack');
+    const layeredSwapPrevBtn = document.getElementById('layeredSwapPrevBtn');
+    const layeredSwapNextBtn = document.getElementById('layeredSwapNextBtn');
+    const layeredSwapCaption = document.getElementById('layeredSwapCaption');
 
-  function swapImages() {
-    if (frontIsOriginal) {
-      // Animate swap: front image rotates out and moves behind
-      imgFront.style.transform = 'translateZ(0) translateX(40px) translateY(20px) rotateY(-15deg)';
-      imgFront.style.opacity = "0.7";
-      imgFront.style.filter = "brightness(0.85)";
-      imgFront.style.zIndex = "1";
+    let originalIsFront = true;
 
-      // Back image moves into front position
-      imgBack.style.transform = 'translateZ(60px) translateX(0) translateY(0) rotateY(0deg)';
-      imgBack.style.opacity = "1";
-      imgBack.style.filter = "brightness(1)";
-      imgBack.style.zIndex = "2";
-    } else {
-      // Reverse the swap back
-      imgFront.style.transform = 'translateZ(60px) translateX(0) translateY(0) rotateY(0deg)';
-      imgFront.style.opacity = "1"; 
-      imgFront.style.filter = "brightness(1)";
-      imgFront.style.zIndex = "2";
+    function updateLayeredSwap() {
+      if (originalIsFront) {
+        layeredSwapFront.classList.add('is-front');
+        layeredSwapFront.classList.remove('is-back');
 
-      imgBack.style.transform = 'translateZ(0) translateX(40px) translateY(20px) rotateY(-15deg)';
-      imgBack.style.opacity = "0.7";
-      imgBack.style.filter = "brightness(0.85)";
-      imgBack.style.zIndex = "1";
+        layeredSwapBack.classList.add('is-back');
+        layeredSwapBack.classList.remove('is-front');
+
+        layeredSwapCaption.textContent = 'Currently viewing: Original dashboard in front, redesigned dashboard behind.';
+      } else {
+        layeredSwapFront.classList.remove('is-front');
+        layeredSwapFront.classList.add('is-back');
+
+        layeredSwapBack.classList.remove('is-back');
+        layeredSwapBack.classList.add('is-front');
+
+        layeredSwapCaption.textContent = 'Currently viewing: Redesigned dashboard in front, original dashboard behind.';
+      }
     }
-    frontIsOriginal = !frontIsOriginal;
-  }
 
-  nextBtn.onclick = swapImages;
-  prevBtn.onclick = swapImages;
-</script>
+    function swapLayeredImages() {
+      originalIsFront = !originalIsFront;
+      updateLayeredSwap();
+    }
+
+    layeredSwapPrevBtn.addEventListener('click', swapLayeredImages);
+    layeredSwapNextBtn.addEventListener('click', swapLayeredImages);
+
+    updateLayeredSwap();
+  </script>
 </body>
 </html>
