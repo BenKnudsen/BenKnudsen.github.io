@@ -431,7 +431,7 @@ p {
 }
 
 .layered-swap-frame.is-back {
-  transform: translate(-50%, -50%) translateX(42px) translateY(22px) rotateY(-4deg) scale(0.975);
+  transform: translate(-50%, -50%) translateX(42px) translateY(22px) scale(0.975);
   opacity: 0.8;
   filter: brightness(0.92);
   z-index: 1;
