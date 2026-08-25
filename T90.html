@@ -79,7 +79,7 @@
     <section class="layered-swap-section">
       <h2>Before and After of the Final T90 Report</h2>
       <p class="section-note">
-        This comparison highlights the redesign of the final reporting dashboard used to monitor projects approaching launch. The updated version improves clarity, reduces manual effort, and better supports ongoing monitoring of at-risk records throughout the reporting cycle.
+        This comparison highlights the redesign of the final reporting dashboard used to monitor projects approaching launch. Click either image to open a larger view.
       </p>
 
       <div class="layered-swap-wrapper">
@@ -87,20 +87,24 @@
           <button class="layered-swap-inline-control left" id="wrapperSwapPrevBtn" type="button" aria-label="Show previous image">&#8249;</button>
           <button class="layered-swap-inline-control right" id="wrapperSwapNextBtn" type="button" aria-label="Show next image">&#8250;</button>
 
-          <div class="layered-swap-frame is-front" id="wrapperSwapFrontFrame">
+          <div
+            class="layered-swap-frame is-front"
+            id="wrapperSwapFrontFrame"
+            data-modal-src="assets/images/t90/T90 Old.png"
+            data-modal-title="Inherited (Old)"
+          >
             <div class="layered-swap-title">Inherited (Old)</div>
-            <img
-              src="assets/images/t90/T90 Old_2.png"
-              alt="Inherited old T90 dashboard"
-            />
+            <img src="assets/images/t90/T90 Old.png" alt="Inherited old T90 dashboard" />
           </div>
 
-          <div class="layered-swap-frame is-back" id="wrapperSwapBackFrame">
+          <div
+            class="layered-swap-frame is-back"
+            id="wrapperSwapBackFrame"
+            data-modal-src="assets/images/t90/T90 New Dashboard.png"
+            data-modal-title="Reconstructed (New)"
+          >
             <div class="layered-swap-title">Reconstructed (New)</div>
-            <img
-              src="assets/images/t90/T90 Dashboard New_2.png"
-              alt="Reconstructed new T90 dashboard"
-            />
+            <img src="assets/images/t90/T90 New Dashboard.png" alt="Reconstructed new T90 dashboard" />
           </div>
         </div>
 
@@ -135,28 +139,28 @@
               <div class="imcc-slide active" data-title="Query 1 - Master RDOF Launch Readiness" data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.">
                 <div class="imcc-slide-title">Query 1 - Master RDOF Launch Readiness</div>
                 <video preload="metadata" playsinline>
-                  <source src="assets/videos/t90/OLD 01_T90 Friday Extract Template_Workbook1.mp4" type="video/mp4" />
+                  <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook1.mp4" type="video/mp4" />
                 </video>
               </div>
 
               <div class="imcc-slide" data-title="Query 2 - PIDs in Range" data-caption="Filters the master launch-readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis.">
                 <div class="imcc-slide-title">Query 2 - PIDs in Range</div>
                 <video preload="metadata" playsinline>
-                  <source src="assets/videos/t90/OLD 01_T90 Friday Extract Template_Workbook2.mp4" type="video/mp4" />
+                  <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook2.mp4" type="video/mp4" />
                 </video>
               </div>
 
               <div class="imcc-slide" data-title="Query 3 - T90 Extract" data-caption="Produces the final at-risk project subset by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and transport-related exclusions. This output serves as the snapshot passed into the Final workbook for end-user reporting.">
                 <div class="imcc-slide-title">Query 3 - T90 Extract</div>
                 <video preload="metadata" playsinline>
-                  <source src="assets/videos/t90/OLD 01_T90 Friday Extract Template_Workbook3.mp4" type="video/mp4" />
+                  <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook3.mp4" type="video/mp4" />
                 </video>
               </div>
 
               <div class="imcc-slide" data-title="Power Query Editor View" data-caption="View of the legacy Power Query Editor used to maintain and troubleshoot the Extract workbook logic. This view reflects the complexity of the inherited query structure and the amount of transformation logic concentrated in the old process.">
                 <div class="imcc-slide-title">Power Query Editor View</div>
                 <video preload="metadata" playsinline>
-                  <source src="assets/videos/t90/OLD 01_T90 Friday Extract Template.mp4" type="video/mp4" />
+                  <source src="assets/images/t90/OLD 01_T90 Friday Extract Template.mp4" type="video/mp4" />
                 </video>
               </div>
 
@@ -171,19 +175,25 @@
           </div>
 
           <div class="imcc-code-column">
-            <div class="imcc-code-card active" data-imcc-index="0">
-              <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/1. Old_01_T90 Fri Extract_R LR.png" alt="Code snippet for Query 1 - Master RDOF Launch Readiness" />
-              <div class="imcc-code-label">Query 1 - Master RDOF Launch Readiness</div>
+            <div class="imcc-code-card active" data-imcc-index="0" data-code-src="assets/images/t90/1. Old_01_T90 Fri Extract_R LR.png" data-code-title="Query 1 - Master RDOF Launch Readiness">
+              <div class="imcc-code-thumb-wrap">
+                <img class="imcc-code-thumb" src="assets/images/t90/1. Old_01_T90 Fri Extract_R LR.png" alt="Code snippet for Query 1 - Master RDOF Launch Readiness" />
+              </div>
+              <div class="imcc-code-label">Query 1</div>
             </div>
 
-            <div class="imcc-code-card" data-imcc-index="1">
-              <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/2. Old_01_T90 Fri Extract_PIDsinRange.png" alt="Code snippet for Query 2 - PIDs in Range" />
-              <div class="imcc-code-label">Query 2 - PIDs in Range</div>
+            <div class="imcc-code-card" data-imcc-index="1" data-code-src="assets/images/t90/2. Old_01_T90 Fri Extract_PIDsinRange.png" data-code-title="Query 2 - PIDs in Range">
+              <div class="imcc-code-thumb-wrap">
+                <img class="imcc-code-thumb" src="assets/images/t90/2. Old_01_T90 Fri Extract_PIDsinRange.png" alt="Code snippet for Query 2 - PIDs in Range" />
+              </div>
+              <div class="imcc-code-label">Query 2</div>
             </div>
 
-            <div class="imcc-code-card" data-imcc-index="2">
-              <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/3. Old_01_T90 Fri Extract_Extract.png" alt="Code snippet for Query 3 - T90 Extract" />
-              <div class="imcc-code-label">Query 3 - T90 Extract</div>
+            <div class="imcc-code-card" data-imcc-index="2" data-code-src="assets/images/t90/3. Old_01_T90 Fri Extract_Extract.png" data-code-title="Query 3 - T90 Extract">
+              <div class="imcc-code-thumb-wrap">
+                <img class="imcc-code-thumb" src="assets/images/t90/3. Old_01_T90 Fri Extract_Extract.png" alt="Code snippet for Query 3 - T90 Extract" />
+              </div>
+              <div class="imcc-code-label">Query 3</div>
             </div>
           </div>
         </div>
@@ -200,6 +210,24 @@
       <a href="index.html">&larr; Back to Homepage</a>
     </div>
   </main>
+
+  <div class="modal" id="imageModal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" id="imageModalClose" type="button" aria-label="Close image modal">✕</button>
+      <button class="modal-nav prev" id="imageModalPrev" type="button" aria-label="Previous image">&#8249;</button>
+      <div class="modal-image-title" id="imageModalTitle"></div>
+      <img class="modal-image" id="imageModalImg" src="" alt="" />
+      <button class="modal-nav next" id="imageModalNext" type="button" aria-label="Next image">&#8250;</button>
+    </div>
+  </div>
+
+  <div class="modal" id="codeModal" aria-hidden="true">
+    <div class="modal-content">
+      <button class="modal-close" id="codeModalClose" type="button" aria-label="Close code modal">✕</button>
+      <div class="modal-image-title" id="codeModalTitle"></div>
+      <img class="modal-image" id="codeModalImg" src="" alt="" />
+    </div>
+  </div>
 
   <script>
     const wrapperSwapFrontFrame = document.getElementById('wrapperSwapFrontFrame');
@@ -240,6 +268,50 @@
 
     updateWrapperSwap();
 
+    const layeredModalItems = [
+      { src: 'assets/images/t90/T90 Old.png', title: 'Inherited (Old)', alt: 'Inherited old T90 dashboard' },
+      { src: 'assets/images/t90/T90 New Dashboard.png', title: 'Reconstructed (New)', alt: 'Reconstructed new T90 dashboard' }
+    ];
+
+    const imageModal = document.getElementById('imageModal');
+    const imageModalClose = document.getElementById('imageModalClose');
+    const imageModalPrev = document.getElementById('imageModalPrev');
+    const imageModalNext = document.getElementById('imageModalNext');
+    const imageModalImg = document.getElementById('imageModalImg');
+    const imageModalTitle = document.getElementById('imageModalTitle');
+
+    let imageModalIndex = 0;
+
+    function openImageModal(index) {
+      imageModalIndex = index;
+      const item = layeredModalItems[imageModalIndex];
+      imageModalImg.src = item.src;
+      imageModalImg.alt = item.alt;
+      imageModalTitle.textContent = item.title;
+      imageModal.classList.add('open');
+      imageModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeImageModal() {
+      imageModal.classList.remove('open');
+      imageModal.setAttribute('aria-hidden', 'true');
+      imageModalImg.src = '';
+    }
+
+    function stepImageModal(direction) {
+      imageModalIndex = (imageModalIndex + direction + layeredModalItems.length) % layeredModalItems.length;
+      openImageModal(imageModalIndex);
+    }
+
+    wrapperSwapFrontFrame.addEventListener('click', () => openImageModal(0));
+    wrapperSwapBackFrame.addEventListener('click', () => openImageModal(1));
+    imageModalClose.addEventListener('click', closeImageModal);
+    imageModalPrev.addEventListener('click', () => stepImageModal(-1));
+    imageModalNext.addEventListener('click', () => stepImageModal(1));
+    imageModal.addEventListener('click', (event) => {
+      if (event.target === imageModal) closeImageModal();
+    });
+
     const legacyImcc = document.getElementById('legacyImcc');
     const legacySlides = Array.from(legacyImcc.querySelectorAll('.imcc-slide'));
     const legacyCodeCards = Array.from(legacyImcc.querySelectorAll('.imcc-code-card'));
@@ -276,7 +348,7 @@
       });
 
       legacyCodeCards.forEach((card, i) => {
-        card.classList.toggle('active', i === index);
+        card.classList.toggle('active', i === index && i < 3);
       });
 
       legacyActiveIndex = index;
@@ -287,16 +359,13 @@
       const activeVideo = getLegacyActiveVideo();
       if (activeVideo) {
         activeVideo.currentTime = 0;
+        activeVideo.load();
       }
     }
 
     function goToLegacySlide(index) {
-      if (index < 0) {
-        index = legacySlides.length - 1;
-      }
-      if (index >= legacySlides.length) {
-        index = 0;
-      }
+      if (index < 0) index = legacySlides.length - 1;
+      if (index >= legacySlides.length) index = 0;
       updateLegacyImcc(index);
     }
 
@@ -313,8 +382,11 @@
       if (!video) return;
 
       if (video.paused) {
-        video.play();
-        legacyPlay.textContent = '❚❚';
+        video.play().then(() => {
+          legacyPlay.textContent = '❚❚';
+        }).catch(() => {
+          legacyPlay.textContent = '▶';
+        });
       } else {
         video.pause();
         legacyPlay.textContent = '▶';
@@ -352,6 +424,48 @@
     });
 
     updateLegacyImcc(0);
+
+    const codeModal = document.getElementById('codeModal');
+    const codeModalClose = document.getElementById('codeModalClose');
+    const codeModalImg = document.getElementById('codeModalImg');
+    const codeModalTitle = document.getElementById('codeModalTitle');
+
+    function openCodeModal(src, title, alt) {
+      codeModalImg.src = src;
+      codeModalImg.alt = alt || title;
+      codeModalTitle.textContent = title;
+      codeModal.classList.add('open');
+      codeModal.setAttribute('aria-hidden', 'false');
+    }
+
+    function closeCodeModal() {
+      codeModal.classList.remove('open');
+      codeModal.setAttribute('aria-hidden', 'true');
+      codeModalImg.src = '';
+    }
+
+    legacyCodeCards.forEach((card) => {
+      const src = card.dataset.codeSrc;
+      const title = card.dataset.codeTitle;
+      const img = card.querySelector('img');
+
+      img.addEventListener('click', (event) => {
+        event.stopPropagation();
+        openCodeModal(src, title, img.alt);
+      });
+    });
+
+    codeModalClose.addEventListener('click', closeCodeModal);
+    codeModal.addEventListener('click', (event) => {
+      if (event.target === codeModal) closeCodeModal();
+    });
+
+    document.addEventListener('keydown', (event) => {
+      if (event.key === 'Escape') {
+        closeImageModal();
+        closeCodeModal();
+      }
+    });
   </script>
 </body>
 </html>
