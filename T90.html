@@ -44,38 +44,79 @@
       <li>Placeholder Application 3</li>
     </ul>
 
-    <section class="layered-swap-section">
-      <h2>Before and After Dashboard Comparison</h2>
-      <p class="section-note">
-        This Layered Swap view compares the inherited dashboard with the redesigned version. Use the buttons below to rotate the two images and compare the layouts from a more dynamic perspective.
-      </p>
+    <section class="layered-swap-compare-section">
+  <h2>Before and After Dashboard Comparison</h2>
+  <p class="section-note">
+    Below are two versions of the Layered Swap effect using the same source images. The first uses the original image-based implementation, and the second uses a wrapper-based implementation intended to preserve more text clarity in the front image.
+  </p>
 
-      <div class="layered-swap-wrapper">
-        <div class="layered-swap-container" aria-label="Before and after dashboard comparison" role="region">
+  <div class="layered-swap-compare-block">
+    <h3>Original Layered Swap</h3>
+    <p class="layered-swap-compare-note">
+      Original implementation with the transform applied directly to the images.
+    </p>
+
+    <div class="layered-swap-wrapper">
+      <div class="layered-swap-container" aria-label="Original layered swap comparison" role="region">
+        <img
+          src="assets/images/t90/T90 Old.png"
+          alt="T90 old dashboard"
+          class="layered-swap-image is-front"
+          id="layeredSwapFront"
+        />
+        <img
+          src="assets/images/t90/T90 New Dashboard.png"
+          alt="T90 new dashboard"
+          class="layered-swap-image is-back"
+          id="layeredSwapBack"
+        />
+      </div>
+
+      <div class="layered-swap-controls">
+        <button class="layered-swap-button" id="layeredSwapPrevBtn" type="button">Previous</button>
+        <button class="layered-swap-button" id="layeredSwapNextBtn" type="button">Next</button>
+      </div>
+
+      <p class="layered-swap-caption" id="layeredSwapCaption">
+        Currently viewing: Original dashboard in front, redesigned dashboard behind.
+      </p>
+    </div>
+  </div>
+
+  <div class="layered-swap-compare-block">
+    <h3>Wrapper-Based Layered Swap Test</h3>
+    <p class="layered-swap-compare-note">
+      Wrapper-based version with inline edge controls and reduced transform on the rear image to test whether the front dashboard remains sharper.
+    </p>
+
+    <div class="layered-swap-wrapper-test">
+      <div class="layered-swap-wrapper-container" aria-label="Wrapper-based layered swap comparison" role="region">
+        <button class="layered-swap-inline-control left" id="wrapperSwapPrevBtn" type="button" aria-label="Show previous image">&#8249;</button>
+        <button class="layered-swap-inline-control right" id="wrapperSwapNextBtn" type="button" aria-label="Show next image">&#8250;</button>
+
+        <div class="layered-swap-frame is-front" id="wrapperSwapFrontFrame">
           <img
             src="assets/images/t90/T90 Old.png"
             alt="T90 old dashboard"
-            class="layered-swap-image is-front"
-            id="layeredSwapFront"
+            id="wrapperSwapFrontImg"
           />
+        </div>
+
+        <div class="layered-swap-frame is-back" id="wrapperSwapBackFrame">
           <img
             src="assets/images/t90/T90 New Dashboard.png"
             alt="T90 new dashboard"
-            class="layered-swap-image is-back"
-            id="layeredSwapBack"
+            id="wrapperSwapBackImg"
           />
         </div>
-
-        <div class="layered-swap-controls">
-          <button class="layered-swap-button" id="layeredSwapPrevBtn" type="button">Previous</button>
-          <button class="layered-swap-button" id="layeredSwapNextBtn" type="button">Next</button>
-        </div>
-
-        <p class="layered-swap-caption" id="layeredSwapCaption">
-          Currently viewing: Original dashboard in front, redesigned dashboard behind.
-        </p>
       </div>
-    </section>
+
+      <p class="layered-swap-caption" id="wrapperSwapCaption">
+        Currently viewing: Original dashboard in front, redesigned dashboard behind.
+      </p>
+    </div>
+  </div>
+</section>
 
     <h2>Placeholder Section Title</h2>
     <p class="section-note">
@@ -125,6 +166,46 @@
       originalIsFront = !originalIsFront;
       updateLayeredSwap();
     }
+
+    <script>
+  const wrapperSwapFrontFrame = document.getElementById('wrapperSwapFrontFrame');
+  const wrapperSwapBackFrame = document.getElementById('wrapperSwapBackFrame');
+  const wrapperSwapPrevBtn = document.getElementById('wrapperSwapPrevBtn');
+  const wrapperSwapNextBtn = document.getElementById('wrapperSwapNextBtn');
+  const wrapperSwapCaption = document.getElementById('wrapperSwapCaption');
+
+  let wrapperOriginalIsFront = true;
+
+  function updateWrapperSwap() {
+    if (wrapperOriginalIsFront) {
+      wrapperSwapFrontFrame.classList.add('is-front');
+      wrapperSwapFrontFrame.classList.remove('is-back');
+
+      wrapperSwapBackFrame.classList.add('is-back');
+      wrapperSwapBackFrame.classList.remove('is-front');
+
+      wrapperSwapCaption.textContent = 'Currently viewing: Original dashboard in front, redesigned dashboard behind.';
+    } else {
+      wrapperSwapFrontFrame.classList.remove('is-front');
+      wrapperSwapFrontFrame.classList.add('is-back');
+
+      wrapperSwapBackFrame.classList.remove('is-back');
+      wrapperSwapBackFrame.classList.add('is-front');
+
+      wrapperSwapCaption.textContent = 'Currently viewing: Redesigned dashboard in front, original dashboard behind.';
+    }
+  }
+
+  function swapWrapperImages() {
+    wrapperOriginalIsFront = !wrapperOriginalIsFront;
+    updateWrapperSwap();
+  }
+
+  wrapperSwapPrevBtn.addEventListener('click', swapWrapperImages);
+  wrapperSwapNextBtn.addEventListener('click', swapWrapperImages);
+
+  updateWrapperSwap();
+</script>
 
     layeredSwapPrevBtn.addEventListener('click', swapLayeredImages);
     layeredSwapNextBtn.addEventListener('click', swapLayeredImages);
