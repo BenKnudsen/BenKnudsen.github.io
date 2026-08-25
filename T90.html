@@ -167,50 +167,82 @@
       updateLayeredSwap();
     }
 
-    <script>
-  const wrapperSwapFrontFrame = document.getElementById('wrapperSwapFrontFrame');
-  const wrapperSwapBackFrame = document.getElementById('wrapperSwapBackFrame');
-  const wrapperSwapPrevBtn = document.getElementById('wrapperSwapPrevBtn');
-  const wrapperSwapNextBtn = document.getElementById('wrapperSwapNextBtn');
-  const wrapperSwapCaption = document.getElementById('wrapperSwapCaption');
+   <script>
+    const layeredSwapFront = document.getElementById('layeredSwapFront');
+    const layeredSwapBack = document.getElementById('layeredSwapBack');
+    const layeredSwapPrevBtn = document.getElementById('layeredSwapPrevBtn');
+    const layeredSwapNextBtn = document.getElementById('layeredSwapNextBtn');
+    const layeredSwapCaption = document.getElementById('layeredSwapCaption');
 
-  let wrapperOriginalIsFront = true;
+    let originalIsFront = true;
 
-  function updateWrapperSwap() {
-    if (wrapperOriginalIsFront) {
-      wrapperSwapFrontFrame.classList.add('is-front');
-      wrapperSwapFrontFrame.classList.remove('is-back');
+    function updateLayeredSwap() {
+      if (originalIsFront) {
+        layeredSwapFront.classList.add('is-front');
+        layeredSwapFront.classList.remove('is-back');
 
-      wrapperSwapBackFrame.classList.add('is-back');
-      wrapperSwapBackFrame.classList.remove('is-front');
+        layeredSwapBack.classList.add('is-back');
+        layeredSwapBack.classList.remove('is-front');
 
-      wrapperSwapCaption.textContent = 'Currently viewing: Original dashboard in front, redesigned dashboard behind.';
-    } else {
-      wrapperSwapFrontFrame.classList.remove('is-front');
-      wrapperSwapFrontFrame.classList.add('is-back');
+        layeredSwapCaption.textContent = 'Currently viewing: Original dashboard in front, redesigned dashboard behind.';
+      } else {
+        layeredSwapFront.classList.remove('is-front');
+        layeredSwapFront.classList.add('is-back');
 
-      wrapperSwapBackFrame.classList.remove('is-back');
-      wrapperSwapBackFrame.classList.add('is-front');
+        layeredSwapBack.classList.remove('is-back');
+        layeredSwapBack.classList.add('is-front');
 
-      wrapperSwapCaption.textContent = 'Currently viewing: Redesigned dashboard in front, original dashboard behind.';
+        layeredSwapCaption.textContent = 'Currently viewing: Redesigned dashboard in front, original dashboard behind.';
+      }
     }
-  }
 
-  function swapWrapperImages() {
-    wrapperOriginalIsFront = !wrapperOriginalIsFront;
-    updateWrapperSwap();
-  }
-
-  wrapperSwapPrevBtn.addEventListener('click', swapWrapperImages);
-  wrapperSwapNextBtn.addEventListener('click', swapWrapperImages);
-
-  updateWrapperSwap();
-</script>
+    function swapLayeredImages() {
+      originalIsFront = !originalIsFront;
+      updateLayeredSwap();
+    }
 
     layeredSwapPrevBtn.addEventListener('click', swapLayeredImages);
     layeredSwapNextBtn.addEventListener('click', swapLayeredImages);
 
     updateLayeredSwap();
+
+    const wrapperSwapFrontFrame = document.getElementById('wrapperSwapFrontFrame');
+    const wrapperSwapBackFrame = document.getElementById('wrapperSwapBackFrame');
+    const wrapperSwapPrevBtn = document.getElementById('wrapperSwapPrevBtn');
+    const wrapperSwapNextBtn = document.getElementById('wrapperSwapNextBtn');
+    const wrapperSwapCaption = document.getElementById('wrapperSwapCaption');
+
+    let wrapperOriginalIsFront = true;
+
+    function updateWrapperSwap() {
+      if (wrapperOriginalIsFront) {
+        wrapperSwapFrontFrame.classList.add('is-front');
+        wrapperSwapFrontFrame.classList.remove('is-back');
+
+        wrapperSwapBackFrame.classList.add('is-back');
+        wrapperSwapBackFrame.classList.remove('is-front');
+
+        wrapperSwapCaption.textContent = 'Currently viewing: Original dashboard in front, redesigned dashboard behind.';
+      } else {
+        wrapperSwapFrontFrame.classList.remove('is-front');
+        wrapperSwapFrontFrame.classList.add('is-back');
+
+        wrapperSwapBackFrame.classList.remove('is-back');
+        wrapperSwapBackFrame.classList.add('is-front');
+
+        wrapperSwapCaption.textContent = 'Currently viewing: Redesigned dashboard in front, original dashboard behind.';
+      }
+    }
+
+    function swapWrapperImages() {
+      wrapperOriginalIsFront = !wrapperOriginalIsFront;
+      updateWrapperSwap();
+    }
+
+    wrapperSwapPrevBtn.addEventListener('click', swapWrapperImages);
+    wrapperSwapNextBtn.addEventListener('click', swapWrapperImages);
+
+    updateWrapperSwap();
   </script>
 </body>
 </html>
