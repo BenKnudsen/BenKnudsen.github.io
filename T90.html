@@ -22,9 +22,18 @@
       <div class="project-actions"><a href="index.html#projects" class="btn primary">Back to Projects</a></div>
     </div>
   </header>
+  
   <main class="project-page">
     <h2>Description</h2>
-    <p>...[Same description as before omitted for brevity]...</p>
+    <p>
+      This project reconstructed the T90 (T-minus 90 Days) Report generation process used to monitor projects forecasted to launch within the next 90 days. The purpose of the T90 workflow is to identify projects that may be at risk of delayed activation due to missing or late inputs across operational partners (Legal, Field Operations, Billing, Internet Connectivity, Video Connectivity, and Voice Connectivity) required for launch. The redesign focused on stabilizing and simplifying a multi-workbook Excel and Power Query process that captures a data snapshot on Fridays and compares to refreshed current-state data the following week.
+    </p>
+    <p>
+      Key enhancements included consolidating and standardizing query logic, optimizing query performance, simplifying dependency calculations, adding logic to identify resolved and forecast-shifted records, and introducing a unique status field with a custom connection between the T90 dashboard and the source SharePoint List, enabling updates made in the Excel table to flow back to the underlying source data. The solution also introduced a method for preserving manual user-entered closure decisions through refreshes by using Excel helper tables and Power Query merge-back logic, allowing the workbook to behave more like an interactive dashboard while retaining end-user inputs. Additional improvements included dynamic retrieval of Friday snapshot dates from the source workbook, summary metrics for total projects within the date range and those at risk, and synchronized redesigns for two parallel reporting paths serving different project populations.
+    </p>
+    <p>
+      Together, these changes created a more consistent, accurate, and maintainable launch-readiness reporting framework. The finished product eliminated the need for an additional helper workbook and replaced a fragile, manual copy-and-paste workflow with a streamlined and sustainable reporting solution.
+    </p>
 
     <section class="project-summary-grid">
       <div class="project-summary-card">
