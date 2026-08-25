@@ -119,82 +119,79 @@
       <p class="section-note">
         The legacy process relied on an Extract &gt; Template &gt; Final workbook flow. While functional, that structure introduced duplicated logic, repeated manual steps, and a fragile reporting chain that was difficult to maintain and troubleshoot.
       </p>
-    
+
       <h3>Legacy Extract Workbook Query Pipeline</h3>
       <p>
         The Extract workbook followed a three-query pipeline: a master readiness query established the core dataset, a second query isolated the full 90-day project population, and a final query narrowed that set to the projects considered at risk for dashboard reporting.
       </p>
-    
+
       <div class="imcc-shell" id="legacyImcc">
         <div class="imcc-stage">
-          <div class="imcc-media-frame">
-            <button class="imcc-control prev" id="legacyImccPrev" type="button" aria-label="Previous slide">&#8249;</button>
-            <button class="imcc-control next" id="legacyImccNext" type="button" aria-label="Next slide">&#8250;</button>
-    
-            <div class="imcc-slide active" data-title="Master RDOF Launch Readiness" data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.">
-              <div class="imcc-slide-title">Master RDOF Launch Readiness</div>
-              <video preload="metadata" playsinline>
-                <source src="assets/videos/t90/OLD_01_T90_Friday_Extract_Template_Workbook1.mp4" type="video/mp4" />
-              </video>
+          <div class="imcc-media-column">
+            <div class="imcc-media-frame">
+              <button class="imcc-control prev" id="legacyImccPrev" type="button" aria-label="Previous slide">&#8249;</button>
+              <button class="imcc-control next" id="legacyImccNext" type="button" aria-label="Next slide">&#8250;</button>
+
+              <div class="imcc-slide active" data-title="Query 1 - Master RDOF Launch Readiness" data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.">
+                <div class="imcc-slide-title">Query 1 - Master RDOF Launch Readiness</div>
+                <video preload="metadata" playsinline>
+                  <source src="assets/videos/t90/OLD 01_T90 Friday Extract Template_Workbook1.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div class="imcc-slide" data-title="Query 2 - PIDs in Range" data-caption="Filters the master launch-readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis.">
+                <div class="imcc-slide-title">Query 2 - PIDs in Range</div>
+                <video preload="metadata" playsinline>
+                  <source src="assets/videos/t90/OLD 01_T90 Friday Extract Template_Workbook2.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div class="imcc-slide" data-title="Query 3 - T90 Extract" data-caption="Produces the final at-risk project subset by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and transport-related exclusions. This output serves as the snapshot passed into the Final workbook for end-user reporting.">
+                <div class="imcc-slide-title">Query 3 - T90 Extract</div>
+                <video preload="metadata" playsinline>
+                  <source src="assets/videos/t90/OLD 01_T90 Friday Extract Template_Workbook3.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div class="imcc-slide" data-title="Power Query Editor View" data-caption="View of the legacy Power Query Editor used to maintain and troubleshoot the Extract workbook logic. This view reflects the complexity of the inherited query structure and the amount of transformation logic concentrated in the old process.">
+                <div class="imcc-slide-title">Power Query Editor View</div>
+                <video preload="metadata" playsinline>
+                  <source src="assets/videos/t90/OLD 01_T90 Friday Extract Template.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div class="imcc-play-overlay">
+                <button class="imcc-play-button" id="legacyImccPlay" type="button" aria-label="Play or pause active video">▶</button>
+              </div>
             </div>
-    
-            <div class="imcc-slide" data-title="PIDs in Range" data-caption="Filters the master launch-readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis.">
-              <div class="imcc-slide-title">PIDs in Range</div>
-              <video preload="metadata" playsinline>
-                <source src="assets/videos/t90/OLD_01_T90_Friday_Extract_Template_Workbook2.mp4" type="video/mp4" />
-              </video>
-            </div>
-    
-            <div class="imcc-slide" data-title="T90 Extract" data-caption="Produces the final at-risk project subset by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and transport-related exclusions. This output serves as the snapshot passed into the Final workbook for end-user reporting.">
-              <div class="imcc-slide-title">T90 Extract</div>
-              <video preload="metadata" playsinline>
-                <source src="assets/videos/t90/OLD_01_T90_Friday_Extract_Template_Workbook3.mp4" type="video/mp4" />
-              </video>
-            </div>
-    
-            <div class="imcc-slide" data-title="Power Query Editor" data-caption="Placeholder caption for the legacy Power Query Editor walkthrough. Replace with your final descriptive blurb once this video and associated explanation are finalized.">
-              <div class="imcc-slide-title">Power Query Editor</div>
-              <video preload="metadata" playsinline>
-                <source src="assets/videos/t90/OLD_01_T90_Friday_Extract_Template.mp4" type="video/mp4" />
-              </video>
-            </div>
-    
-            <div class="imcc-play-overlay">
-              <button class="imcc-play-button" id="legacyImccPlay" type="button" aria-label="Play or pause active video">▶</button>
+
+            <div class="imcc-progress-wrap">
+              <input class="imcc-progress" id="legacyImccProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
             </div>
           </div>
-    
-          <div class="imcc-progress-wrap">
-            <input class="imcc-progress" id="legacyImccProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
+
+          <div class="imcc-code-column">
+            <div class="imcc-code-card active" data-imcc-index="0">
+              <img class="imcc-code-thumb" src="assets/images/t90/1. Old_01_T90 Fri Extract_R LR.png" alt="Code snippet for Query 1 - Master RDOF Launch Readiness" />
+              <div class="imcc-code-label">Query 1 - Master RDOF Launch Readiness</div>
+            </div>
+
+            <div class="imcc-code-card" data-imcc-index="1">
+              <img class="imcc-code-thumb" src="assets/images/t90/2. Old_01_T90 Fri Extract_PIDsinRange.png" alt="Code snippet for Query 2 - PIDs in Range" />
+              <div class="imcc-code-label">Query 2 - PIDs in Range</div>
+            </div>
+
+            <div class="imcc-code-card" data-imcc-index="2">
+              <img class="imcc-code-thumb" src="assets/images/t90/3. Old_01_T90 Fri Extract_Extract.png" alt="Code snippet for Query 3 - T90 Extract" />
+              <div class="imcc-code-label">Query 3 - T90 Extract</div>
+            </div>
           </div>
         </div>
-    
+
         <div class="imcc-meta">
           <p class="imcc-caption" id="legacyImccCaption">
             The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.
           </p>
-    
-          <div class="imcc-code-strip">
-            <div class="imcc-code-card active" data-imcc-index="0">
-              <img class="imcc-code-thumb" src="assets/images/t90/Old_01_T90_Fri_Extract_R_LR.png" alt="Code thumbnail for Master RDOF Launch Readiness" />
-              <div class="imcc-code-label">Master RDOF Launch Readiness</div>
-            </div>
-    
-            <div class="imcc-code-card" data-imcc-index="1">
-              <img class="imcc-code-thumb" src="assets/images/t90/Old_01_T90_Fri_Extract_PIDsinRange.png" alt="Code thumbnail for PIDs in Range" />
-              <div class="imcc-code-label">PIDs in Range</div>
-            </div>
-    
-            <div class="imcc-code-card" data-imcc-index="2">
-              <img class="imcc-code-thumb" src="assets/images/t90/Old_01_T90_Fri_Extract_Extract.png" alt="Code thumbnail for T90 Extract" />
-              <div class="imcc-code-label">T90 Extract</div>
-            </div>
-    
-            <div class="imcc-code-card" data-imcc-index="3">
-              <img class="imcc-code-thumb" src="assets/images/t90/placeholder_code_thumb.png" alt="Code thumbnail placeholder for Power Query Editor" />
-              <div class="imcc-code-label">Power Query Editor</div>
-            </div>
-          </div>
         </div>
       </div>
     </section>
@@ -242,121 +239,119 @@
     wrapperSwapNextBtn.addEventListener('click', swapWrapperImages);
 
     updateWrapperSwap();
-  </script>
 
-  <script>
-  const legacyImcc = document.getElementById('legacyImcc');
-  const legacySlides = Array.from(legacyImcc.querySelectorAll('.imcc-slide'));
-  const legacyCodeCards = Array.from(legacyImcc.querySelectorAll('.imcc-code-card'));
-  const legacyPrev = document.getElementById('legacyImccPrev');
-  const legacyNext = document.getElementById('legacyImccNext');
-  const legacyPlay = document.getElementById('legacyImccPlay');
-  const legacyProgress = document.getElementById('legacyImccProgress');
-  const legacyCaption = document.getElementById('legacyImccCaption');
+    const legacyImcc = document.getElementById('legacyImcc');
+    const legacySlides = Array.from(legacyImcc.querySelectorAll('.imcc-slide'));
+    const legacyCodeCards = Array.from(legacyImcc.querySelectorAll('.imcc-code-card'));
+    const legacyPrev = document.getElementById('legacyImccPrev');
+    const legacyNext = document.getElementById('legacyImccNext');
+    const legacyPlay = document.getElementById('legacyImccPlay');
+    const legacyProgress = document.getElementById('legacyImccProgress');
+    const legacyCaption = document.getElementById('legacyImccCaption');
 
-  let legacyActiveIndex = 0;
+    let legacyActiveIndex = 0;
 
-  function getLegacyActiveVideo() {
-    return legacySlides[legacyActiveIndex].querySelector('video');
-  }
+    function getLegacyActiveVideo() {
+      return legacySlides[legacyActiveIndex].querySelector('video');
+    }
 
-  function pauseAllLegacyVideos() {
+    function pauseAllLegacyVideos() {
+      legacySlides.forEach((slide) => {
+        const video = slide.querySelector('video');
+        if (video) {
+          video.pause();
+        }
+      });
+    }
+
+    function resetLegacyProgress() {
+      legacyProgress.value = 0;
+    }
+
+    function updateLegacyImcc(index) {
+      pauseAllLegacyVideos();
+
+      legacySlides.forEach((slide, i) => {
+        slide.classList.toggle('active', i === index);
+      });
+
+      legacyCodeCards.forEach((card, i) => {
+        card.classList.toggle('active', i === index);
+      });
+
+      legacyActiveIndex = index;
+      legacyCaption.textContent = legacySlides[index].dataset.caption || '';
+      resetLegacyProgress();
+      legacyPlay.textContent = '▶';
+
+      const activeVideo = getLegacyActiveVideo();
+      if (activeVideo) {
+        activeVideo.currentTime = 0;
+      }
+    }
+
+    function goToLegacySlide(index) {
+      if (index < 0) {
+        index = legacySlides.length - 1;
+      }
+      if (index >= legacySlides.length) {
+        index = 0;
+      }
+      updateLegacyImcc(index);
+    }
+
+    legacyPrev.addEventListener('click', () => {
+      goToLegacySlide(legacyActiveIndex - 1);
+    });
+
+    legacyNext.addEventListener('click', () => {
+      goToLegacySlide(legacyActiveIndex + 1);
+    });
+
+    legacyPlay.addEventListener('click', () => {
+      const video = getLegacyActiveVideo();
+      if (!video) return;
+
+      if (video.paused) {
+        video.play();
+        legacyPlay.textContent = '❚❚';
+      } else {
+        video.pause();
+        legacyPlay.textContent = '▶';
+      }
+    });
+
     legacySlides.forEach((slide) => {
       const video = slide.querySelector('video');
-      if (video) {
-        video.pause();
-      }
-    });
-  }
+      if (!video) return;
 
-  function resetLegacyProgress() {
-    legacyProgress.value = 0;
-  }
+      video.addEventListener('timeupdate', () => {
+        if (video.duration) {
+          legacyProgress.value = (video.currentTime / video.duration) * 100;
+        }
+      });
 
-  function updateLegacyImcc(index) {
-    pauseAllLegacyVideos();
-
-    legacySlides.forEach((slide, i) => {
-      slide.classList.toggle('active', i === index);
+      video.addEventListener('ended', () => {
+        legacyPlay.textContent = '▶';
+      });
     });
 
-    legacyCodeCards.forEach((card, i) => {
-      card.classList.toggle('active', i === index);
+    legacyProgress.addEventListener('input', () => {
+      const video = getLegacyActiveVideo();
+      if (!video || !video.duration) return;
+
+      const newTime = (legacyProgress.value / 100) * video.duration;
+      video.currentTime = newTime;
     });
 
-    legacyActiveIndex = index;
-    legacyCaption.textContent = legacySlides[index].dataset.caption || '';
-    resetLegacyProgress();
-    legacyPlay.textContent = '▶';
-
-    const activeVideo = getLegacyActiveVideo();
-    if (activeVideo) {
-      activeVideo.currentTime = 0;
-    }
-  }
-
-  function goToLegacySlide(index) {
-    if (index < 0) {
-      index = legacySlides.length - 1;
-    }
-    if (index >= legacySlides.length) {
-      index = 0;
-    }
-    updateLegacyImcc(index);
-  }
-
-  legacyPrev.addEventListener('click', () => {
-    goToLegacySlide(legacyActiveIndex - 1);
-  });
-
-  legacyNext.addEventListener('click', () => {
-    goToLegacySlide(legacyActiveIndex + 1);
-  });
-
-  legacyPlay.addEventListener('click', () => {
-    const video = getLegacyActiveVideo();
-    if (!video) return;
-
-    if (video.paused) {
-      video.play();
-      legacyPlay.textContent = '❚❚';
-    } else {
-      video.pause();
-      legacyPlay.textContent = '▶';
-    }
-  });
-
-  legacySlides.forEach((slide) => {
-    const video = slide.querySelector('video');
-    if (!video) return;
-
-    video.addEventListener('timeupdate', () => {
-      if (video.duration) {
-        legacyProgress.value = (video.currentTime / video.duration) * 100;
-      }
+    legacyCodeCards.forEach((card) => {
+      card.addEventListener('click', () => {
+        const index = Number(card.dataset.imccIndex);
+        goToLegacySlide(index);
+      });
     });
 
-    video.addEventListener('ended', () => {
-      legacyPlay.textContent = '▶';
-    });
-  });
-
-  legacyProgress.addEventListener('input', () => {
-    const video = getLegacyActiveVideo();
-    if (!video || !video.duration) return;
-
-    const newTime = (legacyProgress.value / 100) * video.duration;
-    video.currentTime = newTime;
-  });
-
-  legacyCodeCards.forEach((card) => {
-    card.addEventListener('click', () => {
-      const index = Number(card.dataset.imccIndex);
-      goToLegacySlide(index);
-    });
-  });
-
-  updateLegacyImcc(0);
-</script>
+    updateLegacyImcc(0);
+  </script>
 </body>
 </html>
