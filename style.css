@@ -497,8 +497,8 @@ p {
   position: relative;
   width: 100%;
   max-width: 1000px;
-  height: 650px;
-  margin: 1.5rem auto 0;
+  height: 590px;
+  margin: 1.25rem auto 0;
   overflow: hidden;
 }
 
@@ -506,9 +506,9 @@ p {
   position: absolute;
   top: 50%;
   left: 50%;
-  width: 900px;
-  max-width: 95vw;
-  max-height: 600px;
+  width: 940px;
+  max-width: 96vw;
+  max-height: 560px;
   border-radius: 12px;
   border: 1px solid #dbeafe;
   background: white;
@@ -531,9 +531,9 @@ p {
 }
 
 .layered-swap-frame.is-back {
-  transform: translate(-50%, -50%) translateX(36px) translateY(18px) scale(0.985);
-  opacity: 0.82;
-  filter: brightness(0.94);
+  transform: translate(-50%, -50%) translateX(24px) translateY(12px) scale(0.992);
+  opacity: 0.84;
+  filter: brightness(0.95);
   z-index: 1;
 }
 
@@ -541,16 +541,33 @@ p {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 600px;
+  max-height: 560px;
   object-fit: contain;
   image-rendering: auto;
+}
+
+.layered-swap-title {
+  position: absolute;
+  top: 16px;
+  left: 16px;
+  z-index: 4;
+  padding: 0.45rem 0.7rem;
+  border-radius: 10px;
+  background: rgba(15, 23, 42, 0.58);
+  color: white;
+  font-size: 0.9rem;
+  font-weight: 600;
+  line-height: 1.2;
+  backdrop-filter: blur(4px);
+  -webkit-backdrop-filter: blur(4px);
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
 }
 
 .layered-swap-inline-control {
   position: absolute;
   top: 50%;
   transform: translateY(-50%);
-  z-index: 3;
+  z-index: 5;
   width: 44px;
   height: 44px;
   border: none;
@@ -581,6 +598,47 @@ p {
 .layered-swap-inline-control:focus-visible {
   outline: 3px solid rgba(147, 197, 253, 0.8);
   outline-offset: 2px;
+}
+
+@media (max-width: 768px) {
+  .layered-swap-wrapper-container {
+    height: 330px;
+    margin-top: 1rem;
+  }
+
+  .layered-swap-frame {
+    width: 95vw;
+    max-height: 300px;
+  }
+
+  .layered-swap-frame img {
+    max-height: 300px;
+  }
+
+  .layered-swap-frame.is-back {
+    transform: translate(-50%, -50%) translateX(14px) translateY(8px) scale(0.995);
+  }
+
+  .layered-swap-title {
+    top: 10px;
+    left: 10px;
+    font-size: 0.8rem;
+    padding: 0.35rem 0.55rem;
+  }
+
+  .layered-swap-inline-control {
+    width: 38px;
+    height: 38px;
+    font-size: 1.15rem;
+  }
+
+  .layered-swap-inline-control.left {
+    left: 0.35rem;
+  }
+
+  .layered-swap-inline-control.right {
+    right: 0.35rem;
+  }
 }
 
 @media (max-width: 768px) {
