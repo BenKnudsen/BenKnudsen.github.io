@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>T90 | Ben Knudsen Portfolio</title>
+  <title>T90 Report | Ben Knudsen Portfolio</title>
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
@@ -18,9 +18,9 @@
     </nav>
 
     <div class="project-hero-content">
-      <h1>T90</h1>
+      <h1>T90 Report</h1>
       <p>
-        Placeholder short blurb for the T90 project. Replace this with a concise summary of the problem, solution, and impact.
+        A reconstruction of an Excel and Power Query tool used to monitor projects scheduled to launch within the next 90 days and identify those that may be at risk due to missing or delayed inputs across functional partners.
       </p>
       <div class="project-actions">
         <a href="index.html#projects" class="btn primary">Back to Projects</a>
@@ -31,102 +31,107 @@
   <main class="project-page">
     <h2>Description</h2>
     <p>
-      Placeholder long description for the T90 project. Replace this with a full overview of the project context, the business problem, the tools or methods used, and the outcome. You can also use this section to explain your role, the stakeholders involved, and any technical or organizational challenges you addressed.
+      This project reconstructed the T90 (T-minus 90 Days) Report generation process used to monitor projects forecasted to launch within the next 90 days. The purpose of the T90 workflow is to identify projects that may be at risk of delayed activation due to missing or late inputs across operational partners (Legal, Field Operations, Billing, Internet Connectivity, Video Connectivity, and Voice Connectivity) required for launch. The redesign focused on stabilizing and simplifying a multi-workbook Excel and Power Query process that captures a data snapshot on Fridays and compares to refreshed current-state data the following week.
     </p>
     <p>
-      Add a second paragraph here if needed to describe implementation details, the evolution of the solution, or how the final deliverable improved the existing process.
+      Key enhancements included consolidating and standardizing query logic, optimizing query performance, simplifying dependency calculations, adding logic to identify resolved and forecast-shifted records, and introducing a unique status field with a custom connection between the T90 dashboard and the source SharePoint List, enabling updates made in the Excel table to flow back to the underlying source data. The solution also introduced a method for preserving manual user-entered closure decisions through refreshes by using Excel helper tables and Power Query merge-back logic, allowing the workbook to behave more like an interactive dashboard while retaining end-user inputs. Additional improvements included dynamic retrieval of Friday snapshot dates from the source workbook, summary metrics for total projects within the date range and those at risk, and synchronized redesigns for two parallel reporting paths serving different project populations.
+    </p>
+    <p>
+      Together, these changes created a more consistent, accurate, and maintainable launch-readiness reporting framework. The finished product eliminated the need for an additional helper workbook and replaced a fragile, manual copy-and-paste workflow with a streamlined and sustainable reporting solution.
     </p>
 
-    <h2>Applications Used</h2>
-    <ul class="tools-list">
-      <li>Placeholder Application 1</li>
-      <li>Placeholder Application 2</li>
-      <li>Placeholder Application 3</li>
-    </ul>
-
-    <section class="layered-swap-compare-section">
-      <h2>Before and After Dashboard Comparison</h2>
-      <p class="section-note">
-        Below are two versions of the Layered Swap effect using the same source images. The first uses the original image-based implementation, and the second uses a wrapper-based implementation intended to preserve more text clarity in the front image.
-      </p>
-
-      <div class="layered-swap-compare-block">
-        <h3>Original Layered Swap</h3>
-        <p class="layered-swap-compare-note">
-          Original implementation with the transform applied directly to the images.
-        </p>
-
-        <div class="layered-swap-wrapper">
-          <div class="layered-swap-container" aria-label="Original layered swap comparison" role="region">
-            <img
-              src="assets/images/t90/T90 Old.png"
-              alt="T90 old dashboard"
-              class="layered-swap-image is-front"
-              id="layeredSwapFront"
-            />
-            <img
-              src="assets/images/t90/T90 New Dashboard.png"
-              alt="T90 new dashboard"
-              class="layered-swap-image is-back"
-              id="layeredSwapBack"
-            />
-          </div>
-
-          <div class="layered-swap-controls">
-            <button class="layered-swap-button" id="layeredSwapPrevBtn" type="button">Previous</button>
-            <button class="layered-swap-button" id="layeredSwapNextBtn" type="button">Next</button>
-          </div>
-
-          <p class="layered-swap-caption" id="layeredSwapCaption">
-            Currently viewing: Original dashboard in front, redesigned dashboard behind.
-          </p>
-        </div>
+    <section class="project-summary-grid">
+      <div class="project-summary-card">
+        <h3>Applications Used</h3>
+        <ul class="project-summary-list">
+          <li>Excel</li>
+          <li>Power Query</li>
+          <li>Power Automate</li>
+          <li>SharePoint</li>
+        </ul>
       </div>
 
-      <div class="layered-swap-compare-block">
-        <h3>Wrapper-Based Layered Swap Test</h3>
-        <p class="layered-swap-compare-note">
-          Wrapper-based version with inline edge controls and reduced transform on the rear image to test whether the front dashboard remains sharper.
-        </p>
+      <div class="project-summary-card">
+        <h3>Capabilities Demonstrated</h3>
+        <ul class="project-summary-list">
+          <li>Data modeling</li>
+          <li>ETL and query design</li>
+          <li>User-centered reporting</li>
+          <li>State preservation through refresh</li>
+          <li>Automation integration</li>
+          <li>Source system synchronization</li>
+        </ul>
+      </div>
 
-        <div class="layered-swap-wrapper-test">
-          <div class="layered-swap-wrapper-container" aria-label="Wrapper-based layered swap comparison" role="region">
-            <button class="layered-swap-inline-control left" id="wrapperSwapPrevBtn" type="button" aria-label="Show previous image">&#8249;</button>
-            <button class="layered-swap-inline-control right" id="wrapperSwapNextBtn" type="button" aria-label="Show next image">&#8250;</button>
-
-        <div class="layered-swap-frame is-front" id="wrapperSwapFrontFrame">
-          <div class="layered-swap-title">Inherited (Old)</div>
-          <img
-            src="assets/images/t90/T90 Old.png"
-            alt="T90 old dashboard"
-          />
-        </div>
-        
-        <div class="layered-swap-frame is-back" id="wrapperSwapBackFrame">
-          <div class="layered-swap-title">Reconstructed (New)</div>
-          <img
-            src="assets/images/t90/T90 New Dashboard.png"
-            alt="T90 new dashboard"
-          />
-        </div>
-          </div>
-
-          <p class="layered-swap-caption" id="wrapperSwapCaption">
-            Currently viewing: Original dashboard in front, redesigned dashboard behind.
-          </p>
-        </div>
+      <div class="project-summary-card">
+        <h3>Transferable Skills</h3>
+        <ul class="project-summary-list">
+          <li>Data modeling and transformation</li>
+          <li>Reporting and dashboard design</li>
+          <li>Process automation</li>
+          <li>System integration</li>
+          <li>User-centered solution design</li>
+          <li>Workflow optimization</li>
+        </ul>
       </div>
     </section>
 
-    <h2>Placeholder Section Title</h2>
-    <p class="section-note">
-      Placeholder helper text for an additional project artifact, media section, or explanation block.
-    </p>
+    <section class="layered-swap-section">
+      <h2>Before and After of the Final T90 Report</h2>
+      <p class="section-note">
+        This comparison highlights the redesign of the final reporting dashboard used to monitor projects approaching launch. The updated version improves clarity, reduces manual effort, and better supports ongoing monitoring of at-risk records throughout the reporting cycle.
+      </p>
 
-    <div class="screenshot-block">
-      <h3>Placeholder Screenshot or Deliverable</h3>
-      <img src="assets/images/t90/T90 New Dashboard.png" alt="Placeholder T90 screenshot" />
-    </div>
+      <div class="layered-swap-wrapper">
+        <div class="layered-swap-container" aria-label="Before and after dashboard comparison" role="region">
+          <button class="layered-swap-inline-control left" id="wrapperSwapPrevBtn" type="button" aria-label="Show previous image">&#8249;</button>
+          <button class="layered-swap-inline-control right" id="wrapperSwapNextBtn" type="button" aria-label="Show next image">&#8250;</button>
+
+          <div class="layered-swap-frame is-front" id="wrapperSwapFrontFrame">
+            <div class="layered-swap-title">Inherited (Old)</div>
+            <img
+              src="assets/images/t90/T90 Old_2.png"
+              alt="Inherited old T90 dashboard"
+            />
+          </div>
+
+          <div class="layered-swap-frame is-back" id="wrapperSwapBackFrame">
+            <div class="layered-swap-title">Reconstructed (New)</div>
+            <img
+              src="assets/images/t90/T90 Dashboard New_2.png"
+              alt="Reconstructed new T90 dashboard"
+            />
+          </div>
+        </div>
+
+        <p class="layered-swap-caption" id="wrapperSwapCaption">
+          Currently viewing: Inherited (Old) in front, Reconstructed (New) behind.
+        </p>
+      </div>
+
+      <p class="section-note">
+        The T90 report generation workflow begins with a Friday snapshot of projects forecasted to launch within the next 90 days. That snapshot is used to identify projects at risk based on missing or delayed readiness inputs. The report is then refreshed on Tuesday and Thursday to monitor whether those at-risk projects are progressing toward launch readiness, while preserving user-entered closure decisions and updated status handling.
+      </p>
+    </section>
+
+    <section>
+      <h2>Legacy Workflow</h2>
+      <p class="section-note">
+        The legacy process relied on a multi-workbook flow in which data moved from an Extract workbook into a Template structure and then into the Final reporting workbook. This design worked, but it created unnecessary complexity, duplicated logic, and made the process harder to maintain.
+      </p>
+
+      <h3>Legacy Extract Workbook Query Pipeline</h3>
+      <p>
+        The Extract workbook followed a three-query pipeline: a master readiness query established the core dataset, a second query isolated the full 90-day project population, and a final query narrowed that set to the projects considered at risk for dashboard reporting.
+      </p>
+
+      <div class="screenshot-block">
+        <h3>IMCC Placeholder</h3>
+        <p class="section-note">
+          Placeholder for the legacy workflow IMCC section with autoplaying short videos, slide-specific captions, associated code thumbnails, and synchronized highlighting behavior.
+        </p>
+      </div>
+    </section>
 
     <div class="back-link">
       <a href="index.html">&larr; Back to Homepage</a>
@@ -134,61 +139,23 @@
   </main>
 
   <script>
-    const layeredSwapFront = document.getElementById('layeredSwapFront');
-    const layeredSwapBack = document.getElementById('layeredSwapBack');
-    const layeredSwapPrevBtn = document.getElementById('layeredSwapPrevBtn');
-    const layeredSwapNextBtn = document.getElementById('layeredSwapNextBtn');
-    const layeredSwapCaption = document.getElementById('layeredSwapCaption');
-
-    let originalIsFront = true;
-
-    function updateLayeredSwap() {
-      if (originalIsFront) {
-        layeredSwapFront.classList.add('is-front');
-        layeredSwapFront.classList.remove('is-back');
-
-        layeredSwapBack.classList.add('is-back');
-        layeredSwapBack.classList.remove('is-front');
-
-        layeredSwapCaption.textContent = 'Currently viewing: Original dashboard in front, redesigned dashboard behind.';
-      } else {
-        layeredSwapFront.classList.remove('is-front');
-        layeredSwapFront.classList.add('is-back');
-
-        layeredSwapBack.classList.remove('is-back');
-        layeredSwapBack.classList.add('is-front');
-
-        layeredSwapCaption.textContent = 'Currently viewing: Redesigned dashboard in front, original dashboard behind.';
-      }
-    }
-
-    function swapLayeredImages() {
-      originalIsFront = !originalIsFront;
-      updateLayeredSwap();
-    }
-
-    layeredSwapPrevBtn.addEventListener('click', swapLayeredImages);
-    layeredSwapNextBtn.addEventListener('click', swapLayeredImages);
-
-    updateLayeredSwap();
-
     const wrapperSwapFrontFrame = document.getElementById('wrapperSwapFrontFrame');
     const wrapperSwapBackFrame = document.getElementById('wrapperSwapBackFrame');
     const wrapperSwapPrevBtn = document.getElementById('wrapperSwapPrevBtn');
     const wrapperSwapNextBtn = document.getElementById('wrapperSwapNextBtn');
     const wrapperSwapCaption = document.getElementById('wrapperSwapCaption');
 
-    let wrapperOriginalIsFront = true;
+    let wrapperOldIsFront = true;
 
     function updateWrapperSwap() {
-      if (wrapperOriginalIsFront) {
+      if (wrapperOldIsFront) {
         wrapperSwapFrontFrame.classList.add('is-front');
         wrapperSwapFrontFrame.classList.remove('is-back');
 
         wrapperSwapBackFrame.classList.add('is-back');
         wrapperSwapBackFrame.classList.remove('is-front');
 
-        wrapperSwapCaption.textContent = 'Currently viewing: Original dashboard in front, redesigned dashboard behind.';
+        wrapperSwapCaption.textContent = 'Currently viewing: Inherited (Old) in front, Reconstructed (New) behind.';
       } else {
         wrapperSwapFrontFrame.classList.remove('is-front');
         wrapperSwapFrontFrame.classList.add('is-back');
@@ -196,12 +163,12 @@
         wrapperSwapBackFrame.classList.remove('is-back');
         wrapperSwapBackFrame.classList.add('is-front');
 
-        wrapperSwapCaption.textContent = 'Currently viewing: Redesigned dashboard in front, original dashboard behind.';
+        wrapperSwapCaption.textContent = 'Currently viewing: Reconstructed (New) in front, Inherited (Old) behind.';
       }
     }
 
     function swapWrapperImages() {
-      wrapperOriginalIsFront = !wrapperOriginalIsFront;
+      wrapperOldIsFront = !wrapperOldIsFront;
       updateWrapperSwap();
     }
 
