@@ -391,6 +391,9 @@ p {
 }
 
 .layered-swap-image {
+  position: absolute;
+  top: 50%;
+  left: 50%;
   width: 900px;
   max-width: 95vw;
   max-height: 600px;
@@ -406,7 +409,10 @@ p {
     box-shadow 0.7s cubic-bezier(0.4, 0, 0.2, 1);
   image-rendering: crisp-edges;
   -webkit-font-smoothing: antialiased;
+  backface-visibility: hidden;
+  transform-origin: center center;
 }
+
 .layered-swap-image.is-back {
   filter: brightness(0.9);
   transform: translate(-50%, -50%) translateX(42px) translateY(22px) rotateY(-14deg) scale(0.97);
