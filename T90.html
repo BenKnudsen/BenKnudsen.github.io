@@ -443,21 +443,19 @@
     }
 
     // Add zoom/open button to video frame
-    const videoExpandBtn = document.createElement('button');
-    videoExpandBtn.textContent = '🔍';
-    videoExpandBtn.className = 'imcc-control next';
-    videoExpandBtn.style.top = '5px';
-    videoExpandBtn.style.right = '5px';
-    videoExpandBtn.style.fontSize = '1.2rem';
-    videoExpandBtn.style.width = '32px';
-    videoExpandBtn.style.height = '32px';
-    videoExpandBtn.title = 'Open video in lightbox';
-    videoExpandBtn.type = 'button';
+const imccMediaFrame = document.querySelector('.imcc-media-frame');
 
-    const imccMediaFrame = document.querySelector('.imcc-media-frame');
-    imccMediaFrame.appendChild(videoExpandBtn);
-
-    videoExpandBtn.addEventListener('click', openVideoModal);
+    imccMediaFrame.addEventListener('click', (event) => {
+      if (
+        event.target.closest('.imcc-play-button') ||
+        event.target.closest('.imcc-control') ||
+        event.target.closest('.imcc-progress')
+      ) {
+        return;
+      }
+    
+      openVideoModal();
+    });
 
     videoModalClose.addEventListener('click', closeVideoModal);
     videoModal.addEventListener('click', e => {
