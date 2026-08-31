@@ -19,10 +19,12 @@
     <div class="project-hero-content">
       <h1>T90 Report</h1>
       <p>A reconstruction of an Excel and Power Query tool used to monitor projects scheduled to launch within the next 90 days and identify those that may be at risk due to missing or delayed inputs across functional partners.</p>
-      <div class="project-actions"><a href="index.html#projects" class="btn primary">Back to Projects</a></div>
+      <div class="project-actions">
+        <a href="index.html#projects" class="btn primary">Back to Projects</a>
+      </div>
     </div>
   </header>
-  
+
   <main class="project-page">
     <h2>Description</h2>
     <p>
@@ -116,25 +118,25 @@
               <button class="imcc-control prev" id="legacyImccPrev" type="button" aria-label="Previous slide">&#8249;</button>
               <button class="imcc-control next" id="legacyImccNext" type="button" aria-label="Next slide">&#8250;</button>
 
-              <div class="imcc-slide active" data-title="Query 1 - Master RDOF Launch Readiness" data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.">
+              <div class="imcc-slide active" data-title="Query/Table 1: Master RDOF Launch Readiness" data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.">
                 <video preload="metadata" playsinline>
                   <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook1.mp4" type="video/mp4" />
                 </video>
               </div>
 
-              <div class="imcc-slide" data-title="Query 2 - PIDs in Range" data-caption="Filters the master launch-readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis."> 
+              <div class="imcc-slide" data-title="Query/Table 2: PIDs in Range" data-caption="Filters the master launch-readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis.">
                 <video preload="metadata" playsinline>
                   <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook2.mp4" type="video/mp4" />
                 </video>
               </div>
 
-              <div class="imcc-slide" data-title="Query 3 - T90 Extract" data-caption="Produces the final at-risk project subset by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and transport-related exclusions. This output serves as the snapshot passed into the Final workbook for end-user reporting.">
+              <div class="imcc-slide" data-title="Query/Table 3: T90 Extract" data-caption="Produces the final at-risk project subset by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and transport-related exclusions. This output serves as the snapshot passed into the Final workbook for end-user reporting.">
                 <video preload="metadata" playsinline>
                   <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook3.mp4" type="video/mp4" />
                 </video>
               </div>
 
-              <div class="imcc-slide" data-title="Power Query Editor View" data-caption="View of the legacy Power Query Editor used to maintain and troubleshoot the Extract workbook logic. This view reflects the complexity of the inherited query structure and the amount of transformation logic concentrated in the old process.">
+              <div class="imcc-slide" data-title="Power Query Editor Detailed View" data-caption="View of the legacy Power Query Editor used to maintain and troubleshoot the Extract workbook logic. This view reflects the complexity of the inherited query structure and the amount of transformation logic concentrated in the old process.">
                 <video preload="metadata" playsinline>
                   <source src="assets/images/t90/OLD 01_T90 Friday Extract Template.mp4" type="video/mp4" />
                 </video>
@@ -143,22 +145,45 @@
               <div class="imcc-play-overlay">
                 <button class="imcc-play-button" id="legacyImccPlay" type="button" aria-label="Play or pause active video">▶</button>
               </div>
+
+              <div class="imcc-expand-hint">
+                <span>Click to expand</span>
+              </div>
             </div>
 
             <div class="imcc-progress-wrap">
               <input class="imcc-progress" id="legacyImccProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
             </div>
 
-            <div class="imcc-slide-thumbnails" id="legacyImccThumbnails" aria-label="Slide Thumbnails">
-              <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query 1 - Master RDOF Launch Readiness">Query 1</div>
-              <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query 2 - PIDs in Range">Query 2</div>
-              <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query 3 - T90 Extract">Query 3</div>
-              <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Power Query Editor View">PQ Editor</div>
+            <div class="imcc-slide-nav">
+              <div class="imcc-slide-nav-label">Slide:</div>
+
+              <div class="imcc-slide-thumbnails" id="legacyImccThumbnails" aria-label="Slide navigation">
+                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query/Table 1: Master RDOF Launch Readiness">
+                  Query/Table 1: Master RDOF Launch Readiness
+                </div>
+
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Table 2: PIDs in Range">
+                  Query/Table 2: PIDs in Range
+                </div>
+
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: T90 Extract">
+                  Query/Table 3: T90 Extract
+                </div>
+
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Power Query Editor Detailed View">
+                  Power Query Editor Detailed View
+                </div>
+              </div>
             </div>
           </div>
 
-          <div class="imcc-code-column" aria-label="Queries">
-            <h4 class="imcc-code-heading">Queries</h4>
+          <div class="imcc-code-column" aria-label="Query Code">
+            <div class="imcc-code-heading-wrap">
+              <h4 class="imcc-code-heading">Query Code</h4>
+              <div class="imcc-code-subcaption">Click to expand</div>
+            </div>
+
             <div class="imcc-code-card active" data-imcc-index="0" data-code-src="assets/images/t90/OldCodeSnippets/1. Old_01_T90 Fri Extract_R LR.png" data-code-title="Query 1 - Master RDOF Launch Readiness">
               <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/1. Old_01_T90 Fri Extract_R LR.png" alt="Code snippet for Query 1 - Master RDOF Launch Readiness" />
               <div class="imcc-code-tile-label">Query 1</div>
@@ -189,7 +214,6 @@
     </div>
   </main>
 
-  <!-- Layered swap image modal/lightbox -->
   <div class="modal" id="imageModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Layered swap image lightbox">
     <div class="modal-content">
       <button class="modal-close" id="imageModalClose" type="button" aria-label="Close image modal">✕</button>
@@ -200,7 +224,6 @@
     </div>
   </div>
 
-  <!-- Code snippet lightbox -->
   <div class="modal" id="codeModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Code snippet lightbox">
     <div class="modal-content scrollable-modal-content">
       <button class="modal-close" id="codeModalClose" type="button" aria-label="Close code modal">✕</button>
@@ -209,11 +232,10 @@
     </div>
   </div>
 
-  <!-- IMCC video expand modal -->
   <div class="modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Video lightbox">
-    <div class="modal-content scrollable-modal-content">
+    <div class="modal-content">
       <button class="modal-close" id="videoModalClose" type="button" aria-label="Close video modal">✕</button>
-      <video id="videoModalPlayer" controls crossorigin playsinline>
+      <video id="videoModalPlayer" controls playsinline>
         <source id="videoModalSource" src="" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
@@ -221,7 +243,6 @@
   </div>
 
   <script>
-    // Layered Swap controls and modal
     const wrapperSwapFrontFrame = document.getElementById('wrapperSwapFrontFrame');
     const wrapperSwapBackFrame = document.getElementById('wrapperSwapBackFrame');
     const wrapperSwapPrevBtn = document.getElementById('wrapperSwapPrevBtn');
@@ -253,13 +274,19 @@
 
     wrapperSwapPrevBtn.addEventListener('click', swapWrapperImages);
     wrapperSwapNextBtn.addEventListener('click', swapWrapperImages);
-
     updateWrapperSwap();
 
-    // Lightbox / Modal for layered swap images
     const layeredModalItems = [
-      { src: wrapperSwapFrontFrame.dataset.modalSrc, title: wrapperSwapFrontFrame.dataset.modalTitle, alt: wrapperSwapFrontFrame.querySelector('img').alt },
-      { src: wrapperSwapBackFrame.dataset.modalSrc, title: wrapperSwapBackFrame.dataset.modalTitle, alt: wrapperSwapBackFrame.querySelector('img').alt }
+      {
+        src: wrapperSwapFrontFrame.dataset.modalSrc,
+        title: wrapperSwapFrontFrame.dataset.modalTitle,
+        alt: wrapperSwapFrontFrame.querySelector('img').alt
+      },
+      {
+        src: wrapperSwapBackFrame.dataset.modalSrc,
+        title: wrapperSwapBackFrame.dataset.modalTitle,
+        alt: wrapperSwapBackFrame.querySelector('img').alt
+      }
     ];
 
     const imageModal = document.getElementById('imageModal');
@@ -301,22 +328,26 @@
       if (event.target === imageModal) closeImageModal();
     });
 
-    // IMCC Controls
     const legacyImcc = document.getElementById('legacyImcc');
     const legacySlides = Array.from(legacyImcc.querySelectorAll('.imcc-slide'));
     const legacyCodeCards = Array.from(legacyImcc.querySelectorAll('.imcc-code-card'));
-    const legacySlideThumbs = Array.from(document.querySelectorAll('.imcc-slide-thumbnail'));
+    const legacySlideThumbs = Array.from(legacyImcc.querySelectorAll('.imcc-slide-thumbnail'));
     const legacyPrev = document.getElementById('legacyImccPrev');
     const legacyNext = document.getElementById('legacyImccNext');
     const legacyPlay = document.getElementById('legacyImccPlay');
     const legacyProgress = document.getElementById('legacyImccProgress');
     const legacyCaption = document.getElementById('legacyImccCaption');
+    const imccMediaFrame = legacyImcc.querySelector('.imcc-media-frame');
 
-    // Video modal elements
     const videoModal = document.getElementById('videoModal');
     const videoModalClose = document.getElementById('videoModalClose');
     const videoModalPlayer = document.getElementById('videoModalPlayer');
     const videoModalSource = document.getElementById('videoModalSource');
+
+    const codeModal = document.getElementById('codeModal');
+    const codeModalClose = document.getElementById('codeModalClose');
+    const codeModalImg = document.getElementById('codeModalImg');
+    const codeModalTitle = document.getElementById('codeModalTitle');
 
     let legacyActiveIndex = 0;
 
@@ -325,7 +356,7 @@
     }
 
     function pauseAllLegacyVideos() {
-      legacySlides.forEach(slide => {
+      legacySlides.forEach((slide) => {
         const video = slide.querySelector('video');
         if (video) video.pause();
       });
@@ -364,7 +395,7 @@
     }
 
     function goToLegacySlide(index) {
-      if (index < 0) index = legacySlides.length -1;
+      if (index < 0) index = legacySlides.length - 1;
       if (index >= legacySlides.length) index = 0;
       updateLegacyImcc(index);
     }
@@ -375,45 +406,58 @@
     legacyPlay.addEventListener('click', () => {
       const video = getLegacyActiveVideo();
       if (!video) return;
+
       if (video.paused) {
-        video.play().then(() => legacyPlay.textContent = '❚❚').catch(() => legacyPlay.textContent = '▶');
+        video.play()
+          .then(() => {
+            legacyPlay.textContent = '❚❚';
+          })
+          .catch(() => {
+            legacyPlay.textContent = '▶';
+          });
       } else {
         video.pause();
         legacyPlay.textContent = '▶';
       }
     });
 
-    legacySlides.forEach(slide => {
+    legacySlides.forEach((slide) => {
       const video = slide.querySelector('video');
       if (!video) return;
+
       video.addEventListener('timeupdate', () => {
-        if(video.duration) {
+        if (video.duration) {
           legacyProgress.value = (video.currentTime / video.duration) * 100;
         }
       });
-      video.addEventListener('ended', () => legacyPlay.textContent = '▶');
+
+      video.addEventListener('ended', () => {
+        legacyPlay.textContent = '▶';
+      });
     });
 
     legacyProgress.addEventListener('input', () => {
       const video = getLegacyActiveVideo();
-      if(!video || !video.duration) return;
+      if (!video || !video.duration) return;
+
       video.currentTime = (legacyProgress.value / 100) * video.duration;
     });
 
-    legacyCodeCards.forEach(card => {
+    legacyCodeCards.forEach((card) => {
       card.addEventListener('click', () => {
         const index = Number(card.dataset.imccIndex);
         goToLegacySlide(index);
       });
     });
 
-    legacySlideThumbs.forEach(thumb => {
+    legacySlideThumbs.forEach((thumb) => {
       thumb.addEventListener('click', () => {
         const index = Number(thumb.dataset.index);
         goToLegacySlide(index);
       });
-      thumb.addEventListener('keydown', e => {
-        if(e.key === 'Enter' || e.key === ' ') {
+
+      thumb.addEventListener('keydown', (e) => {
+        if (e.key === 'Enter' || e.key === ' ') {
           e.preventDefault();
           const index = Number(thumb.dataset.index);
           goToLegacySlide(index);
@@ -421,17 +465,18 @@
       });
     });
 
-    updateLegacyImcc(0);
-
-    // Video modal open/close
     function openVideoModal() {
       const activeVideo = getLegacyActiveVideo();
       if (!activeVideo) return;
-      videoModalSource.src = activeVideo.querySelector('source').src;
+
+      const activeSource = activeVideo.querySelector('source');
+      if (!activeSource) return;
+
+      videoModalSource.src = activeSource.src;
       videoModalPlayer.load();
       videoModal.classList.add('open');
       videoModal.setAttribute('aria-hidden', 'false');
-      videoModalPlayer.play();
+      videoModalPlayer.play().catch(() => {});
     }
 
     function closeVideoModal() {
@@ -442,39 +487,21 @@
       videoModalPlayer.load();
     }
 
-    // Add zoom/open button to video frame
-const imccMediaFrame = document.querySelector('.imcc-media-frame');
-
     imccMediaFrame.addEventListener('click', (event) => {
       if (
         event.target.closest('.imcc-play-button') ||
-        event.target.closest('.imcc-control') ||
-        event.target.closest('.imcc-progress')
+        event.target.closest('.imcc-control')
       ) {
         return;
       }
-    
+
       openVideoModal();
     });
 
     videoModalClose.addEventListener('click', closeVideoModal);
-    videoModal.addEventListener('click', e => {
+    videoModal.addEventListener('click', (e) => {
       if (e.target === videoModal) closeVideoModal();
     });
-
-    document.addEventListener('keydown', e => {
-      if(e.key === 'Escape') {
-        closeImageModal();
-        closeCodeModal();
-        closeVideoModal();
-      }
-    });
-
-    // Code snippet lightbox
-    const codeModal = document.getElementById('codeModal');
-    const codeModalClose = document.getElementById('codeModalClose');
-    const codeModalImg = document.getElementById('codeModalImg');
-    const codeModalTitle = document.getElementById('codeModalTitle');
 
     function openCodeModal(src, title, alt) {
       codeModalImg.src = src;
@@ -490,24 +517,30 @@ const imccMediaFrame = document.querySelector('.imcc-media-frame');
       codeModalImg.src = '';
     }
 
-    legacyCodeCards.forEach(card => {
-      card.querySelector('img').addEventListener('click', e => {
+    legacyCodeCards.forEach((card) => {
+      const img = card.querySelector('img');
+      if (!img) return;
+
+      img.addEventListener('click', (e) => {
         e.stopPropagation();
-        openCodeModal(card.dataset.codeSrc, card.dataset.codeTitle, card.querySelector('img').alt);
+        openCodeModal(card.dataset.codeSrc, card.dataset.codeTitle, img.alt);
       });
     });
 
     codeModalClose.addEventListener('click', closeCodeModal);
-    codeModal.addEventListener('click', e => {
-      if(e.target === codeModal) closeCodeModal();
+    codeModal.addEventListener('click', (e) => {
+      if (e.target === codeModal) closeCodeModal();
     });
 
-    // Layered swap image modal close on overlay click
-    function closeImageModal() {
-      imageModal.classList.remove('open');
-      imageModal.setAttribute('aria-hidden', 'true');
-      imageModalImg.src = '';
-    }
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeImageModal();
+        closeCodeModal();
+        closeVideoModal();
+      }
+    });
+
+    updateLegacyImcc(0);
   </script>
 </body>
 </html>
