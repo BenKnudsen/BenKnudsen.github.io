@@ -399,9 +399,9 @@ p {
   position: relative;
   width: 100%;
   max-width: 980px;
-  height: 620px;
+  height: 590px;
   perspective: 1500px;
-  margin: 1.25rem auto 0;
+  margin: 0.6rem auto 0;
 }
 
 .layered-swap-frame {
@@ -410,7 +410,7 @@ p {
   left: 50%;
   width: 900px;
   max-width: 95vw;
-  max-height: 600px;
+  max-height: 560px;
   border-radius: 12px;
   border: 1px solid #dbeafe;
   background: white;
@@ -434,9 +434,9 @@ p {
 }
 
 .layered-swap-frame.is-back {
-  transform: translate(-50%, -50%) translateX(42px) translateY(22px) rotateY(-12deg) scale(0.975);
-  opacity: 0.8;
-  filter: brightness(0.92);
+  transform: translate(-50%, -50%) translateX(28px) translateY(16px) rotateY(-7deg) scale(0.982);
+  opacity: 0.84;
+  filter: brightness(0.93);
   z-index: 1;
 }
 
@@ -444,7 +444,7 @@ p {
   display: block;
   width: 100%;
   height: auto;
-  max-height: 600px;
+  max-height: 560px;
   object-fit: contain;
 }
 
@@ -466,6 +466,41 @@ p {
   backdrop-filter: blur(4px);
   -webkit-backdrop-filter: blur(4px);
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.18);
+}
+
+.layered-swap-expand-hint {
+  position: absolute;
+  inset: 0;
+  z-index: 3;
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+  padding-bottom: 0.85rem;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.2s ease;
+  background: linear-gradient(
+    to top,
+    rgba(15, 23, 42, 0.24) 0%,
+    rgba(15, 23, 42, 0.08) 24%,
+    rgba(15, 23, 42, 0) 48%
+  );
+}
+
+.layered-swap-frame:hover .layered-swap-expand-hint {
+  opacity: 1;
+}
+
+.layered-swap-expand-hint span {
+  display: inline-block;
+  padding: 0.35rem 0.65rem;
+  border-radius: 999px;
+  background: rgba(15, 23, 42, 0.72);
+  color: white;
+  font-size: 0.82rem;
+  font-weight: 600;
+  letter-spacing: 0.01em;
+  box-shadow: 0 4px 12px rgba(15, 23, 42, 0.22);
 }
 
 .layered-swap-inline-control {
@@ -491,19 +526,67 @@ p {
   background: rgba(29, 78, 216, 0.9);
 }
 
+/* Keep arrows outside image bounds while still within container */
 .layered-swap-inline-control.left {
-  left: 0.75rem;
+  left: 0.35rem;
 }
 
 .layered-swap-inline-control.right {
-  right: 0.75rem;
+  right: 0.35rem;
 }
 
-.layered-swap-caption {
+/* Workflow visuals */
+
+.workflow-visual-section {
+  margin-top: 1.9rem;
+}
+
+.workflow-visual-card {
   margin-top: 0.85rem;
+  background: white;
+  border: 1px solid #dbeafe;
+  border-radius: 14px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.08);
+  overflow: hidden;
+}
+
+.workflow-visual-frame {
+  display: block;
+  width: 100%;
+  background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+  padding: 1rem;
+}
+
+.workflow-visual-frame img {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 10px;
+  background: white;
+}
+
+.workflow-placeholder {
+  width: 100%;
+  min-height: 240px;
+  border: 2px dashed #93c5fd;
+  border-radius: 12px;
+  background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1.25rem;
   text-align: center;
-  font-size: 0.95rem;
   color: #475569;
+  font-size: 0.98rem;
+  line-height: 1.5;
+}
+
+.workflow-visual-caption {
+  padding: 0.95rem 1rem 1rem;
+  border-top: 1px solid #e2e8f0;
+  color: #334155;
+  font-size: 0.96rem;
+  line-height: 1.55;
 }
 
 /* IMCC */
@@ -526,7 +609,7 @@ p {
 
 .imcc-stage {
   display: grid;
-  grid-template-columns: minmax(0, 3fr) 170px;
+  grid-template-columns: minmax(0, 3fr) 190px;
   gap: 1rem;
   padding: 1rem 1.25rem;
   background: linear-gradient(180deg, #eff6ff 0%, #f8fafc 100%);
@@ -564,12 +647,22 @@ p {
 }
 
 .imcc-slide video,
-.imcc-slide img {
+.imcc-slide img,
+.imcc-slide iframe,
+.imcc-slide embed,
+.imcc-slide object {
   width: 100%;
   height: 100%;
   object-fit: contain;
   background: #0f172a;
   display: block;
+  border: 0;
+}
+
+.imcc-slide.pdf-slide iframe,
+.imcc-slide.pdf-slide embed,
+.imcc-slide.pdf-slide object {
+  background: white;
 }
 
 .imcc-slide-title {
@@ -666,8 +759,15 @@ p {
   box-shadow: 0 4px 12px rgba(15, 23, 42, 0.22);
 }
 
+.imcc-optimization-note {
+  margin-top: 0.05rem;
+  font-size: 0.84rem;
+  color: #64748b;
+  line-height: 1.4;
+}
+
 .imcc-progress-wrap {
-  margin-top: 1rem;
+  margin-top: 0.45rem;
   width: 100%;
 }
 
@@ -696,7 +796,7 @@ p {
 .imcc-slide-thumbnails {
   margin-top: 0;
   display: grid;
-  grid-template-columns: repeat(4, minmax(120px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(135px, 1fr));
   gap: 0.75rem;
   justify-content: start;
 }
@@ -739,6 +839,7 @@ p {
 
 .imcc-code-heading-wrap {
   margin-bottom: 0.4rem;
+  text-align: center;
 }
 
 .imcc-code-heading {
@@ -755,15 +856,15 @@ p {
 }
 
 .imcc-code-card {
-  width: 96px;
-  height: 96px;
+  width: 108px;
+  height: 108px;
   border: 1px solid #dbeafe;
   border-radius: 12px;
   background: #f8fafc;
   position: relative;
-  cursor: pointer;
-  opacity: 0.62;
-  transform: scale(0.94);
+  cursor: zoom-in;
+  opacity: 0.74;
+  transform: scale(0.96);
   transition:
     opacity 0.2s ease,
     transform 0.2s ease,
@@ -777,8 +878,8 @@ p {
 }
 
 .imcc-code-card:hover {
-  opacity: 0.9;
-  transform: scale(0.98) translateY(-1px);
+  opacity: 1;
+  transform: scale(0.99) translateY(-1px);
   border-color: #93c5fd;
   background: #eff6ff;
 }
@@ -822,9 +923,32 @@ p {
   text-overflow: ellipsis;
 }
 
+.imcc-code-empty {
+  width: 108px;
+  min-height: 108px;
+  border: 1px dashed #cbd5e1;
+  border-radius: 12px;
+  background: rgba(248, 250, 252, 0.75);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.75rem;
+  text-align: center;
+  color: #94a3b8;
+  font-size: 0.74rem;
+  line-height: 1.35;
+}
+
 .imcc-meta {
   padding: 1rem 1rem 1.1rem;
   border-top: 1px solid #e2e8f0;
+}
+
+.imcc-title {
+  font-size: 1.02rem;
+  line-height: 1.4;
+  color: #0f172a;
+  margin-bottom: 0.45rem;
 }
 
 .imcc-caption {
@@ -832,6 +956,26 @@ p {
   line-height: 1.55;
   color: #334155;
   margin-bottom: 0;
+}
+
+/* Detail lists */
+
+.detail-list {
+  margin: 0.55rem 0 0.8rem 1.25rem;
+  color: #1f2937;
+}
+
+.detail-list li {
+  margin-bottom: 0.45rem;
+  line-height: 1.5;
+}
+
+.detail-list.numbered {
+  list-style: decimal;
+}
+
+.detail-list.bulleted {
+  list-style: disc;
 }
 
 /* Lightbox / modal */
@@ -938,18 +1082,33 @@ p {
 /* Specific lightboxes */
 
 #videoModal .modal-content {
-  max-width: min(1080px, 88vw);
-  max-height: 82vh;
+  max-width: min(1180px, 92vw);
+  max-height: 86vh;
   justify-content: center;
 }
 
-#videoModal video {
+#videoModal video,
+#videoModal iframe,
+#videoModal embed,
+#videoModal object {
   width: 100%;
   max-width: 100%;
-  max-height: 72vh;
+  max-height: 78vh;
   border-radius: 12px;
   background: #000;
   box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  border: 0;
+}
+
+#videoModal.pdf-mode .modal-content {
+  max-width: min(1240px, 94vw);
+}
+
+#videoModal.pdf-mode iframe,
+#videoModal.pdf-mode embed,
+#videoModal.pdf-mode object {
+  height: 78vh;
+  background: white;
 }
 
 #codeModal .modal-content {
@@ -1106,16 +1265,21 @@ p {
   }
 
   .layered-swap-container {
-    height: 350px;
+    height: 330px;
+    margin-top: 0.45rem;
   }
 
   .layered-swap-frame {
     width: 95vw;
-    max-height: 330px;
+    max-height: 310px;
+  }
+
+  .layered-swap-frame img {
+    max-height: 310px;
   }
 
   .layered-swap-frame.is-back {
-    transform: translate(-50%, -50%) translateX(20px) translateY(12px) rotateY(-8deg) scale(0.98);
+    transform: translate(-50%, -50%) translateX(14px) translateY(9px) rotateY(-5deg) scale(0.986);
   }
 
   .layered-swap-title {
@@ -1133,11 +1297,20 @@ p {
   }
 
   .layered-swap-inline-control.left {
-    left: 0.35rem;
+    left: 0.15rem;
   }
 
   .layered-swap-inline-control.right {
-    right: 0.35rem;
+    right: 0.15rem;
+  }
+
+  .workflow-visual-frame {
+    padding: 0.75rem;
+  }
+
+  .workflow-placeholder {
+    min-height: 180px;
+    font-size: 0.92rem;
   }
 
   .imcc-stage {
@@ -1180,11 +1353,15 @@ p {
     overflow-x: auto;
     gap: 0.55rem;
     align-items: stretch;
+    padding-bottom: 0.2rem;
   }
 
-  .imcc-code-card {
+  .imcc-code-card,
+  .imcc-code-empty {
     width: 88px;
+    min-width: 88px;
     height: 88px;
+    min-height: 88px;
     flex: 0 0 auto;
   }
 
@@ -1238,7 +1415,16 @@ p {
     max-height: 84vh;
   }
 
-  #videoModal video {
+  #videoModal video,
+  #videoModal iframe,
+  #videoModal embed,
+  #videoModal object {
     max-height: 68vh;
+  }
+
+  #videoModal.pdf-mode iframe,
+  #videoModal.pdf-mode embed,
+  #videoModal.pdf-mode object {
+    height: 68vh;
   }
 }
