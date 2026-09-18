@@ -16,9 +16,12 @@
         <li><a href="index.html#contact">Contact</a></li>
       </ul>
     </nav>
+
     <div class="project-hero-content">
       <h1>T90 Report</h1>
-      <p>A reconstruction of an Excel and Power Query tool used to monitor projects scheduled to launch within the next 90 days and identify those that may be at risk due to missing or delayed inputs across functional partners.</p>
+      <p>
+        A reconstruction of an Excel and Power Query tool used to monitor projects scheduled to launch within the next 90 days and identify those that may be at risk due to missing or delayed inputs across functional partners.
+      </p>
       <div class="project-actions">
         <a href="index.html#projects" class="btn primary">Back to Projects</a>
       </div>
@@ -47,6 +50,7 @@
           <li>SharePoint</li>
         </ul>
       </div>
+
       <div class="project-summary-card">
         <h3>Capabilities Demonstrated</h3>
         <ul class="project-summary-list">
@@ -58,6 +62,7 @@
           <li>Source system synchronization</li>
         </ul>
       </div>
+
       <div class="project-summary-card">
         <h3>Transferable Skills</h3>
         <ul class="project-summary-list">
@@ -76,74 +81,138 @@
       <p class="section-note">
         This comparison highlights the redesign of the final reporting dashboard used to monitor projects approaching launch. Click either image to open a larger view.
       </p>
+
       <div class="layered-swap-wrapper">
         <div class="layered-swap-container" aria-label="Before and after dashboard comparison" role="region">
           <button class="layered-swap-inline-control left" id="wrapperSwapPrevBtn" type="button" aria-label="Show previous image">&#8249;</button>
           <button class="layered-swap-inline-control right" id="wrapperSwapNextBtn" type="button" aria-label="Show next image">&#8250;</button>
 
-          <div class="layered-swap-frame is-front" id="wrapperSwapFrontFrame" data-modal-src="assets/images/t90/T90 Old.png" data-modal-title="Inherited (Old)">
-            <div class="layered-swap-title">Inherited (Old)</div>
-            <img src="assets/images/t90/T90 Old.png" alt="Inherited old T90 dashboard" />
+          <div
+            class="layered-swap-frame is-front"
+            id="wrapperSwapFrontFrame"
+            data-modal-src="assets/images/t90/T90 Old.png"
+            data-modal-title="Inherited (Legacy)"
+          >
+            <div class="layered-swap-title">Inherited (Legacy)</div>
+            <img src="assets/images/t90/T90 Old.png" alt="Inherited legacy T90 dashboard" />
+            <div class="layered-swap-expand-hint"><span>Click to expand</span></div>
           </div>
 
-          <div class="layered-swap-frame is-back" id="wrapperSwapBackFrame" data-modal-src="assets/images/t90/T90 New Dashboard.png" data-modal-title="Reconstructed (New)">
+          <div
+            class="layered-swap-frame is-back"
+            id="wrapperSwapBackFrame"
+            data-modal-src="assets/images/t90/T90 New Dashboard.png"
+            data-modal-title="Reconstructed (New)"
+          >
             <div class="layered-swap-title">Reconstructed (New)</div>
             <img src="assets/images/t90/T90 New Dashboard.png" alt="Reconstructed new T90 dashboard" />
+            <div class="layered-swap-expand-hint"><span>Click to expand</span></div>
           </div>
         </div>
-        <p class="layered-swap-caption" id="wrapperSwapCaption">
-          Currently viewing: Inherited (Old) in front, Reconstructed (New) behind.
-        </p>
       </div>
+
       <p class="section-note">
         The T90 report generation workflow begins with a Friday snapshot of projects forecasted to launch within the next 90 days. That snapshot is used to identify projects at risk based on missing or delayed readiness inputs. The report is then refreshed on Tuesday and Thursday to monitor whether those at-risk projects are progressing toward launch readiness, while preserving user-entered closure decisions and updated status handling.
       </p>
     </section>
 
-    <section class="imcc-section">
-      <h2>Legacy Workflow</h2>
+    <section class="workflow-visual-section">
+      <h2>Legacy Workflow Overview</h2>
       <p class="section-note">
-        The legacy process relied on an Extract &gt; Template &gt; Final workbook flow. While functional, that structure introduced duplicated logic, repeated manual steps, and a fragile reporting chain that was difficult to maintain and troubleshoot.
+        The legacy T90 process relied on a multi-workbook handoff chain that moved data from an Extract workbook into an Intermediate Template workbook and then into the Final reporting workbook. While functional, that structure created duplicated logic, repeated refresh activity, and several manual transfer points that increased maintenance effort and process fragility.
       </p>
 
-      <h3>Legacy Extract Workbook Query Pipeline</h3>
+      <div class="workflow-visual-card">
+        <div class="workflow-visual-frame">
+          <img
+            src="assets/images/t90/workflows/legacy_workflow.svg"
+            alt="Legacy T90 workflow diagram showing the Extract workbook, Template workbook, and Final workbook process flow"
+          />
+        </div>
+        <div class="workflow-visual-caption">
+          The legacy workflow depended on sequential workbook handoffs. Data was first prepared in the Extract workbook, manually passed into an Intermediate Template workbook for refreshed comparison and shaping, and then copied again into the Final report workbook for dashboard assembly and user review.
+        </div>
+      </div>
+    </section>
+
+    <section class="imcc-section">
+      <h2>Legacy T90 Workflow</h2>
+      <p class="section-note">
+        The inherited reporting process was divided across multiple workbooks, each responsible for a separate stage in the reporting chain. This structure worked, but it introduced unnecessary duplication, repeated refresh steps, and manual handoffs that made the workflow harder to sustain and more difficult to troubleshoot end to end.
+      </p>
+
+      <h3>Legacy Extract Workbook: Baseline Snapshot Layer</h3>
       <p>
-        The Extract workbook followed a three-query pipeline: a master readiness query established the core dataset, a second query isolated the full 90-day project population, and a final query narrowed that set to the projects considered at risk for dashboard reporting.
+        The Extract workbook established the weekly Friday baseline used to identify projects that were forecasted to launch within the next 90 days and determine which of them were at risk. It functioned as the starting point of the reporting chain and supplied the snapshot later used for comparison in downstream workbooks.
       </p>
 
-      <div class="imcc-shell" id="legacyImcc">
+      <div class="imcc-shell" data-imcc>
         <div class="imcc-stage">
           <div class="imcc-media-column">
-            <div class="imcc-media-frame">
-              <button class="imcc-control prev" id="legacyImccPrev" type="button" aria-label="Previous slide">&#8249;</button>
-              <button class="imcc-control next" id="legacyImccNext" type="button" aria-label="Next slide">&#8250;</button>
+            <div class="imcc-media-frame" aria-label="Legacy Extract Workbook media viewer">
+              <button class="imcc-control prev" type="button" aria-label="Previous slide">&#8249;</button>
+              <button class="imcc-control next" type="button" aria-label="Next slide">&#8250;</button>
 
-              <div class="imcc-slide active" data-title="Query/Table 1: Master RDOF Launch Readiness" data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.">
+              <div
+                class="imcc-slide active"
+                data-title="Query/Table 1: Master RDOF Launch Readiness"
+                data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook1.mp4"
+              >
                 <video preload="metadata" playsinline>
                   <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook1.mp4" type="video/mp4" />
                 </video>
               </div>
 
-              <div class="imcc-slide" data-title="Query/Table 2: PIDs in Range" data-caption="Filters the master launch-readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis.">
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 2: PIDs in Range"
+                data-caption="Filters the master launch-readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook2.mp4"
+              >
                 <video preload="metadata" playsinline>
                   <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook2.mp4" type="video/mp4" />
                 </video>
               </div>
 
-              <div class="imcc-slide" data-title="Query/Table 3: T90 Extract" data-caption="Produces the final at-risk project subset by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and transport-related exclusions. This output serves as the snapshot passed into the Final workbook for end-user reporting.">
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 3: T90 Extract"
+                data-caption="Produces the final at-risk project subset by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and transport-related exclusions. This output serves as the snapshot passed into the Final workbook for end-user reporting."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook3.mp4"
+              >
                 <video preload="metadata" playsinline>
                   <source src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook3.mp4" type="video/mp4" />
                 </video>
               </div>
 
-              <div class="imcc-slide" data-title="Power Query Editor Detailed View" data-caption="View of the legacy Power Query Editor used to maintain and troubleshoot the Extract workbook logic. This view reflects the complexity of the inherited query structure and the amount of transformation logic concentrated in the old process.">
+              <div
+                class="imcc-slide"
+                data-title="Power Query Editor Detailed View"
+                data-caption="View of the legacy Power Query Editor used to maintain and troubleshoot the Extract workbook logic. This view reflects the complexity of the inherited query structure and the amount of transformation logic concentrated in the old process."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/OLD 01_T90 Friday Extract Template.mp4"
+              >
                 <video preload="metadata" playsinline>
                   <source src="assets/images/t90/OLD 01_T90 Friday Extract Template.mp4" type="video/mp4" />
                 </video>
               </div>
 
+              <div
+                class="imcc-slide"
+                data-title="Notes (Transition)"
+                data-caption="This transition point marks the handoff from the legacy Extract workbook into the next workbook in the reporting chain. Although the Friday snapshot was successfully created here, the downstream process still depended on additional refreshes, reshaping, and manual coordination in separate files before the final report could be delivered."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/legacymedia/4. Legacy_Extract_Transition_Notes.png"
+              >
+                <img src="assets/images/t90/legacymedia/4. Legacy_Extract_Transition_Notes.png" alt="Legacy Extract workbook transition notes slide" />
+              </div>
+
               <div class="imcc-play-overlay">
-                <button class="imcc-play-button" id="legacyImccPlay" type="button" aria-label="Play or pause active video">▶</button>
+                <button class="imcc-play-button" type="button" aria-label="Play or pause active video">▶</button>
               </div>
 
               <div class="imcc-expand-hint">
@@ -151,50 +220,51 @@
               </div>
             </div>
 
+            <div class="imcc-optimization-note">Video is optimized to play in expanded media viewer.</div>
+
             <div class="imcc-progress-wrap">
-              <input class="imcc-progress" id="legacyImccProgress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
+              <input class="imcc-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
             </div>
 
             <div class="imcc-slide-nav">
               <div class="imcc-slide-nav-label">Slide:</div>
-
-              <div class="imcc-slide-thumbnails" id="legacyImccThumbnails" aria-label="Slide navigation">
+              <div class="imcc-slide-thumbnails" aria-label="Slide navigation">
                 <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query/Table 1: Master RDOF Launch Readiness">
                   Query/Table 1: Master RDOF Launch Readiness
                 </div>
-
                 <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Table 2: PIDs in Range">
                   Query/Table 2: PIDs in Range
                 </div>
-
                 <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: T90 Extract">
                   Query/Table 3: T90 Extract
                 </div>
-
                 <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Power Query Editor Detailed View">
                   Power Query Editor Detailed View
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="4" aria-label="Slide 5: Notes (Transition)">
+                  Notes (Transition)
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="imcc-code-column" aria-label="Query Code">
+          <div class="imcc-code-column" aria-label="Query code">
             <div class="imcc-code-heading-wrap">
               <h4 class="imcc-code-heading">Query Code</h4>
-              <div class="imcc-code-subcaption">Click to expand</div>
+              <div class="imcc-code-subcaption">(Click to expand)</div>
             </div>
 
-            <div class="imcc-code-card active" data-imcc-index="0" data-code-src="assets/images/t90/OldCodeSnippets/1. Old_01_T90 Fri Extract_R LR.png" data-code-title="Query 1 - Master RDOF Launch Readiness">
+            <div class="imcc-code-card active" data-code-src="assets/images/t90/OldCodeSnippets/1. Old_01_T90 Fri Extract_R LR.png" data-code-title="Query 1 - Master RDOF Launch Readiness">
               <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/1. Old_01_T90 Fri Extract_R LR.png" alt="Code snippet for Query 1 - Master RDOF Launch Readiness" />
               <div class="imcc-code-tile-label">Query 1</div>
             </div>
 
-            <div class="imcc-code-card" data-imcc-index="1" data-code-src="assets/images/t90/OldCodeSnippets/2. Old_01_T90 Fri Extract_PIDsinRange.png" data-code-title="Query 2 - PIDs in Range">
+            <div class="imcc-code-card" data-code-src="assets/images/t90/OldCodeSnippets/2. Old_01_T90 Fri Extract_PIDsinRange.png" data-code-title="Query 2 - PIDs in Range">
               <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/2. Old_01_T90 Fri Extract_PIDsinRange.png" alt="Code snippet for Query 2 - PIDs in Range" />
               <div class="imcc-code-tile-label">Query 2</div>
             </div>
 
-            <div class="imcc-code-card" data-imcc-index="2" data-code-src="assets/images/t90/OldCodeSnippets/3. Old_01_T90 Fri Extract_Extract.png" data-code-title="Query 3 - T90 Extract">
+            <div class="imcc-code-card" data-code-src="assets/images/t90/OldCodeSnippets/3. Old_01_T90 Fri Extract_Extract.png" data-code-title="Query 3 - T90 Extract">
               <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/3. Old_01_T90 Fri Extract_Extract.png" alt="Code snippet for Query 3 - T90 Extract" />
               <div class="imcc-code-tile-label">Query 3</div>
             </div>
@@ -202,11 +272,590 @@
         </div>
 
         <div class="imcc-meta" aria-live="polite" aria-atomic="true">
-          <p class="imcc-caption" id="legacyImccCaption">
+          <h4 class="imcc-title">Query/Table 1: Master RDOF Launch Readiness</h4>
+          <p class="imcc-caption">
             The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.
           </p>
         </div>
       </div>
+    </section>
+
+    <section class="imcc-section">
+      <h3>Legacy Intermediate (Template) Workbook: Weekly Refresh and Manual Handoff Layer</h3>
+      <p>
+        The Intermediate Template workbook was used to refresh the Friday snapshot against current-state data during the following week and prepare the output that would later be copied into the Final report workbook. This extra layer extended the reporting chain and introduced both duplicate query logic and a manual handoff step.
+      </p>
+      <p>
+        In practice, the Template workbook acted as a staging layer between the original Extract output and the final dashboard. It refreshed source data, applied comparison logic, and created the interim formatted output that users then carried forward manually into the last workbook.
+      </p>
+
+      <div class="imcc-shell" data-imcc>
+        <div class="imcc-stage">
+          <div class="imcc-media-column">
+            <div class="imcc-media-frame" aria-label="Legacy Intermediate Workbook media viewer">
+              <button class="imcc-control prev" type="button" aria-label="Previous slide">&#8249;</button>
+              <button class="imcc-control next" type="button" aria-label="Next slide">&#8250;</button>
+
+              <div
+                class="imcc-slide active"
+                data-title="Query/Connection 1: Friday Extract Pull-Through"
+                data-caption="Loads the Friday at-risk snapshot from the Extract workbook into the Intermediate Template workbook so it can be compared against refreshed current-state data later in the week. This step was necessary only because the legacy process split logic across multiple files."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/legacymedia/5. Legacy_Template_Fri_Extract.png"
+              >
+                <img src="assets/images/t90/legacymedia/5. Legacy_Template_Fri_Extract.png" alt="Legacy Template workbook Friday Extract pull-through query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Connection 2: Refreshed Launch Readiness Pull"
+                data-caption="Brings refreshed Launch Readiness data into the Template workbook so the current-week state can be compared against the Friday snapshot. In the legacy process, this duplicated source-loading logic that could have been centralized upstream."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/legacymedia/6. Legacy_Template_R_LR.png"
+              >
+                <img src="assets/images/t90/legacymedia/6. Legacy_Template_R_LR.png" alt="Legacy Template workbook refreshed Launch Readiness pull query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 3: Intermediate Comparison Output"
+                data-caption="Merges the Friday snapshot with the refreshed Launch Readiness data to produce the working comparison table used for the weekly report handoff. This layer recreated logic that was later consolidated into the redesigned Final workbook."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/legacymedia/7. Legacy_Template_Comparison_Output.mp4"
+              >
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/legacymedia/7. Legacy_Template_Comparison_Output.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Manual Handoff to Final Workbook"
+                data-caption="After the comparison output was refreshed and reviewed, users manually transferred the resulting table into the Final report workbook. This handoff increased the risk of timing issues, version confusion, and missed updates."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/legacymedia/8. Legacy_Template_Manual_Handoff.png"
+              >
+                <img src="assets/images/t90/legacymedia/8. Legacy_Template_Manual_Handoff.png" alt="Legacy Template workbook manual handoff to Final workbook" />
+              </div>
+
+              <div class="imcc-play-overlay">
+                <button class="imcc-play-button" type="button" aria-label="Play or pause active video">▶</button>
+              </div>
+
+              <div class="imcc-expand-hint">
+                <span>Click to expand</span>
+              </div>
+            </div>
+
+            <div class="imcc-optimization-note">Video is optimized to play in expanded media viewer.</div>
+
+            <div class="imcc-progress-wrap">
+              <input class="imcc-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
+            </div>
+
+            <div class="imcc-slide-nav">
+              <div class="imcc-slide-nav-label">Slide:</div>
+              <div class="imcc-slide-thumbnails" aria-label="Slide navigation">
+                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query/Connection 1: Friday Extract Pull-Through">
+                  Query/Connection 1: Friday Extract Pull-Through
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Connection 2: Refreshed Launch Readiness Pull">
+                  Query/Connection 2: Refreshed Launch Readiness Pull
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: Intermediate Comparison Output">
+                  Query/Table 3: Intermediate Comparison Output
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Manual Handoff to Final Workbook">
+                  Manual Handoff to Final Workbook
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="imcc-code-column" aria-label="Query code">
+            <div class="imcc-code-heading-wrap">
+              <h4 class="imcc-code-heading">Query Code</h4>
+              <div class="imcc-code-subcaption">(Click to expand)</div>
+            </div>
+
+            <div class="imcc-code-empty">No code snippet</div>
+          </div>
+        </div>
+
+        <div class="imcc-meta" aria-live="polite" aria-atomic="true">
+          <h4 class="imcc-title">Query/Connection 1: Friday Extract Pull-Through</h4>
+          <p class="imcc-caption">
+            Loads the Friday at-risk snapshot from the Extract workbook into the Intermediate Template workbook so it can be compared against refreshed current-state data later in the week. This step was necessary only because the legacy process split logic across multiple files.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="imcc-section">
+      <h3>Legacy T90 Report Workbook: Manual Report Assembly and Refresh Layer</h3>
+      <p>
+        The Final workbook in the inherited process was the user-facing report, but it still depended on earlier workbook outputs and manual preparation before it could be used. Rather than serving as a single consolidated reporting layer, it acted as the end point of a chain of refresh and copy-forward steps.
+      </p>
+      <p>
+        This meant report generation was not only slower, but also more vulnerable to inconsistencies between files, stale data, and accidental omissions during update cycles.
+      </p>
+
+      <div class="imcc-shell" data-imcc>
+        <div class="imcc-stage">
+          <div class="imcc-media-column">
+            <div class="imcc-media-frame" aria-label="Legacy Final Workbook media viewer">
+              <button class="imcc-control prev" type="button" aria-label="Previous slide">&#8249;</button>
+              <button class="imcc-control next" type="button" aria-label="Next slide">&#8250;</button>
+
+              <div
+                class="imcc-slide active"
+                data-title="Imported Report Table"
+                data-caption="Receives the prepared output from the Intermediate Template workbook after a manual handoff step. The Final workbook depended on this imported table rather than building the reporting layer directly from the Friday snapshot and refreshed source data."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/legacymedia/9. Legacy_Final_Imported_Report_Table.png"
+              >
+                <img src="assets/images/t90/legacymedia/9. Legacy_Final_Imported_Report_Table.png" alt="Legacy Final workbook imported report table" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Final Dashboard Layout"
+                data-caption="Displays the legacy user-facing dashboard layout used for monitoring at-risk projects. Although the dashboard served its purpose, it was downstream of several manual and workbook-dependent preparation steps."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/legacymedia/10. Legacy_Final_Dashboard.png"
+              >
+                <img src="assets/images/t90/legacymedia/10. Legacy_Final_Dashboard.png" alt="Legacy Final workbook dashboard layout" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Manual Refresh and Maintenance Burden"
+                data-caption="Highlights the number of refresh points, worksheet touchpoints, and manual maintenance actions required to keep the legacy Final workbook aligned with upstream files. This burden was a major reason for redesigning the process."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/legacymedia/11. Legacy_Final_Maintenance_Burden.png"
+              >
+                <img src="assets/images/t90/legacymedia/11. Legacy_Final_Maintenance_Burden.png" alt="Legacy Final workbook maintenance burden illustration" />
+              </div>
+
+              <div class="imcc-play-overlay">
+                <button class="imcc-play-button" type="button" aria-label="Play or pause active video">▶</button>
+              </div>
+
+              <div class="imcc-expand-hint">
+                <span>Click to expand</span>
+              </div>
+            </div>
+
+            <div class="imcc-optimization-note">Video is optimized to play in expanded media viewer.</div>
+
+            <div class="imcc-progress-wrap">
+              <input class="imcc-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
+            </div>
+
+            <div class="imcc-slide-nav">
+              <div class="imcc-slide-nav-label">Slide:</div>
+              <div class="imcc-slide-thumbnails" aria-label="Slide navigation">
+                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Imported Report Table">
+                  Imported Report Table
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Final Dashboard Layout">
+                  Final Dashboard Layout
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Manual Refresh and Maintenance Burden">
+                  Manual Refresh and Maintenance Burden
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="imcc-code-column" aria-label="Query code">
+            <div class="imcc-code-heading-wrap">
+              <h4 class="imcc-code-heading">Query Code</h4>
+              <div class="imcc-code-subcaption">(Click to expand)</div>
+            </div>
+
+            <div class="imcc-code-empty">No code snippet</div>
+          </div>
+        </div>
+
+        <div class="imcc-meta" aria-live="polite" aria-atomic="true">
+          <h4 class="imcc-title">Imported Report Table</h4>
+          <p class="imcc-caption">
+            Receives the prepared output from the Intermediate Template workbook after a manual handoff step. The Final workbook depended on this imported table rather than building the reporting layer directly from the Friday snapshot and refreshed source data.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="workflow-visual-section">
+      <h2>Redesigned Workflow Overview</h2>
+      <p class="section-note">
+        The redesigned T90 process consolidates the reporting chain into a more direct and maintainable structure. Instead of routing data through an intermediate workbook and relying on manual copy-forward steps, the new process keeps the Friday snapshot logic in the Extract workbook and pulls both the snapshot and refreshed source data directly into the Final workbook for reporting.
+      </p>
+
+      <div class="workflow-visual-card">
+        <div class="workflow-visual-frame">
+          <img
+            src="assets/images/t90/workflows/new_workflow.svg"
+            alt="Redesigned T90 workflow diagram showing direct flow from Extract workbook and SharePoint into the Final workbook"
+          />
+        </div>
+        <div class="workflow-visual-caption">
+          The reconstructed workflow removes the intermediate workbook and brings the Friday snapshot and refreshed Launch Readiness data directly into the Final report workbook. This reduces file dependencies, eliminates a manual transfer step, and creates a more stable reporting framework.
+        </div>
+      </div>
+    </section>
+
+    <section class="imcc-section">
+      <h2>Redesigned Workflow</h2>
+      <p class="section-note">
+        The redesigned workflow keeps the Friday snapshot generation in the Extract workbook but restructures the process so the Final workbook can directly consume both the weekly snapshot and refreshed source data. This creates a shorter, clearer reporting path and reduces the need for duplicate logic across files.
+      </p>
+
+      <h3>New Extract Workbook: Baseline Snapshot and Reporting Support Layer</h3>
+      <p>
+        In the redesigned process, the Extract workbook continues to establish the Friday baseline for the week, but its purpose is more focused. It generates the clean at-risk snapshot and also provides a small set of reusable support outputs such as extract dates and reporting counts for the Final dashboard.
+      </p>
+      <p>
+        This keeps the Extract workbook responsible for the snapshot layer while avoiding the heavier downstream dependency chain that existed in the legacy structure.
+      </p>
+
+      <div class="imcc-shell" data-imcc>
+        <div class="imcc-stage">
+          <div class="imcc-media-column">
+            <div class="imcc-media-frame" aria-label="New Extract Workbook media viewer">
+              <button class="imcc-control prev" type="button" aria-label="Previous slide">&#8249;</button>
+              <button class="imcc-control next" type="button" aria-label="Next slide">&#8250;</button>
+
+              <div
+                class="imcc-slide active"
+                data-title="Query/Table 1: Master RDOF Launch Readiness"
+                data-caption="The redesigned base query still pulls and prepares Launch Readiness source data, but it is more focused and maintainable than the inherited version. Unnecessary system fields and repeated transformation patterns were reduced so the query better supports downstream reporting without carrying avoidable complexity."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/newmedia/1. New_Extract_R_LR.png"
+              >
+                <img src="assets/images/t90/newmedia/1. New_Extract_R_LR.png" alt="New Extract workbook Master RDOF Launch Readiness query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 2: PIDs in Range"
+                data-caption="Defines the full population of projects that fall inside the current 90-day reporting window. In the redesigned process, this query continues to provide the in-scope project count while supporting a more consistent downstream reporting structure."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/newmedia/2. New_Extract_PIDs_in_Range.png"
+              >
+                <img src="assets/images/t90/newmedia/2. New_Extract_PIDs_in_Range.png" alt="New Extract workbook PIDs in Range query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 3: T90 Extract"
+                data-caption="Produces the Friday at-risk snapshot used by the Final workbook. This remains the baseline weekly extract, but in the redesigned workflow it is passed directly into the Final workbook instead of traveling through an intermediate file."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/newmedia/3. New_Extract_T90_Extract.png"
+              >
+                <img src="assets/images/t90/newmedia/3. New_Extract_T90_Extract.png" alt="New Extract workbook T90 Extract query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 4: Extract Dates"
+                data-caption="Pulls the active Friday snapshot date and supporting report-window dates into a reusable output table. These values are consumed by the Final workbook so the dashboard always reflects the correct reporting period without relying on manual cell updates or worksheet labels."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/newmedia/4. New_Extract_Extract_Dates.png"
+              >
+                <img src="assets/images/t90/newmedia/4. New_Extract_Extract_Dates.png" alt="New Extract workbook Extract Dates query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 5: Counts"
+                data-caption="Provides reusable summary values such as total projects in range, at-risk project counts, and readiness percentages that can be pulled into the Final dashboard. This reduces manual maintenance and keeps headline reporting metrics aligned with source logic."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/newmedia/5. New_Extract_Counts.png"
+              >
+                <img src="assets/images/t90/newmedia/5. New_Extract_Counts.png" alt="New Extract workbook Counts query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Power Query Editor Detailed View"
+                data-caption="Detailed view of the redesigned Extract workbook logic. Compared with the inherited version, the query structure is more organized and purposeful, with less unnecessary baggage carried into downstream reporting."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/newmedia/6. New_Extract_PQ_Detail.mp4"
+              >
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/newmedia/6. New_Extract_PQ_Detail.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Notes (Transition)"
+                data-caption="This transition point shows how the redesigned Extract workbook now hands off a focused Friday snapshot and reusable support outputs directly to the Final workbook. The intermediate workbook dependency is removed, shortening the workflow and reducing manual coordination."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/newmedia/7. New_Extract_Transition_Notes.png"
+              >
+                <img src="assets/images/t90/newmedia/7. New_Extract_Transition_Notes.png" alt="New Extract workbook transition notes slide" />
+              </div>
+
+              <div class="imcc-play-overlay">
+                <button class="imcc-play-button" type="button" aria-label="Play or pause active video">▶</button>
+              </div>
+
+              <div class="imcc-expand-hint">
+                <span>Click to expand</span>
+              </div>
+            </div>
+
+            <div class="imcc-optimization-note">Video is optimized to play in expanded media viewer.</div>
+
+            <div class="imcc-progress-wrap">
+              <input class="imcc-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
+            </div>
+
+            <div class="imcc-slide-nav">
+              <div class="imcc-slide-nav-label">Slide:</div>
+              <div class="imcc-slide-thumbnails" aria-label="Slide navigation">
+                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query/Table 1: Master RDOF Launch Readiness">
+                  Query/Table 1: Master RDOF Launch Readiness
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Table 2: PIDs in Range">
+                  Query/Table 2: PIDs in Range
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: T90 Extract">
+                  Query/Table 3: T90 Extract
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Query/Table 4: Extract Dates">
+                  Query/Table 4: Extract Dates
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="4" aria-label="Slide 5: Query/Table 5: Counts">
+                  Query/Table 5: Counts
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="5" aria-label="Slide 6: Power Query Editor Detailed View">
+                  Power Query Editor Detailed View
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="6" aria-label="Slide 7: Notes (Transition)">
+                  Notes (Transition)
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="imcc-code-column" aria-label="Query code">
+            <div class="imcc-code-heading-wrap">
+              <h4 class="imcc-code-heading">Query Code</h4>
+              <div class="imcc-code-subcaption">(Click to expand)</div>
+            </div>
+
+            <div class="imcc-code-empty">No code snippet</div>
+          </div>
+        </div>
+
+        <div class="imcc-meta" aria-live="polite" aria-atomic="true">
+          <h4 class="imcc-title">Query/Table 1: Master RDOF Launch Readiness</h4>
+          <p class="imcc-caption">
+            The redesigned base query still pulls and prepares Launch Readiness source data, but it is more focused and maintainable than the inherited version. Unnecessary system fields and repeated transformation patterns were reduced so the query better supports downstream reporting without carrying avoidable complexity.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="imcc-section">
+      <h3>New Final Workbook: Consolidated Dashboard and Status Tracking Layer</h3>
+      <p>
+        The redesigned Final workbook is the core of the new reporting process. Rather than waiting for a manually prepared handoff from an intermediate file, it now pulls the Friday Extract snapshot directly from the Extract workbook and combines it with refreshed current-state Launch Readiness data from SharePoint.
+      </p>
+      <p>
+        This allows the Final workbook to serve as a consolidated reporting layer where dashboard output, closure logic, helper-query support, and user-entered status preservation are handled together in a more stable and maintainable design.
+      </p>
+
+      <div class="imcc-shell" data-imcc>
+        <div class="imcc-stage">
+          <div class="imcc-media-column">
+            <div class="imcc-media-frame" aria-label="New Final Workbook media viewer">
+              <button class="imcc-control prev" type="button" aria-label="Previous slide">&#8249;</button>
+              <button class="imcc-control next" type="button" aria-label="Next slide">&#8250;</button>
+
+              <div
+                class="imcc-slide active"
+                data-title="Query/Connection 1: R Fri Extract"
+                data-caption="Pulls the Friday Extract snapshot from the Extract workbook and isolates the key fields needed to anchor the week-over-week comparison in the Final workbook. It is a connection only query to reduce table loads to their minimal required locations in the ensuing merged query, improving performance. In the legacy process, the Friday snapshot was brought through an intermediate workbook and then manually handed off downstream. The new design pulls the snapshot directly into the Final workbook, reducing file dependencies and eliminating a manual transfer step."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/newmedia/9. New_Final_Fri Extract.png"
+              >
+                <img src="assets/images/t90/newmedia/9. New_Final_Fri Extract.png" alt="New Final workbook R Fri Extract connection query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Connection 2: RDOF LR"
+                data-caption="Loads the refreshed current-state Launch Readiness data from SharePoint, including operational readiness fields, notes, and the custom status/write-back field. It is a connection only query to reduce table loads to their minimal required locations in the ensuing merged query, improving performance. Compared with the legacy process, this version is more focused and maintainable, selecting only the fields needed for final reporting while incorporating additional business-use fields such as the write-back status field. It also centralizes cleanup and filtering upstream instead of relying on manual shaping later."
+                data-modal-type="image"
+                data-modal-src="assets/images/t90/newmedia/10. New_Final_R LR.png"
+              >
+                <img src="assets/images/t90/newmedia/10. New_Final_R LR.png" alt="New Final workbook RDOF LR connection query" />
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 3: R T90 Formatted"
+                data-caption="This is the central reporting query of the Final workbook and the main user-facing dataset behind the redesigned dashboard. It merges the Friday snapshot with refreshed Launch Readiness data and transforms it into the final dashboard-ready table, including display-ready readiness fields, production calculations, closure logic, and manual status preservation. This query replaces what used to be split across multiple workbooks, manual refresh steps, and formatting actions. It now compares Friday Extract records to current source data directly, calculates Quota Ready and Production Ready automatically, formats readiness fields for display using values like In Planning, In Process, and N/A, identifies resolved records and forecast-shifted records through Status (Closed) logic, and preserves manual user closures by merging in helper-table input during refresh."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/newmedia/11. New_Final_RT90Formatted.mp4"
+              >
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/newmedia/11. New_Final_RT90Formatted.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div
+                class="imcc-slide pdf-slide"
+                data-title="Query/Table 4: Helper Queries: Extract_Dates + Counts"
+                data-caption="These supporting queries pull reusable dashboard values into the Final workbook: Extract_Dates brings in the active reporting-window dates from the Extract workbook, and Counts brings in the summary metrics used for dashboard totals, at-risk counts, and readiness percentages. In addition to supporting dashboard display, the Extract date values also provide the date context used to anchor snapshot-based reporting logic. In the legacy process, these values were maintained far more manually in worksheet cells or tab labels, which made them easy to miss, hide, or leave outdated. The redesigned approach centralizes them in query outputs and pulls them directly into the Final dashboard, improving consistency, reducing manual maintenance, and keeping the dashboard aligned with the source Extract logic automatically."
+                data-modal-type="pdf"
+                data-modal-src="assets/images/t90/newmedia/12. New_Final_HelperQueries.pdf"
+              >
+                <iframe src="assets/images/t90/newmedia/12. New_Final_HelperQueries.pdf" title="New Final workbook helper queries PDF preview"></iframe>
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 5: Status Helper Queries: R Status + R_Status_Input"
+                data-caption="Together, these two queries support the helper-table pattern that preserves manual closure decisions entered by users in Excel. R Status exposes the current PRISM ID list from the final dashboard output, and R_Status_Input reads the workbook table where users can enter or maintain status overrides for those same records. This interaction is one of the most important user-experience improvements in the redesigned workbook. In the legacy process, user-entered adjustments were vulnerable to being lost during refresh. The new design creates a stable loop between the dashboard output and the helper table so that manual closure decisions can persist through automated refreshes without requiring a separate maintenance process."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/newmedia/13. New_Final_Status.mp4"
+              >
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/newmedia/13. New_Final_Status.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div class="imcc-play-overlay">
+                <button class="imcc-play-button" type="button" aria-label="Play or pause active video">▶</button>
+              </div>
+
+              <div class="imcc-expand-hint">
+                <span>Click to expand</span>
+              </div>
+            </div>
+
+            <div class="imcc-optimization-note">Video is optimized to play in expanded media viewer.</div>
+
+            <div class="imcc-progress-wrap">
+              <input class="imcc-progress" type="range" min="0" max="100" value="0" step="0.1" aria-label="Video progress" />
+            </div>
+
+            <div class="imcc-slide-nav">
+              <div class="imcc-slide-nav-label">Slide:</div>
+              <div class="imcc-slide-thumbnails" aria-label="Slide navigation">
+                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query/Connection 1: R Fri Extract">
+                  Query/Connection 1: R Fri Extract
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Connection 2: RDOF LR">
+                  Query/Connection 2: RDOF LR
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: R T90 Formatted">
+                  Query/Table 3: R T90 Formatted
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Query/Table 4: Helper Queries: Extract_Dates + Counts">
+                  Query/Table 4: Helper Queries: Extract_Dates + Counts
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="4" aria-label="Slide 5: Query/Table 5: Status Helper Queries: R Status + R_Status_Input">
+                  Query/Table 5: Status Helper Queries: R Status + R_Status_Input
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="imcc-code-column" aria-label="Query code">
+            <div class="imcc-code-heading-wrap">
+              <h4 class="imcc-code-heading">Query Code</h4>
+              <div class="imcc-code-subcaption">(Click to expand)</div>
+            </div>
+
+            <div class="imcc-code-card active" data-code-src="assets/images/t90/NewCodeSnippets/7. New_T90 Dash_R Fri Extract.png" data-code-title="Query/Connection 1 - R Fri Extract">
+              <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/7. New_T90 Dash_R Fri Extract.png" alt="Code snippet for Query/Connection 1 - R Fri Extract" />
+              <div class="imcc-code-tile-label">Query 1</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/6. New_T90 Dash_R LR.png" data-code-title="Query/Connection 2 - RDOF LR">
+              <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/6. New_T90 Dash_R LR.png" alt="Code snippet for Query/Connection 2 - RDOF LR" />
+              <div class="imcc-code-tile-label">Query 2</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/8. New_T90 Dash_R T90 Formatted.png" data-code-title="Query/Table 3 - R T90 Formatted">
+              <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/8. New_T90 Dash_R T90 Formatted.png" alt="Code snippet for Query/Table 3 - R T90 Formatted" />
+              <div class="imcc-code-tile-label">Query 3</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/10. New_T90 Dash_Extract Dates Pull Through.png" data-code-title="Query/Table 4A - Extract_Dates Pull Through">
+              <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/10. New_T90 Dash_Extract Dates Pull Through.png" alt="Code snippet for Query/Table 4A - Extract_Dates Pull Through" />
+              <div class="imcc-code-tile-label">Query 4A</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/9. New_T90 Dash_Counts Pull Through.png" data-code-title="Query/Table 4B - Counts Pull Through">
+              <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/9. New_T90 Dash_Counts Pull Through.png" alt="Code snippet for Query/Table 4B - Counts Pull Through" />
+              <div class="imcc-code-tile-label">Query 4B</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/11. New_T90 Dash_R Status.png" data-code-title="Query/Table 5A - R Status">
+              <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/11. New_T90 Dash_R Status.png" alt="Code snippet for Query/Table 5A - R Status" />
+              <div class="imcc-code-tile-label">Query 5A</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/12. New_T90 Dash_R_Status_Input.png" data-code-title="Query/Table 5B - R_Status_Input">
+              <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/12. New_T90 Dash_R_Status_Input.png" alt="Code snippet for Query/Table 5B - R_Status_Input" />
+              <div class="imcc-code-tile-label">Query 5B</div>
+            </div>
+          </div>
+        </div>
+
+        <div class="imcc-meta" aria-live="polite" aria-atomic="true">
+          <h4 class="imcc-title">Query/Connection 1: R Fri Extract</h4>
+          <p class="imcc-caption">
+            Pulls the Friday Extract snapshot from the Extract workbook and isolates the key fields needed to anchor the week-over-week comparison in the Final workbook. It is a connection only query to reduce table loads to their minimal required locations in the ensuing merged query, improving performance. In the legacy process, the Friday snapshot was brought through an intermediate workbook and then manually handed off downstream. The new design pulls the snapshot directly into the Final workbook, reducing file dependencies and eliminating a manual transfer step.
+          </p>
+        </div>
+      </div>
+    </section>
+
+    <section class="imcc-section">
+      <h2>Key Improvements in the Redesigned Process</h2>
+      <p>
+        The redesigned T90 solution improved both the technical structure of the reporting process and the end-user experience of maintaining the dashboard week over week.
+      </p>
+
+      <ol class="detail-list numbered">
+        <li>
+          <strong>Removed the intermediate workbook dependency.</strong> The Friday snapshot now flows directly from the Extract workbook into the Final workbook, eliminating a separate staging file and a manual handoff step.
+        </li>
+        <li>
+          <strong>Consolidated reporting logic.</strong> Comparison logic, display formatting, closure handling, and user-facing dashboard preparation were brought together into a more centralized Final workbook design.
+        </li>
+        <li>
+          <strong>Improved query focus and maintainability.</strong> Source-loading and transformation logic were streamlined so queries pulled the fields actually needed for reporting and reduced unnecessary complexity.
+        </li>
+        <li>
+          <strong>Added reusable support outputs.</strong> Extract dates and counts were exposed as query-driven outputs and pulled directly into the dashboard, reducing manual maintenance.
+        </li>
+        <li>
+          <strong>Preserved user-entered closure decisions across refreshes.</strong> Helper queries and merge-back logic created a durable pattern for retaining manual status handling during automated refresh cycles.
+        </li>
+        <li>
+          <strong>Enabled source-system synchronization.</strong> A custom write-back field created a more interactive connection between the dashboard and the underlying SharePoint source data.
+        </li>
+      </ol>
+    </section>
+
+    <section class="imcc-section">
+      <h2>Outcome</h2>
+      <p>
+        The finished redesign created a more consistent, accurate, and sustainable launch-readiness reporting framework. It reduced file sprawl, shortened the reporting path, improved visibility into project status, and made the Final workbook behave more like an interactive dashboard rather than a static downstream report.
+      </p>
+      <p>
+        By consolidating logic, reducing manual maintenance, and preserving user inputs through refreshes, the new structure turned a fragile multi-workbook process into a more reliable and maintainable reporting solution.
+      </p>
     </section>
 
     <div class="back-link">
@@ -214,7 +863,7 @@
     </div>
   </main>
 
-  <div class="modal" id="imageModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Layered swap image lightbox">
+  <div class="modal" id="imageModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Image lightbox">
     <div class="modal-content">
       <button class="modal-close" id="imageModalClose" type="button" aria-label="Close image modal">✕</button>
       <button class="modal-nav prev" id="imageModalPrev" type="button" aria-label="Previous image">&#8249;</button>
@@ -232,13 +881,15 @@
     </div>
   </div>
 
-  <div class="modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Video lightbox">
+  <div class="modal" id="videoModal" aria-hidden="true" role="dialog" aria-modal="true" aria-label="Expanded media lightbox">
     <div class="modal-content">
-      <button class="modal-close" id="videoModalClose" type="button" aria-label="Close video modal">✕</button>
-      <video id="videoModalPlayer" controls playsinline>
+      <button class="modal-close" id="videoModalClose" type="button" aria-label="Close media modal">✕</button>
+      <div class="modal-image-title" id="videoModalTitle"></div>
+      <video id="videoModalPlayer" controls playsinline style="display:none;">
         <source id="videoModalSource" src="" type="video/mp4" />
         Your browser does not support the video tag.
       </video>
+      <iframe id="videoModalIframe" title="Expanded document or media viewer" style="display:none;"></iframe>
     </div>
   </div>
 
@@ -247,7 +898,6 @@
     const wrapperSwapBackFrame = document.getElementById('wrapperSwapBackFrame');
     const wrapperSwapPrevBtn = document.getElementById('wrapperSwapPrevBtn');
     const wrapperSwapNextBtn = document.getElementById('wrapperSwapNextBtn');
-    const wrapperSwapCaption = document.getElementById('wrapperSwapCaption');
 
     let wrapperOldIsFront = true;
 
@@ -257,13 +907,11 @@
         wrapperSwapFrontFrame.classList.remove('is-back');
         wrapperSwapBackFrame.classList.add('is-back');
         wrapperSwapBackFrame.classList.remove('is-front');
-        wrapperSwapCaption.textContent = 'Currently viewing: Inherited (Old) in front, Reconstructed (New) behind.';
       } else {
         wrapperSwapFrontFrame.classList.remove('is-front');
         wrapperSwapFrontFrame.classList.add('is-back');
         wrapperSwapBackFrame.classList.remove('is-back');
         wrapperSwapBackFrame.classList.add('is-front');
-        wrapperSwapCaption.textContent = 'Currently viewing: Reconstructed (New) in front, Inherited (Old) behind.';
       }
     }
 
@@ -328,180 +976,10 @@
       if (event.target === imageModal) closeImageModal();
     });
 
-    const legacyImcc = document.getElementById('legacyImcc');
-    const legacySlides = Array.from(legacyImcc.querySelectorAll('.imcc-slide'));
-    const legacyCodeCards = Array.from(legacyImcc.querySelectorAll('.imcc-code-card'));
-    const legacySlideThumbs = Array.from(legacyImcc.querySelectorAll('.imcc-slide-thumbnail'));
-    const legacyPrev = document.getElementById('legacyImccPrev');
-    const legacyNext = document.getElementById('legacyImccNext');
-    const legacyPlay = document.getElementById('legacyImccPlay');
-    const legacyProgress = document.getElementById('legacyImccProgress');
-    const legacyCaption = document.getElementById('legacyImccCaption');
-    const imccMediaFrame = legacyImcc.querySelector('.imcc-media-frame');
-
-    const videoModal = document.getElementById('videoModal');
-    const videoModalClose = document.getElementById('videoModalClose');
-    const videoModalPlayer = document.getElementById('videoModalPlayer');
-    const videoModalSource = document.getElementById('videoModalSource');
-
     const codeModal = document.getElementById('codeModal');
     const codeModalClose = document.getElementById('codeModalClose');
     const codeModalImg = document.getElementById('codeModalImg');
     const codeModalTitle = document.getElementById('codeModalTitle');
-
-    let legacyActiveIndex = 0;
-
-    function getLegacyActiveVideo() {
-      return legacySlides[legacyActiveIndex].querySelector('video');
-    }
-
-    function pauseAllLegacyVideos() {
-      legacySlides.forEach((slide) => {
-        const video = slide.querySelector('video');
-        if (video) video.pause();
-      });
-      videoModalPlayer.pause();
-    }
-
-    function resetLegacyProgress() {
-      legacyProgress.value = 0;
-    }
-
-    function updateLegacyImcc(index) {
-      pauseAllLegacyVideos();
-
-      legacySlides.forEach((slide, i) => {
-        slide.classList.toggle('active', i === index);
-      });
-
-      legacyCodeCards.forEach((card, i) => {
-        card.classList.toggle('active', i === index && i < 3);
-      });
-
-      legacySlideThumbs.forEach((thumb, i) => {
-        thumb.classList.toggle('active', i === index);
-      });
-
-      legacyActiveIndex = index;
-      legacyCaption.textContent = legacySlides[index].dataset.caption || '';
-      resetLegacyProgress();
-      legacyPlay.textContent = '▶';
-
-      const activeVideo = getLegacyActiveVideo();
-      if (activeVideo) {
-        activeVideo.currentTime = 0;
-        activeVideo.load();
-      }
-    }
-
-    function goToLegacySlide(index) {
-      if (index < 0) index = legacySlides.length - 1;
-      if (index >= legacySlides.length) index = 0;
-      updateLegacyImcc(index);
-    }
-
-    legacyPrev.addEventListener('click', () => goToLegacySlide(legacyActiveIndex - 1));
-    legacyNext.addEventListener('click', () => goToLegacySlide(legacyActiveIndex + 1));
-
-    legacyPlay.addEventListener('click', () => {
-      const video = getLegacyActiveVideo();
-      if (!video) return;
-
-      if (video.paused) {
-        video.play()
-          .then(() => {
-            legacyPlay.textContent = '❚❚';
-          })
-          .catch(() => {
-            legacyPlay.textContent = '▶';
-          });
-      } else {
-        video.pause();
-        legacyPlay.textContent = '▶';
-      }
-    });
-
-    legacySlides.forEach((slide) => {
-      const video = slide.querySelector('video');
-      if (!video) return;
-
-      video.addEventListener('timeupdate', () => {
-        if (video.duration) {
-          legacyProgress.value = (video.currentTime / video.duration) * 100;
-        }
-      });
-
-      video.addEventListener('ended', () => {
-        legacyPlay.textContent = '▶';
-      });
-    });
-
-    legacyProgress.addEventListener('input', () => {
-      const video = getLegacyActiveVideo();
-      if (!video || !video.duration) return;
-
-      video.currentTime = (legacyProgress.value / 100) * video.duration;
-    });
-
-    legacyCodeCards.forEach((card) => {
-      card.addEventListener('click', () => {
-        const index = Number(card.dataset.imccIndex);
-        goToLegacySlide(index);
-      });
-    });
-
-    legacySlideThumbs.forEach((thumb) => {
-      thumb.addEventListener('click', () => {
-        const index = Number(thumb.dataset.index);
-        goToLegacySlide(index);
-      });
-
-      thumb.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') {
-          e.preventDefault();
-          const index = Number(thumb.dataset.index);
-          goToLegacySlide(index);
-        }
-      });
-    });
-
-    function openVideoModal() {
-      const activeVideo = getLegacyActiveVideo();
-      if (!activeVideo) return;
-
-      const activeSource = activeVideo.querySelector('source');
-      if (!activeSource) return;
-
-      videoModalSource.src = activeSource.src;
-      videoModalPlayer.load();
-      videoModal.classList.add('open');
-      videoModal.setAttribute('aria-hidden', 'false');
-      videoModalPlayer.play().catch(() => {});
-    }
-
-    function closeVideoModal() {
-      videoModal.classList.remove('open');
-      videoModal.setAttribute('aria-hidden', 'true');
-      videoModalPlayer.pause();
-      videoModalSource.src = '';
-      videoModalPlayer.load();
-    }
-
-    imccMediaFrame.addEventListener('click', (event) => {
-      if (
-        event.target.closest('.imcc-play-button') ||
-        event.target.closest('.imcc-control')
-      ) {
-        return;
-      }
-
-      openVideoModal();
-    });
-
-    videoModalClose.addEventListener('click', closeVideoModal);
-    videoModal.addEventListener('click', (e) => {
-      if (e.target === videoModal) closeVideoModal();
-    });
 
     function openCodeModal(src, title, alt) {
       codeModalImg.src = src;
@@ -517,30 +995,277 @@
       codeModalImg.src = '';
     }
 
-    legacyCodeCards.forEach((card) => {
-      const img = card.querySelector('img');
-      if (!img) return;
-
-      img.addEventListener('click', (e) => {
-        e.stopPropagation();
-        openCodeModal(card.dataset.codeSrc, card.dataset.codeTitle, img.alt);
-      });
-    });
-
     codeModalClose.addEventListener('click', closeCodeModal);
     codeModal.addEventListener('click', (e) => {
       if (e.target === codeModal) closeCodeModal();
     });
 
+    const videoModal = document.getElementById('videoModal');
+    const videoModalClose = document.getElementById('videoModalClose');
+    const videoModalTitle = document.getElementById('videoModalTitle');
+    const videoModalPlayer = document.getElementById('videoModalPlayer');
+    const videoModalSource = document.getElementById('videoModalSource');
+    const videoModalIframe = document.getElementById('videoModalIframe');
+
+    function openMediaModal(type, src, title) {
+      videoModalTitle.textContent = title || '';
+      videoModal.classList.add('open');
+      videoModal.setAttribute('aria-hidden', 'false');
+
+      videoModalPlayer.pause();
+      videoModalSource.src = '';
+      videoModalPlayer.style.display = 'none';
+
+      videoModalIframe.src = '';
+      videoModalIframe.style.display = 'none';
+
+      videoModal.classList.remove('pdf-mode');
+
+      if (type === 'video') {
+        videoModalSource.src = src;
+        videoModalPlayer.style.display = 'block';
+        videoModalPlayer.load();
+        videoModalPlayer.play().catch(() => {});
+      } else if (type === 'pdf') {
+        videoModal.classList.add('pdf-mode');
+        videoModalIframe.src = src;
+        videoModalIframe.style.display = 'block';
+      } else if (type === 'image') {
+        videoModal.classList.add('pdf-mode');
+        videoModalIframe.src = src;
+        videoModalIframe.style.display = 'block';
+      }
+    }
+
+    function closeMediaModal() {
+      videoModal.classList.remove('open');
+      videoModal.setAttribute('aria-hidden', 'true');
+      videoModal.classList.remove('pdf-mode');
+
+      videoModalPlayer.pause();
+      videoModalSource.src = '';
+      videoModalPlayer.load();
+      videoModalPlayer.style.display = 'none';
+
+      videoModalIframe.src = '';
+      videoModalIframe.style.display = 'none';
+    }
+
+    videoModalClose.addEventListener('click', closeMediaModal);
+    videoModal.addEventListener('click', (e) => {
+      if (e.target === videoModal) closeMediaModal();
+    });
+
+    function initializeImcc(imccRoot) {
+      const slides = Array.from(imccRoot.querySelectorAll('.imcc-slide'));
+      const slideThumbs = Array.from(imccRoot.querySelectorAll('.imcc-slide-thumbnail'));
+      const codeCards = Array.from(imccRoot.querySelectorAll('.imcc-code-card'));
+      const prevBtn = imccRoot.querySelector('.imcc-control.prev');
+      const nextBtn = imccRoot.querySelector('.imcc-control.next');
+      const playBtn = imccRoot.querySelector('.imcc-play-button');
+      const progress = imccRoot.querySelector('.imcc-progress');
+      const caption = imccRoot.querySelector('.imcc-caption');
+      const title = imccRoot.querySelector('.imcc-title');
+      const mediaFrame = imccRoot.querySelector('.imcc-media-frame');
+
+      let activeIndex = 0;
+
+      function getActiveSlide() {
+        return slides[activeIndex];
+      }
+
+      function getActiveVideo() {
+        const activeSlide = getActiveSlide();
+        return activeSlide ? activeSlide.querySelector('video') : null;
+      }
+
+      function isVideoSlide(index) {
+        return slides[index]?.dataset.modalType === 'video';
+      }
+
+      function pauseAllVideos() {
+        slides.forEach((slide) => {
+          const video = slide.querySelector('video');
+          if (video) video.pause();
+        });
+      }
+
+      function resetProgress() {
+        if (progress) progress.value = 0;
+      }
+
+      function updatePlayButtonVisibility() {
+        if (!playBtn) return;
+        playBtn.style.display = isVideoSlide(activeIndex) ? 'inline-flex' : 'none';
+      }
+
+      function updateCodeHighlight(index) {
+        if (!codeCards.length) return;
+
+        codeCards.forEach((card) => {
+          card.classList.remove('active');
+        });
+
+        const matchedCard = codeCards[index];
+        if (matchedCard) {
+          matchedCard.classList.add('active');
+        }
+      }
+
+      function updateImcc(index) {
+        pauseAllVideos();
+
+        slides.forEach((slide, i) => {
+          slide.classList.toggle('active', i === index);
+        });
+
+        slideThumbs.forEach((thumb, i) => {
+          thumb.classList.toggle('active', i === index);
+        });
+
+        activeIndex = index;
+
+        const activeSlide = getActiveSlide();
+        title.textContent = activeSlide.dataset.title || '';
+        caption.textContent = activeSlide.dataset.caption || '';
+
+        resetProgress();
+        if (playBtn) playBtn.textContent = '▶';
+        updatePlayButtonVisibility();
+        updateCodeHighlight(index);
+
+        const activeVideo = getActiveVideo();
+        if (activeVideo) {
+          activeVideo.currentTime = 0;
+          activeVideo.load();
+        }
+      }
+
+      function goToSlide(index) {
+        if (index < 0) index = slides.length - 1;
+        if (index >= slides.length) index = 0;
+        updateImcc(index);
+      }
+
+      if (prevBtn) {
+        prevBtn.addEventListener('click', () => goToSlide(activeIndex - 1));
+      }
+
+      if (nextBtn) {
+        nextBtn.addEventListener('click', () => goToSlide(activeIndex + 1));
+      }
+
+      if (playBtn) {
+        playBtn.addEventListener('click', () => {
+          const video = getActiveVideo();
+          if (!video) return;
+
+          if (video.paused) {
+            video.play()
+              .then(() => {
+                playBtn.textContent = '❚❚';
+              })
+              .catch(() => {
+                playBtn.textContent = '▶';
+              });
+          } else {
+            video.pause();
+            playBtn.textContent = '▶';
+          }
+        });
+      }
+
+      slides.forEach((slide) => {
+        const video = slide.querySelector('video');
+        if (!video) return;
+
+        video.addEventListener('timeupdate', () => {
+          if (progress && video.duration) {
+            progress.value = (video.currentTime / video.duration) * 100;
+          }
+        });
+
+        video.addEventListener('ended', () => {
+          if (playBtn) playBtn.textContent = '▶';
+        });
+
+        video.addEventListener('pause', () => {
+          if (slide.classList.contains('active') && playBtn) {
+            playBtn.textContent = '▶';
+          }
+        });
+
+        video.addEventListener('play', () => {
+          if (slide.classList.contains('active') && playBtn) {
+            playBtn.textContent = '❚❚';
+          }
+        });
+      });
+
+      if (progress) {
+        progress.addEventListener('input', () => {
+          const video = getActiveVideo();
+          if (!video || !video.duration) return;
+          video.currentTime = (progress.value / 100) * video.duration;
+        });
+      }
+
+      slideThumbs.forEach((thumb) => {
+        thumb.addEventListener('click', () => {
+          const index = Number(thumb.dataset.index);
+          goToSlide(index);
+        });
+
+        thumb.addEventListener('keydown', (e) => {
+          if (e.key === 'Enter' || e.key === ' ') {
+            e.preventDefault();
+            const index = Number(thumb.dataset.index);
+            goToSlide(index);
+          }
+        });
+      });
+
+      codeCards.forEach((card) => {
+        const img = card.querySelector('img');
+        if (!img) return;
+
+        card.addEventListener('click', () => {
+          openCodeModal(card.dataset.codeSrc, card.dataset.codeTitle, img.alt);
+        });
+      });
+
+      if (mediaFrame) {
+        mediaFrame.addEventListener('click', (event) => {
+          if (
+            event.target.closest('.imcc-play-button') ||
+            event.target.closest('.imcc-control')
+          ) {
+            return;
+          }
+
+          const activeSlide = getActiveSlide();
+          const modalType = activeSlide.dataset.modalType;
+          const modalSrc = activeSlide.dataset.modalSrc;
+          const modalTitle = activeSlide.dataset.title || '';
+
+          if (!modalType || !modalSrc) return;
+
+          openMediaModal(modalType, modalSrc, modalTitle);
+        });
+      }
+
+      updateImcc(0);
+    }
+
+    document.querySelectorAll('[data-imcc]').forEach(initializeImcc);
+
     document.addEventListener('keydown', (e) => {
       if (e.key === 'Escape') {
         closeImageModal();
         closeCodeModal();
-        closeVideoModal();
+        closeMediaModal();
       }
     });
-
-    updateLegacyImcc(0);
   </script>
 </body>
 </html>
