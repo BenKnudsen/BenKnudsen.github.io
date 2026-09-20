@@ -595,6 +595,11 @@ p {
   margin-top: 2rem;
 }
 
+.imcc-section > .workflow-visual-card {
+  margin-top: 1rem;
+  margin-bottom: 0.35rem;
+}
+
 .imcc-shell {
   margin-top: 1rem;
   background: white;

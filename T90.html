@@ -283,11 +283,29 @@
     <section class="imcc-section">
       <h3>Legacy Intermediate (Template) Workbook: Weekly Refresh and Manual Handoff Layer</h3>
       <p>
-        The Intermediate Template workbook was used to refresh the Friday snapshot against current-state data during the following week and prepare the output that would later be copied into the Final report workbook. This extra layer extended the reporting chain and introduced both duplicate query logic and a manual handoff step.
+        In the legacy process, a separate template workbook was used as an intermediate refresh layer between the Friday Extract snapshot and the Final dashboard. This workbook partially refreshed current-state data during the week, but still required manual cleanup, formatting, and copy/paste steps before the Final workbook could be updated.
       </p>
-      <p>
-        In practice, the Template workbook acted as a staging layer between the original Extract output and the final dashboard. It refreshed source data, applied comparison logic, and created the interim formatted output that users then carried forward manually into the last workbook.
-      </p>
+      <p><strong>How the legacy template workflow functioned:</strong></p>
+      <ol class="detail-list numbered">
+        <li>Pull in the Friday T90 snapshot from the Extract template file</li>
+        <li>Pull in the current Launch Readiness data from SharePoint</li>
+        <li>Merge old snapshot PIDs to current source data</li>
+        <li>Reshape and calculate checks for the updated week</li>
+        <li>Format for dashboard use</li>
+        <li>Manually clean / manually format / manually copy into the Final workbook</li>
+      </ol>
+
+      <div class="workflow-visual-card">
+        <div class="workflow-visual-frame">
+          <img
+            src="assets/images/t90/workflows/legacy_workflow.svg"
+            alt="Legacy T90 workflow diagram, with the Intermediate Template workbook as the middle refresh and handoff layer"
+          />
+        </div>
+        <div class="workflow-visual-caption">
+          Legacy workflow diagram. The middle layer is this Intermediate Template workbook: it pulled in the Friday snapshot, refreshed SharePoint data, merged and reshaped the weekly comparison, then relied on manual formatting and copy/paste into the Final workbook. Highlighting this layer in the SVG can be refined next.
+        </div>
+      </div>
 
       <div class="imcc-shell" data-imcc>
         <div class="imcc-stage">
@@ -298,44 +316,84 @@
 
               <div
                 class="imcc-slide active"
-                data-title="Query/Connection 1: Friday Extract Pull-Through"
-                data-caption="Loads the Friday at-risk snapshot from the Extract workbook into the Intermediate Template workbook so it can be compared against refreshed current-state data later in the week. This step was necessary only because the legacy process split logic across multiple files."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/legacymedia/5. Legacy_Template_Fri_Extract.png"
-              >
-                <img src="assets/images/t90/legacymedia/5. Legacy_Template_Fri_Extract.png" alt="Legacy Template workbook Friday Extract pull-through query" />
-              </div>
-
-              <div
-                class="imcc-slide"
-                data-title="Query/Connection 2: Refreshed Launch Readiness Pull"
-                data-caption="Brings refreshed Launch Readiness data into the Template workbook so the current-week state can be compared against the Friday snapshot. In the legacy process, this duplicated source-loading logic that could have been centralized upstream."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/legacymedia/6. Legacy_Template_R_LR.png"
-              >
-                <img src="assets/images/t90/legacymedia/6. Legacy_Template_R_LR.png" alt="Legacy Template workbook refreshed Launch Readiness pull query" />
-              </div>
-
-              <div
-                class="imcc-slide"
-                data-title="Query/Table 3: Intermediate Comparison Output"
-                data-caption="Merges the Friday snapshot with the refreshed Launch Readiness data to produce the working comparison table used for the weekly report handoff. This layer recreated logic that was later consolidated into the redesigned Final workbook."
+                data-title="Query/Table 1: T90 Data Friday LR"
+                data-caption="Imports the Friday Extract snapshot from the Extract workbook and prepares it as the baseline dataset to be compared against refreshed current state records the ensuing week. In the legacy process, this query pulled through large amounts of unnecessary fields and redundant calculated columns, slowing data refresh processes. This query should have been a connection only."
                 data-modal-type="video"
-                data-modal-src="assets/images/t90/legacymedia/7. Legacy_Template_Comparison_Output.mp4"
+                data-modal-src="assets/images/t90/legacymedia/6. Old_02_T90 Template_Friday Data.mp4"
               >
                 <video preload="metadata" playsinline>
-                  <source src="assets/images/t90/legacymedia/7. Legacy_Template_Comparison_Output.mp4" type="video/mp4" />
+                  <source src="assets/images/t90/legacymedia/6. Old_02_T90 Template_Friday Data.mp4" type="video/mp4" />
                 </video>
               </div>
 
               <div
                 class="imcc-slide"
-                data-title="Manual Handoff to Final Workbook"
-                data-caption="After the comparison output was refreshed and reviewed, users manually transferred the resulting table into the Final report workbook. This handoff increased the risk of timing issues, version confusion, and missed updates."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/legacymedia/8. Legacy_Template_Manual_Handoff.png"
+                data-title="Query/Table 2: Master RDOF Launch Readiness"
+                data-caption="Pulls refreshed current-state data from SharePoint, standardizes the core fields, and calculates the readiness-date logic used to compare current records against the prior Friday snapshot. Just like the version of this query in the Legacy Extract workbook, the query logic was functional but overly long, imported the entire dataset including unnecessary project rows and system data, was redundant, and slowed data refreshes. Like the previous query, it should have been significantly parsed down and be a connection only."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/legacymedia/7. Old_02_T90 Template_R LR.mp4"
               >
-                <img src="assets/images/t90/legacymedia/8. Legacy_Template_Manual_Handoff.png" alt="Legacy Template workbook manual handoff to Final workbook" />
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/legacymedia/7. Old_02_T90 Template_R LR.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 3: Merge T90 New Week"
+                data-caption="Joins the Friday snapshot (T90 Data Friday LR) to the refreshed source data (Master RDOF Launch Readiness) by project ID, creating the bridge between the prior reporting state and the current week's records. In the legacy process, this join step was necessary because the workflow had been split across separate files, but it also introduced another dependency and another transformation layer to maintain. The merge itself was straightforward, yet it existed largely to support a fragmented architecture that the redesigned solution later eliminated."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/legacymedia/8. Old_02_T90 Template_Merge New Week.mp4"
+              >
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/legacymedia/8. Old_02_T90 Template_Merge New Week.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 4: Final T90 New Week"
+                data-caption="Expands and reshapes the merged snapshot/current-state data, recalculates partner-level issue checks, and prepares the refreshed comparison output. In the legacy process, this output still required manual formatting and cleanup to be done outside the query logic before it could be used downstream."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/legacymedia/9. Old_02_T90 Template_Final New Week.mp4"
+              >
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/legacymedia/9. Old_02_T90 Template_Final New Week.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 5: Final T90 Formatted"
+                data-caption="Produces the legacy workbook's final dashboard-ready dataset by applying display logic, time-window grouping, and initial closure logic. The output table had minimal systemic formatting applied in preparation for a copy/paste to an additional tab for final manual formatting. This stage was used as a precaution/data preservation if the manual process in the proceeding step corrupted or mistakenly deleted data. In the legacy process, this query attempted to prepare a dashboard-ready view, but its output was still not truly final. It duplicated logic already present elsewhere in the workbook, preserved extra precautionary shaping layers, and still depended on manual formatting and copy/paste into the separate report file, making the process more redundant than automated."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/legacymedia/10. Old_02_T90 Template_Final Formatted.mp4"
+              >
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/legacymedia/10. Old_02_T90 Template_Final Formatted.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 6: Manual Formatting (Non-Query tab in the Workbook)"
+                data-caption="The partially formatted Final T90 Formatted table was pasted into this tab for final manual formatting. Color coding, sorting, and out-of-date-range row removal were performed manually. But, even at this stage, the process still depended on manual formatting updates and copy/paste transfer into the separate Final workbook. This table, along with 3. Merge T90 New Week, 4. Final T90 New Week, and 5. Final T90 Formatted were extremely redundant and the product of an overly cautious original developer of this process. They were all consolidated into a single, automated step in the revised process."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/legacymedia/11. Old_02_T90 Template_Manual Formatting.mp4"
+              >
+                <video preload="metadata" playsinline>
+                  <source src="assets/images/t90/legacymedia/11. Old_02_T90 Template_Manual Formatting.mp4" type="video/mp4" />
+                </video>
+              </div>
+
+              <div
+                class="imcc-slide pdf-slide"
+                data-title="Notes (Transition)"
+                data-caption="The legacy template workbook acted as an intermediate refresh layer: it imported the Friday snapshot, joined it to refreshed SharePoint data, recalculated weekly status checks, and prepared the output for manual handoff into the Final workbook."
+                data-modal-type="pdf"
+                data-modal-src="assets/images/t90/legacymedia/12. Old_02_T90 Template_Notes.pdf"
+              >
+                <iframe src="assets/images/t90/legacymedia/12. Old_02_T90 Template_Notes.pdf" title="Legacy Template workbook transition notes"></iframe>
               </div>
 
               <div class="imcc-play-overlay">
@@ -356,17 +414,26 @@
             <div class="imcc-slide-nav">
               <div class="imcc-slide-nav-label">Slide:</div>
               <div class="imcc-slide-thumbnails" aria-label="Slide navigation">
-                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query/Connection 1: Friday Extract Pull-Through">
-                  Query/Connection 1: Friday Extract Pull-Through
+                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query/Table 1: T90 Data Friday LR">
+                  Query/Table 1: T90 Data Friday LR
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Connection 2: Refreshed Launch Readiness Pull">
-                  Query/Connection 2: Refreshed Launch Readiness Pull
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Table 2: Master RDOF Launch Readiness">
+                  Query/Table 2: Master RDOF Launch Readiness
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: Intermediate Comparison Output">
-                  Query/Table 3: Intermediate Comparison Output
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: Merge T90 New Week">
+                  Query/Table 3: Merge T90 New Week
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Manual Handoff to Final Workbook">
-                  Manual Handoff to Final Workbook
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Query/Table 4: Final T90 New Week">
+                  Query/Table 4: Final T90 New Week
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="4" aria-label="Slide 5: Query/Table 5: Final T90 Formatted">
+                  Query/Table 5: Final T90 Formatted
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="5" aria-label="Slide 6: Query/Table 6: Manual Formatting (Non-Query tab in the Workbook)">
+                  Query/Table 6: Manual Formatting (Non-Query tab in the Workbook)
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="6" aria-label="Slide 7: Notes (Transition)">
+                  Notes (Transition)
                 </div>
               </div>
             </div>
@@ -378,14 +445,37 @@
               <div class="imcc-code-subcaption">(Click to expand)</div>
             </div>
 
-            <div class="imcc-code-empty">No code snippet</div>
+            <div class="imcc-code-card active" data-code-src="assets/images/t90/OldCodeSnippets/5. Old_02_T90 Template_Friday Data.png" data-code-title="Query 1 - T90 Data Friday LR">
+              <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/5. Old_02_T90 Template_Friday Data.png" alt="Code snippet for Query 1 - T90 Data Friday LR" />
+              <div class="imcc-code-tile-label">Query 1</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/OldCodeSnippets/4. Old_02_T90 Template_R LR.png" data-code-title="Query 2 - Master RDOF Launch Readiness">
+              <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/4. Old_02_T90 Template_R LR.png" alt="Code snippet for Query 2 - Master RDOF Launch Readiness" />
+              <div class="imcc-code-tile-label">Query 2</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/OldCodeSnippets/6. Old_02_T90 Template_Merge New Week.png" data-code-title="Query 3 - Merge T90 New Week">
+              <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/6. Old_02_T90 Template_Merge New Week.png" alt="Code snippet for Query 3 - Merge T90 New Week" />
+              <div class="imcc-code-tile-label">Query 3</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/OldCodeSnippets/7. Old_02_T90 Template_Final New Week.png" data-code-title="Query 4 - Final T90 New Week">
+              <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/7. Old_02_T90 Template_Final New Week.png" alt="Code snippet for Query 4 - Final T90 New Week" />
+              <div class="imcc-code-tile-label">Query 4</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/OldCodeSnippets/8. Old_02_T90 Template_Final Formatted.png" data-code-title="Query 5 - Final T90 Formatted">
+              <img class="imcc-code-thumb" src="assets/images/t90/OldCodeSnippets/8. Old_02_T90 Template_Final Formatted.png" alt="Code snippet for Query 5 - Final T90 Formatted" />
+              <div class="imcc-code-tile-label">Query 5</div>
+            </div>
           </div>
         </div>
 
         <div class="imcc-meta" aria-live="polite" aria-atomic="true">
-          <h4 class="imcc-title">Query/Connection 1: Friday Extract Pull-Through</h4>
+          <h4 class="imcc-title">Query/Table 1: T90 Data Friday LR</h4>
           <p class="imcc-caption">
-            Loads the Friday at-risk snapshot from the Extract workbook into the Intermediate Template workbook so it can be compared against refreshed current-state data later in the week. This step was necessary only because the legacy process split logic across multiple files.
+            Imports the Friday Extract snapshot from the Extract workbook and prepares it as the baseline dataset to be compared against refreshed current state records the ensuing week. In the legacy process, this query pulled through large amounts of unnecessary fields and redundant calculated columns, slowing data refresh processes. This query should have been a connection only.
           </p>
         </div>
       </div>
