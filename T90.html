@@ -143,8 +143,17 @@
 
       <h3>Legacy Extract Workbook: Baseline Snapshot Layer</h3>
       <p>
-        The Extract workbook established the weekly Friday baseline used to identify projects that were forecasted to launch within the next 90 days and determine which of them were at risk. It functioned as the starting point of the reporting chain and supplied the snapshot later used for comparison in downstream workbooks.
+        In the legacy process, the Extract workbook used a three-query pipeline to generate the baseline Friday snapshot that anchored the rest of the weekly T90 workflow. It pulled source data from SharePoint, isolated the full 90-day project population, and narrowed that set to the projects considered at risk for dashboard reporting.
       </p>
+      <p><strong>How the legacy Extract Workbook functioned:</strong></p>
+      <ol class="detail-list numbered">
+        <li>Pull raw data from the SharePoint source list</li>
+        <li>Clean and reshape the source data into a master readiness dataset</li>
+        <li>Calculate a high-level readiness/date-risk flag for each project</li>
+        <li>Filter the master dataset to projects within the current T90 window</li>
+        <li>Further filter that in-range population to the projects considered at risk</li>
+        <li>Output the resulting extract as the Friday baseline snapshot for downstream use</li>
+      </ol>
 
       <div class="imcc-shell" data-imcc>
         <div class="imcc-stage">
@@ -156,7 +165,7 @@
               <div
                 class="imcc-slide active"
                 data-title="Query/Table 1: Master RDOF Launch Readiness"
-                data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain."
+                data-caption="The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Readiness Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain."
                 data-modal-type="video"
                 data-modal-src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook1.mp4"
               >
@@ -168,7 +177,7 @@
               <div
                 class="imcc-slide"
                 data-title="Query/Table 2: PIDs in Range"
-                data-caption="Filters the master launch-readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis."
+                data-caption="Filters the master Launch Readiness dataset to all projects forecasted within the current 90-day reporting window. This query defines the total in-scope population used for reporting counts and downstream analysis. In the legacy version, this query was useful conceptually but still depended on an overbuilt upstream dataset and static reporting-window logic. Because the source query carried unnecessary columns and transformations, even this simple in-range filter inherited avoidable complexity and slower refresh performance."
                 data-modal-type="video"
                 data-modal-src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook2.mp4"
               >
@@ -179,8 +188,8 @@
 
               <div
                 class="imcc-slide"
-                data-title="Query/Table 3: T90 Extract"
-                data-caption="Produces the final at-risk project subset by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and transport-related exclusions. This output serves as the snapshot passed into the Final workbook for end-user reporting."
+                data-title="Query/Table 3: T90 Exact"
+                data-caption="Further narrows the in-range population by applying additional business filters to the master readiness data, including launch-window limits, construction and stage rules, readiness-date exceptions, and other category-related exclusions to produce the final at-risk project subset. This output serves as the snapshot passed into the Final workbook for end-user reporting. In the legacy version, this final extract was produced through layered filtering and repeated shaping that made the logic harder to audit and maintain. Although it generated the required at-risk snapshot, it also fed a downstream process that still relied on a separate intermediate workbook and additional manual handling before end users could consume the report."
                 data-modal-type="video"
                 data-modal-src="assets/images/t90/OLD 01_T90 Friday Extract Template_Workbook3.mp4"
               >
@@ -204,11 +213,11 @@
               <div
                 class="imcc-slide"
                 data-title="Notes (Transition)"
-                data-caption="This transition point marks the handoff from the legacy Extract workbook into the next workbook in the reporting chain. Although the Friday snapshot was successfully created here, the downstream process still depended on additional refreshes, reshaping, and manual coordination in separate files before the final report could be delivered."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/legacymedia/4. Legacy_Extract_Transition_Notes.png"
+                data-caption="The legacy Extract workbook created the baseline Friday snapshot that anchored the weekly reporting cycle, but it did so through a query chain that was heavier, more static, and more maintenance-intensive than necessary. Although it fulfilled its role as the starting point for the week’s reporting, the output still had to pass through additional workbook layers and manual downstream processes before it became a usable end-user report."
+                data-modal-type="pdf"
+                data-modal-src="assets/images/t90/legacymedia/5. OLD 01_T90 Friday Extract_Notes.pdf"
               >
-                <img src="assets/images/t90/legacymedia/4. Legacy_Extract_Transition_Notes.png" alt="Legacy Extract workbook transition notes slide" />
+                <iframe src="assets/images/t90/legacymedia/5. OLD 01_T90 Friday Extract_Notes.pdf" title="Legacy Extract workbook transition notes"></iframe>
               </div>
 
               <div class="imcc-play-overlay">
@@ -235,8 +244,8 @@
                 <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Table 2: PIDs in Range">
                   Query/Table 2: PIDs in Range
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: T90 Extract">
-                  Query/Table 3: T90 Extract
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: T90 Exact">
+                  Query/Table 3: T90 Exact
                 </div>
                 <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Power Query Editor Detailed View">
                   Power Query Editor Detailed View
@@ -274,7 +283,7 @@
         <div class="imcc-meta" aria-live="polite" aria-atomic="true">
           <h4 class="imcc-title">Query/Table 1: Master RDOF Launch Readiness</h4>
           <p class="imcc-caption">
-            The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Date Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.
+            The base query for the Extract workbook, responsible for pulling raw project data from SharePoint, cleaning and restructuring it, and calculating the core Readiness Check logic used by downstream queries. In the legacy version, this logic was functional but overly long, imported unnecessary system data, repetitive, and difficult to maintain.
           </p>
         </div>
       </div>
@@ -484,11 +493,21 @@
     <section class="imcc-section">
       <h3>Legacy T90 Report Workbook: Manual Report Assembly and Refresh Layer</h3>
       <p>
-        The Final workbook in the inherited process was the user-facing report, but it still depended on earlier workbook outputs and manual preparation before it could be used. Rather than serving as a single consolidated reporting layer, it acted as the end point of a chain of refresh and copy-forward steps.
+        In the legacy process, the T90 Report workbook was updated through a largely manual weekly routine that depended on copy/paste transfers from the intermediate workbook, repeated worksheet duplication, manual filtering and cleanup, hand-applied formatting, and manual entry of summary dates and counts. What is now handled automatically through Power Query, pull-through tables, and conditional formatting previously required a time-consuming sequence of repetitive user actions each reporting cycle.
       </p>
-      <p>
-        This meant report generation was not only slower, but also more vulnerable to inconsistencies between files, stale data, and accidental omissions during update cycles.
-      </p>
+      <p><strong>How the legacy T90 Report functioned:</strong></p>
+      <ol class="detail-list numbered">
+        <li>Refresh the intermediate workbook and manually remove records whose updated forecast dates had moved outside the active T90 range</li>
+        <li>Duplicate the previous report tabs in the T90 Report workbook to create new weekly report tabs for each reporting path</li>
+        <li>Update the worksheet names to reflect the current extract date and refresh date</li>
+        <li>Manually transfer the refreshed data into the new report tabs from the intermediate workbook</li>
+        <li>Manually clean, filter, and sort the report output, including removing closed records and ordering by forecast date</li>
+        <li>Manually apply cell formatting and enter summary counts and date values that are now generated automatically in the redesigned solution</li>
+      </ol>
+
+      <div class="workflow-visual-card">
+        <div class="workflow-visual-frame"><img src="assets/images/t90/workflows/legacy_workflow.svg" alt="Legacy T90 workflow diagram, with the report workbook as the final manual assembly layer" /></div>
+      </div>
 
       <div class="imcc-shell" data-imcc>
         <div class="imcc-stage">
@@ -499,32 +518,32 @@
 
               <div
                 class="imcc-slide active"
-                data-title="Imported Report Table"
-                data-caption="Receives the prepared output from the Intermediate Template workbook after a manual handoff step. The Final workbook depended on this imported table rather than building the reporting layer directly from the Friday snapshot and refreshed source data."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/legacymedia/9. Legacy_Final_Imported_Report_Table.png"
+                data-title="Report Generation: Copy &amp; Paste from Template Workbook"
+                data-caption="The manual copy/paste from the Template workbook was the most error-prone step in the legacy process. Tabs from the previous report would be copied, the data would be deleted, and the new data and metadata would be pasted in and formatted manually."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/legacymedia/13. Old_T90 Report_CopyPaste.mp4"
               >
-                <img src="assets/images/t90/legacymedia/9. Legacy_Final_Imported_Report_Table.png" alt="Legacy Final workbook imported report table" />
+                <video preload="metadata" playsinline><source src="assets/images/t90/legacymedia/13. Old_T90 Report_CopyPaste.mp4" type="video/mp4" /></video>
               </div>
 
               <div
                 class="imcc-slide"
-                data-title="Final Dashboard Layout"
-                data-caption="Displays the legacy user-facing dashboard layout used for monitoring at-risk projects. Although the dashboard served its purpose, it was downstream of several manual and workbook-dependent preparation steps."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/legacymedia/10. Legacy_Final_Dashboard.png"
+                data-title="Report Generation: PIDs in Range Counts"
+                data-caption="The counts of PIDs that are in range and at risk for a given week would just be observed in the Extract file and manually input into the relevant cells in the final report."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/legacymedia/14. Old_T90 Report_Counts.mp4"
               >
-                <img src="assets/images/t90/legacymedia/10. Legacy_Final_Dashboard.png" alt="Legacy Final workbook dashboard layout" />
+                <video preload="metadata" playsinline><source src="assets/images/t90/legacymedia/14. Old_T90 Report_Counts.mp4" type="video/mp4" /></video>
               </div>
 
               <div
                 class="imcc-slide"
-                data-title="Manual Refresh and Maintenance Burden"
-                data-caption="Highlights the number of refresh points, worksheet touchpoints, and manual maintenance actions required to keep the legacy Final workbook aligned with upstream files. This burden was a major reason for redesigning the process."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/legacymedia/11. Legacy_Final_Maintenance_Burden.png"
+                data-title="Final Report: Notes"
+                data-caption="For the redesign, this manual report-assembly cycle will be replaced by a consolidated Final workbook that automatically refreshes data, preserves status tracking, surfaces summary metrics, and uses conditional formatting to apply visual cues consistently without manual intervention."
+                data-modal-type="pdf"
+                data-modal-src="assets/images/t90/legacymedia/15. Old_T90 Report_Notes.pdf"
               >
-                <img src="assets/images/t90/legacymedia/11. Legacy_Final_Maintenance_Burden.png" alt="Legacy Final workbook maintenance burden illustration" />
+                <iframe src="assets/images/t90/legacymedia/15. Old_T90 Report_Notes.pdf" title="Legacy T90 report notes"></iframe>
               </div>
 
               <div class="imcc-play-overlay">
@@ -545,14 +564,14 @@
             <div class="imcc-slide-nav">
               <div class="imcc-slide-nav-label">Slide:</div>
               <div class="imcc-slide-thumbnails" aria-label="Slide navigation">
-                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Imported Report Table">
-                  Imported Report Table
+                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Report Generation: Copy & Paste from Template Workbook">
+                  Report Generation: Copy &amp; Paste from Template Workbook
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Final Dashboard Layout">
-                  Final Dashboard Layout
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Report Generation: PIDs in Range Counts">
+                  Report Generation: PIDs in Range Counts
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Manual Refresh and Maintenance Burden">
-                  Manual Refresh and Maintenance Burden
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Final Report: Notes">
+                  Final Report: Notes
                 </div>
               </div>
             </div>
@@ -569,9 +588,9 @@
         </div>
 
         <div class="imcc-meta" aria-live="polite" aria-atomic="true">
-          <h4 class="imcc-title">Imported Report Table</h4>
+          <h4 class="imcc-title">Report Generation: Copy &amp; Paste from Template Workbook</h4>
           <p class="imcc-caption">
-            Receives the prepared output from the Intermediate Template workbook after a manual handoff step. The Final workbook depended on this imported table rather than building the reporting layer directly from the Friday snapshot and refreshed source data.
+            The manual copy/paste from the Template workbook was the most error-prone step in the legacy process. Tabs from the previous report would be copied, the data would be deleted, and the new data and metadata would be pasted in and formatted manually.
           </p>
         </div>
       </div>
@@ -602,13 +621,19 @@
         The redesigned workflow keeps the Friday snapshot generation in the Extract workbook but restructures the process so the Final workbook can directly consume both the weekly snapshot and refreshed source data. This creates a shorter, clearer reporting path and reduces the need for duplicate logic across files.
       </p>
 
-      <h3>New Extract Workbook: Baseline Snapshot and Reporting Support Layer</h3>
+      <h3>New Extract Workbook: Dynamic Snapshot and Metrics Layer</h3>
       <p>
-        In the redesigned process, the Extract workbook continues to establish the Friday baseline for the week, but its purpose is more focused. It generates the clean at-risk snapshot and also provides a small set of reusable support outputs such as extract dates and reporting counts for the Final dashboard.
+        In the redesigned process, the Extract workbook was rebuilt as a cleaner and more modular snapshot layer that automatically defines the current T90 reporting window, isolates in-scope and at-risk projects, and produces reusable summary metrics for the Final dashboard. Compared with the legacy version, it requires less maintenance, uses dynamic date logic, and supports downstream reporting more directly.
       </p>
-      <p>
-        This keeps the Extract workbook responsible for the snapshot layer while avoiding the heavier downstream dependency chain that existed in the legacy structure.
-      </p>
+      <p><strong>How the new Extract workflow functions:</strong></p>
+      <ol class="detail-list numbered">
+        <li>Pull and standardize current Launch Readiness data from SharePoint</li>
+        <li>Calculate the core readiness/date-risk status in a simplified base query</li>
+        <li>Dynamically define the reporting window using current-date parameter queries</li>
+        <li>Filter to projects forecasted within the next 90 days and not yet activated</li>
+        <li>Isolate the subset of in-range projects with readiness issues or missing required dates</li>
+        <li>Generate reusable counts and reporting-window dates for direct pull-through into the Final dashboard</li>
+      </ol>
 
       <div class="imcc-shell" data-imcc>
         <div class="imcc-stage">
@@ -619,74 +644,76 @@
 
               <div
                 class="imcc-slide active"
-                data-title="Query/Table 1: Master RDOF Launch Readiness"
-                data-caption="The redesigned base query still pulls and prepares Launch Readiness source data, but it is more focused and maintainable than the inherited version. Unnecessary system fields and repeated transformation patterns were reduced so the query better supports downstream reporting without carrying avoidable complexity."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/newmedia/1. New_Extract_R_LR.png"
+                data-title="Power Query Overview"
+                data-caption="The queries have been reformatted for readability and consistency, and variables have been turned into functions that are referenced throughout the workflow."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/newmedia/0. New_01_T90 Friday Extract Template_Queries.mp4"
               >
-                <img src="assets/images/t90/newmedia/1. New_Extract_R_LR.png" alt="New Extract workbook Master RDOF Launch Readiness query" />
+                <video preload="metadata" playsinline><source src="assets/images/t90/newmedia/0. New_01_T90 Friday Extract Template_Queries.mp4" type="video/mp4" /></video>
+              </div>
+
+              <div
+                class="imcc-slide"
+                data-title="Query/Table 1: Launch Readiness (SharePoint List)"
+                data-caption="Rebuilt as the streamlined base query (Master RDOF Launch Readiness) for the Extract workflow, this query pulls current source data from SharePoint, keeps only the required fields, applies standardized filters, and calculates the core Readiness Check used downstream. Compared with the legacy version, this query was significantly simplified by removing repetitive reorder/select steps, narrowing the dataset to only needed columns, consolidating transport and exclusion filtering, and making the logic easier to audit and maintain."
+                data-modal-type="video"
+                data-modal-src="assets/images/t90/newmedia/1. New_01_T90 Fri Extract_R LR.mp4"
+              >
+                <video preload="metadata" playsinline><source src="assets/images/t90/newmedia/1. New_01_T90 Fri Extract_R LR.mp4" type="video/mp4" /></video>
               </div>
 
               <div
                 class="imcc-slide"
                 data-title="Query/Table 2: PIDs in Range"
-                data-caption="Defines the full population of projects that fall inside the current 90-day reporting window. In the redesigned process, this query continues to provide the in-scope project count while supporting a more consistent downstream reporting structure."
+                data-caption="Filters the base readiness dataset to projects forecasted within the next 90 days and excludes records that have already been activated, creating the current in-scope project population, and supports downstream counts and dashboard metrics. The revised version replaces manually maintained date windows with dynamic parameter queries, making the reporting range self-updating."
                 data-modal-type="image"
-                data-modal-src="assets/images/t90/newmedia/2. New_Extract_PIDs_in_Range.png"
+                data-modal-src="assets/images/t90/newmedia/2. New_01_T90 Fri Extract_PIDsinRange.png"
               >
-                <img src="assets/images/t90/newmedia/2. New_Extract_PIDs_in_Range.png" alt="New Extract workbook PIDs in Range query" />
+                <img src="assets/images/t90/newmedia/2. New_01_T90 Fri Extract_PIDsinRange.png" alt="New Extract workbook PIDs in Range query" />
               </div>
 
               <div
                 class="imcc-slide"
                 data-title="Query/Table 3: T90 Extract"
-                data-caption="Produces the Friday at-risk snapshot used by the Final workbook. This remains the baseline weekly extract, but in the redesigned workflow it is passed directly into the Final workbook instead of traveling through an intermediate file."
+                data-caption="Produces the final at-risk project subset by filtering the in-range population to records with readiness issues or missing required dates, and supports downstream counts and dashboard metrics. The legacy version applied additional downstream filtering and partner-level issue logic in a more fragmented way. In the revised design, this query is intentionally lightweight because most cleanup and business logic have already been handled upstream, resulting in a clearer and more maintainable final extract."
                 data-modal-type="image"
-                data-modal-src="assets/images/t90/newmedia/3. New_Extract_T90_Extract.png"
+                data-modal-src="assets/images/t90/newmedia/3. New_01_T90 Fri Extract_Extract.png"
               >
-                <img src="assets/images/t90/newmedia/3. New_Extract_T90_Extract.png" alt="New Extract workbook T90 Extract query" />
+                <img src="assets/images/t90/newmedia/3. New_01_T90 Fri Extract_Extract.png" alt="New Extract workbook T90 Extract query" />
               </div>
 
               <div
                 class="imcc-slide"
-                data-title="Query/Table 4: Extract Dates"
-                data-caption="Pulls the active Friday snapshot date and supporting report-window dates into a reusable output table. These values are consumed by the Final workbook so the dashboard always reflects the correct reporting period without relying on manual cell updates or worksheet labels."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/newmedia/4. New_Extract_Extract_Dates.png"
+                data-title="Query/Variable 4: Today / Today+90"
+                data-caption="These two queries generate the current local date (the base) and the date 90 days from today (the upper bound of the reporting window) for use in dynamic reporting filters and dynamic date displays in the final report. They replace manually updated or hard-coded date parameters with a self-maintaining query."
+                data-modal-type="pdf"
+                data-modal-src="assets/images/t90/newmedia/4. New_01_T90 Fri Extract_TodayToday90.pdf"
               >
-                <img src="assets/images/t90/newmedia/4. New_Extract_Extract_Dates.png" alt="New Extract workbook Extract Dates query" />
+                <iframe src="assets/images/t90/newmedia/4. New_01_T90 Fri Extract_TodayToday90.pdf" title="Today and Today plus 90 queries"></iframe>
               </div>
 
               <div
                 class="imcc-slide"
                 data-title="Query/Table 5: Counts"
-                data-caption="Provides reusable summary values such as total projects in range, at-risk project counts, and readiness percentages that can be pulled into the Final dashboard. This reduces manual maintenance and keeps headline reporting metrics aligned with source logic."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/newmedia/5. New_Extract_Counts.png"
+                data-caption="In the legacy process, counts and dates were often manually updated in worksheet cells. The new summary query centralizes those metrics in Power Query, allowing them to be pulled directly into the dashboard and displayed consistently."
+                data-modal-type="pdf"
+                data-modal-src="assets/images/t90/newmedia/6. New_01_T90 Fri Extract_Counts.pdf"
               >
-                <img src="assets/images/t90/newmedia/5. New_Extract_Counts.png" alt="New Extract workbook Counts query" />
+                <iframe src="assets/images/t90/newmedia/6. New_01_T90 Fri Extract_Counts.pdf" title="Counts query"></iframe>
               </div>
 
               <div
                 class="imcc-slide"
-                data-title="Power Query Editor Detailed View"
-                data-caption="Detailed view of the redesigned Extract workbook logic. Compared with the inherited version, the query structure is more organized and purposeful, with less unnecessary baggage carried into downstream reporting."
-                data-modal-type="video"
-                data-modal-src="assets/images/t90/newmedia/6. New_Extract_PQ_Detail.mp4"
+                data-title="Query/Table 6: Extract_Dates"
+                data-caption="Packages the dynamic Today / Today+90 reporting window dates into a simple query output for easy pull-through into the Final workbook, eliminating manual date updates in the final workbook."
+                data-modal-type="pdf"
+                data-modal-src="assets/images/t90/newmedia/5. New_01_T90 Fri Extract_Dates.pdf"
               >
-                <video preload="metadata" playsinline>
-                  <source src="assets/images/t90/newmedia/6. New_Extract_PQ_Detail.mp4" type="video/mp4" />
-                </video>
+                <iframe src="assets/images/t90/newmedia/5. New_01_T90 Fri Extract_Dates.pdf" title="Extract dates query"></iframe>
               </div>
 
-              <div
-                class="imcc-slide"
-                data-title="Notes (Transition)"
-                data-caption="This transition point shows how the redesigned Extract workbook now hands off a focused Friday snapshot and reusable support outputs directly to the Final workbook. The intermediate workbook dependency is removed, shortening the workflow and reducing manual coordination."
-                data-modal-type="image"
-                data-modal-src="assets/images/t90/newmedia/7. New_Extract_Transition_Notes.png"
-              >
-                <img src="assets/images/t90/newmedia/7. New_Extract_Transition_Notes.png" alt="New Extract workbook transition notes slide" />
+              <div class="imcc-slide" data-title="Notes" data-caption="The redesigned Extract workbook serves as a streamlined snapshot and metrics layer: it pulls current Launch Readiness data from SharePoint, applies the core readiness and in-range filtering logic, produces the T90 at-risk extract, and generates reusable counts and reporting-window dates for downstream dashboard use." data-modal-type="pdf" data-modal-src="assets/images/t90/newmedia/7. New_01_T90 Fri Extract_Notes.pdf">
+                <iframe src="assets/images/t90/newmedia/7. New_01_T90 Fri Extract_Notes.pdf" title="New Extract workbook notes"></iframe>
               </div>
 
               <div class="imcc-play-overlay">
@@ -707,26 +734,29 @@
             <div class="imcc-slide-nav">
               <div class="imcc-slide-nav-label">Slide:</div>
               <div class="imcc-slide-thumbnails" aria-label="Slide navigation">
-                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Query/Table 1: Master RDOF Launch Readiness">
-                  Query/Table 1: Master RDOF Launch Readiness
+                <div class="imcc-slide-thumbnail active" role="button" tabindex="0" data-index="0" aria-label="Slide 1: Power Query Overview">
+                  Power Query Overview
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Table 2: PIDs in Range">
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="1" aria-label="Slide 2: Query/Table 1: Launch Readiness (SharePoint List)">
+                  Query/Table 1: Launch Readiness (SharePoint List)
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 2: PIDs in Range">
                   Query/Table 2: PIDs in Range
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="2" aria-label="Slide 3: Query/Table 3: T90 Extract">
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Query/Table 3: T90 Extract">
                   Query/Table 3: T90 Extract
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="3" aria-label="Slide 4: Query/Table 4: Extract Dates">
-                  Query/Table 4: Extract Dates
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="4" aria-label="Slide 5: Query/Variable 4: Today / Today+90">
+                  Query/Variable 4: Today / Today+90
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="4" aria-label="Slide 5: Query/Table 5: Counts">
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="5" aria-label="Slide 6: Query/Table 5: Counts">
                   Query/Table 5: Counts
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="5" aria-label="Slide 6: Power Query Editor Detailed View">
-                  Power Query Editor Detailed View
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="6" aria-label="Slide 7: Query/Table 6: Extract_Dates">
+                  Query/Table 6: Extract_Dates
                 </div>
-                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="6" aria-label="Slide 7: Notes (Transition)">
-                  Notes (Transition)
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="7" aria-label="Slide 8: Notes">
+                  Notes
                 </div>
               </div>
             </div>
@@ -738,14 +768,18 @@
               <div class="imcc-code-subcaption">(Click to expand)</div>
             </div>
 
-            <div class="imcc-code-empty">No code snippet</div>
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/1. New_01_T90 Fri Extract_R LR.png" data-code-title="Query 1 - Launch Readiness"><img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/1. New_01_T90 Fri Extract_R LR.png" alt="Code snippet for Launch Readiness" /><div class="imcc-code-tile-label">Query 1</div></div>
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/2. New_01_T90 Fri Extract_PIDsinRange.png" data-code-title="Query 2 - PIDs in Range"><img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/2. New_01_T90 Fri Extract_PIDsinRange.png" alt="Code snippet for PIDs in Range" /><div class="imcc-code-tile-label">Query 2</div></div>
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/3. New_01_T90 Fri Extract_Extract.png" data-code-title="Query 3 - T90 Extract"><img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/3. New_01_T90 Fri Extract_Extract.png" alt="Code snippet for T90 Extract" /><div class="imcc-code-tile-label">Query 3</div></div>
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/4. New_01_T90 Fri Extract_Count Push Through.png" data-code-title="Query 5 - Counts"><img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/4. New_01_T90 Fri Extract_Count Push Through.png" alt="Code snippet for Counts" /><div class="imcc-code-tile-label">Query 5</div></div>
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/5. New_01_T90 Fri Extract_Date Push Through.png" data-code-title="Query 6 - Extract Dates"><img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/5. New_01_T90 Fri Extract_Date Push Through.png" alt="Code snippet for Extract Dates" /><div class="imcc-code-tile-label">Query 6</div></div>
           </div>
         </div>
 
         <div class="imcc-meta" aria-live="polite" aria-atomic="true">
-          <h4 class="imcc-title">Query/Table 1: Master RDOF Launch Readiness</h4>
+          <h4 class="imcc-title">Power Query Overview</h4>
           <p class="imcc-caption">
-            The redesigned base query still pulls and prepares Launch Readiness source data, but it is more focused and maintainable than the inherited version. Unnecessary system fields and repeated transformation patterns were reduced so the query better supports downstream reporting without carrying avoidable complexity.
+            The queries have been reformatted for readability and consistency, and variables have been turned into functions that are referenced throughout the workflow.
           </p>
         </div>
       </div>
@@ -821,6 +855,14 @@
                 </video>
               </div>
 
+              <div class="imcc-slide" data-title="Advanced Functionality: Automated Source Data Writeback" data-caption="This writeback functionality allows end users to update the Workaround field directly within the Final T90 table using a validated drop-down selection. A Power Automate flow captures that change and updates the corresponding Launch Readiness record in SharePoint, creating a controlled connection between the dashboard and the source system. In the legacy process, reporting outputs and source-data updates were more disconnected, requiring manual follow-up and increasing the likelihood of inconsistency. The redesigned approach introduced a structured writeback loop that improved data alignment, reduced manual reconciliation, and made the Final workbook a more interactive and operationally useful tool." data-modal-type="video" data-modal-src="assets/images/t90/newmedia/14. New_Final_Writeback.mp4">
+                <video preload="metadata" playsinline><source src="assets/images/t90/newmedia/14. New_Final_Writeback.mp4" type="video/mp4" /></video>
+              </div>
+
+              <div class="imcc-slide" data-title="Notes" data-caption="The redesigned Final workbook became the primary reporting layer for the T90 process: it imports the Friday Extract snapshot, merges it to refreshed Launch Readiness data, transforms the results into a dashboard-ready dataset, preserves manual closure decisions through helper-table logic, and surfaces reporting dates and summary metrics automatically." data-modal-type="pdf" data-modal-src="assets/images/t90/newmedia/15. New_Final_Notes.pdf">
+                <iframe src="assets/images/t90/newmedia/15. New_Final_Notes.pdf" title="New Final workbook notes"></iframe>
+              </div>
+
               <div class="imcc-play-overlay">
                 <button class="imcc-play-button" type="button" aria-label="Play or pause active video">▶</button>
               </div>
@@ -853,6 +895,12 @@
                 </div>
                 <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="4" aria-label="Slide 5: Query/Table 5: Status Helper Queries: R Status + R_Status_Input">
                   Query/Table 5: Status Helper Queries: R Status + R_Status_Input
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="5" aria-label="Slide 6: Advanced Functionality: Automated Source Data Writeback">
+                  Advanced Functionality: Automated Source Data Writeback
+                </div>
+                <div class="imcc-slide-thumbnail" role="button" tabindex="0" data-index="6" aria-label="Slide 7: Notes">
+                  Notes
                 </div>
               </div>
             </div>
@@ -897,6 +945,11 @@
             <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/12. New_T90 Dash_R_Status_Input.png" data-code-title="Query/Table 5B - R_Status_Input">
               <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/12. New_T90 Dash_R_Status_Input.png" alt="Code snippet for Query/Table 5B - R_Status_Input" />
               <div class="imcc-code-tile-label">Query 5B</div>
+            </div>
+
+            <div class="imcc-code-card" data-code-src="assets/images/t90/NewCodeSnippets/13. New_T90 Dash_WorkaroundFlow.png" data-code-title="Automated Source Data Writeback">
+              <img class="imcc-code-thumb" src="assets/images/t90/NewCodeSnippets/13. New_T90 Dash_WorkaroundFlow.png" alt="Code snippet for automated source data writeback" />
+              <div class="imcc-code-tile-label">Writeback</div>
             </div>
           </div>
         </div>
@@ -960,6 +1013,11 @@
       <div class="modal-image-title" id="imageModalTitle"></div>
       <img class="modal-image" id="imageModalImg" src="" alt="" />
       <button class="modal-nav next" id="imageModalNext" type="button" aria-label="Next image">&#8250;</button>
+      <div class="modal-zoom-controls" aria-label="Image zoom controls">
+        <button id="imageModalZoomOut" type="button" aria-label="Zoom out">−</button>
+        <button id="imageModalZoomReset" type="button" aria-label="Reset zoom">100%</button>
+        <button id="imageModalZoomIn" type="button" aria-label="Zoom in">+</button>
+      </div>
     </div>
   </div>
 
@@ -1033,8 +1091,17 @@
     const imageModalNext = document.getElementById('imageModalNext');
     const imageModalImg = document.getElementById('imageModalImg');
     const imageModalTitle = document.getElementById('imageModalTitle');
+    const imageModalZoomIn = document.getElementById('imageModalZoomIn');
+    const imageModalZoomOut = document.getElementById('imageModalZoomOut');
+    const imageModalZoomReset = document.getElementById('imageModalZoomReset');
 
     let imageModalIndex = 0;
+    let imageModalZoom = 1;
+
+    function updateImageModalZoom() {
+      imageModalImg.style.transform = `scale(${imageModalZoom})`;
+      imageModalZoomReset.textContent = `${Math.round(imageModalZoom * 100)}%`;
+    }
 
     function openImageModal(index) {
       imageModalIndex = index;
@@ -1042,6 +1109,8 @@
       imageModalImg.src = item.src;
       imageModalImg.alt = item.alt;
       imageModalTitle.textContent = item.title;
+      imageModalZoom = 1;
+      updateImageModalZoom();
       imageModal.classList.add('open');
       imageModal.setAttribute('aria-hidden', 'false');
     }
@@ -1062,6 +1131,18 @@
     imageModalClose.addEventListener('click', closeImageModal);
     imageModalPrev.addEventListener('click', () => stepImageModal(-1));
     imageModalNext.addEventListener('click', () => stepImageModal(1));
+    imageModalZoomIn.addEventListener('click', () => {
+      imageModalZoom = Math.min(2.5, imageModalZoom + 0.25);
+      updateImageModalZoom();
+    });
+    imageModalZoomOut.addEventListener('click', () => {
+      imageModalZoom = Math.max(0.5, imageModalZoom - 0.25);
+      updateImageModalZoom();
+    });
+    imageModalZoomReset.addEventListener('click', () => {
+      imageModalZoom = 1;
+      updateImageModalZoom();
+    });
     imageModal.addEventListener('click', (event) => {
       if (event.target === imageModal) closeImageModal();
     });
@@ -1196,10 +1277,16 @@
           card.classList.remove('active');
         });
 
-        const matchedCard = codeCards[index];
-        if (matchedCard) {
-          matchedCard.classList.add('active');
-        }
+        const codeIndexes = slides[0]?.dataset.title === 'Power Query Overview'
+          ? [[], [0], [1], [2], [], [3], [4], []][index]
+          : slides[0]?.dataset.title === 'Query/Connection 1: R Fri Extract'
+            ? [[0], [1], [2], [3, 4], [5, 6], [7], []][index]
+            : [index];
+
+        codeIndexes.forEach((codeIndex) => {
+          const matchedCard = codeCards[codeIndex];
+          if (matchedCard) matchedCard.classList.add('active');
+        });
       }
 
       function updateImcc(index) {
